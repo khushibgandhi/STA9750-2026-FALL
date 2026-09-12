@@ -1,0 +1,34 @@
+---
+title: "STA 9750 - Project Submission Site"
+---
+
+Hello readers! My name is Khushi Gandhi and I am currently an MS in Statistics student at Baruch College. This website will serve as a portfolio for the projects I will complete throughout the Fall 2026 semester for STA 9750 (Software Tools for Data Analysis).
+
+I truly believe mathematics is the natural language or our universe and has infinite storytelling potential. If anything, it is becoming increasingly clear that we need numbers to plan strategically and justify our decisions in modern day business. These ideas are what encouraged me to pursue an education in Statistics and Mathematics. Professionally, I aspire to become a Data Analyst in some government role. A career or this nature would perfectly balance my passion for using numbers where it will create impactful change.
+
+### Some facts about me...
+- ***I love to dance!***\
+During the pandemic, I spent hours watching choreography for my favorite songs when one day I decided to try it for myself. It was such a great way to pass time and though I do not dance as often anymore, I occasionally perform at family functions or community gatherings.
+- ***I studied abroad!***\
+Though my study abroad experience only lasted three weeks, those three weeks offered some of the most unforgettable experiences. I had the wonderful opportunity to spend January 2026 in Kyoto, Japan taking a class on Japanese Manga and Art. I mentioned I love to dance but also love drawing and writing. The course was so much different than any other class I had taken but it was so much fun.\
+Japan is also a beautiful place to visit and though I did not travel much I do want to share one of my favorite places I visited.
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+if(!require("leaflet")){
+    options(repos=c(CRAN="https://cloud.r-project.org"))
+    install.packages("leaflet")
+    stopifnot(require("leaflet"))
+}
+
+fuji_longitude <- +138.765918
+fuji_latitude  <- +35.512724
+
+leaflet() |>
+  addTiles() |>
+  setView(fuji_longitude, fuji_latitude, zoom=17) |>
+  addPopups(fuji_longitude, fuji_latitude, 
+            "Mount Fuji over Lake Kawaguchiko!")
+```
