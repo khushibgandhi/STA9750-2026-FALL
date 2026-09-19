@@ -1,17 +1,43 @@
 ---
-title: "STA 9750 - Project Submission Site"
+title: "STA 9750 Submission Material"
 ---
+Hello readers! My name is Khushi Gandhi. Thank you for taking the time to look through my website!
 
-Hello readers! My name is Khushi Gandhi and I am currently an MS in Statistics student at Baruch College. This website will serve as a portfolio for the projects I will complete throughout the Fall 2026 semester for STA 9750 (Software Tools for Data Analysis).
+### About Me
+I am currently an MS in Statistics student at Baruch College. This website will serve as a portfolio for the projects I will complete throughout the Fall 2026 semester for STA 9750 (Software Tools for Data Analysis).
 
-I truly believe mathematics is the natural language or our universe and has infinite storytelling potential. If anything, it is becoming increasingly clear that we need numbers to plan strategically and justify our decisions in modern day business. These ideas are what encouraged me to pursue an education in Statistics and Mathematics. Professionally, I aspire to become a Data Analyst in some government role. A career or this nature would perfectly balance my passion for using numbers where it will create impactful change.
+It is becoming increasingly clear that we need numbers to plan strategically and justify our decisions in modern day business. These ideas are what encouraged me to pursue an education in Statistics and Mathematics. Professionally, I aspire to become a Data Analyst in some government role. A career or this nature would perfectly balance my passion for using numbers where it will create impactful change.
 
-### Some facts about me...
-- ***I love to dance!***\
-During the pandemic, I spent hours watching choreography for my favorite songs when one day I decided to try it for myself. It was such a great way to pass time and though I do not dance as often anymore, I occasionally perform at family functions or community gatherings.
-- ***I studied abroad!***\
-Though my study abroad experience only lasted three weeks, those three weeks offered some of the most unforgettable experiences. I had the wonderful opportunity to spend January 2026 in Kyoto, Japan taking a class on Japanese Manga and Art. I mentioned I love to dance but also love drawing and writing. The course was so much different than any other class I had taken but it was so much fun.\
-Japan is also a beautiful place to visit and though I did not travel much I do want to share one of my favorite places I visited.
+I truly believe mathematics is the natural language or our universe and has infinite storytelling potential.
+
+### Skills
+- ***Programming and Tools***: R, Microsoft Excel (VBA, Macros), Microsoft PowerPoint, Microsoft Access, Python
+- ***Statistical Methods***: Multiple Linear Regression, Logistic Regression, Time-Series Forecasting, Machine Learning
+
+
+### Past Technical Projects
+***Structural Predictors of Chronic Absenteeism in NYC Public Schools***\
+*Contributor* | [GitHub](https://github.com/soniatyburczy/absenteeism-structural-predictors)
+
+- Cleaned and standardized various datasets across 7,600+ records and 50 variables using R to evaluate institutional drivers of chronic absenteeism in NYC public schools.
+- Evaluated multiple linear regression models, translating statistical findings into a strategic written summary highlighting high-impact predictive factors.
+
+***Linking Lifestyle Traits to an Increased Risk of Diabetes***\
+*Contributor*\
+
+- Modeled a CDC health survey dataset in R with 200k+ records using logistic regression to evaluate key demographic and lifestyle risk factors.
+-	Designed data visualizations and delivered a structured diagnostic report, translating complex ratios and confidence intervals into clear takeaways.
+
+### Something less relevant...
+> "There is no happiness for him who does not travel ... Therefore, wander!”
+> 
+> ― Aitareya Brahmanan, *The Rigveda*
+
+Aside from my passion in Statistics and Mathematics, I love to travel. Learning about ancient history, new cultures and new places is exciting and a form of education in itself. That is why during my undergraduate studies, I studied abroad. 
+
+Though my study abroad experience only lasted three weeks, those three weeks offered some of the most unforgettable experiences. I had the wonderful opportunity to spend January 2026 in Kyoto, Japan taking a class on Japanese Manga and Art. The course was so much different than any other class I had taken but it was so much fun.
+
+Thinking about visiting someday? Here's a map to one of my favorite places I visited during my time there.
 ```{r}
 #| echo: false
 #| message: false
