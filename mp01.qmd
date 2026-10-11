@@ -27,6 +27,7 @@ load_netflix_data <- function(){
   library(rvest)
   library(readxl)
   library(fs)
+  library(dplyr)
   
   data_dir <- path("data", "mp01")
     
