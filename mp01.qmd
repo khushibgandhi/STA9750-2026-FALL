@@ -1,11 +1,28 @@
+---
+title: "Mini-Project 01"
+---
 
-  ---
-  title: "Mini-Project Placeholder"
-  ---
-  
-  This is a placeholder for STA9750 Mini-Project 1. Check back soon for more!
-  
+# What We Watched: Exploring Netflix Viewing Data
+
+this report will explore yadayada Data Acquisition, Cleaning, and Preparation
+
+i completed takss 1 2 3 acuiring renaming etc
+
 ```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(rvest)
+library(readxl)
+library(fs)
+library(dplyr)
+library(skimr)
+```
+
+```{r}
+#| echo: false
 #' Acquire Netflix What We Watched Reports
 #' 
 #' This function will acquire and standardize all data for MP#01
@@ -27,7 +44,6 @@ load_netflix_data <- function(){
   library(rvest)
   library(readxl)
   library(fs)
-  library(dplyr)
   
   data_dir <- path("data", "mp01")
     
@@ -99,10 +115,93 @@ NETFLIX_DATA <- load_netflix_data() |> rename(title = "Title", runtime = "Runtim
 ```
 
 
-inital data exploration
+## Inital Data Exploration
+### Initial EDA Pass
 ```{r, echo = TRUE}
 glimpse(NETFLIX_DATA)
-summary(NETFLIX_DATA)
-library(skimr)
+
 skim(NETFLIX_DATA)
+```
+
+
+### Exploratory Questions - Inline Values
+1. What date range is covered by this data set?
+```{r}
+#| echo: false
+
+```
+
+
+2. How many different shows and movies are covered in this data set?\
+hello
+```{r}
+#| echo: false
+
+```
+
+3. How many total hours have been spent watching shows from the Bridgerton universe?
+```{r}
+#| echo: false
+
+```
+
+4. How many total hours have been spent watching the five seasons of Stranger Things? For this question, we only want the “real” Stranger Things shows and not the companion behind-the-scenes show (“Beyond Stranger Things”), the animated spin-off (“Tales from ’85”), or the background music (“Stranger Things: Fireplace”).
+```{r}
+#| echo: false
+
+```
+
+5. What percentage of total watch time was spent on the Top 10 titles of 2026H1?
+```{r}
+#| echo: false
+
+```
+
+6. What fraction of Netflix’s catalog is globally available? (Answer this both by title and weighted by hours viewed)
+```{r}
+#| echo: false
+
+```
+
+
+### Exploratory Questions - Table Values
+1. What was the top title (by total hours viewed) in each period and what fraction of total viewership did it capture?
+```{r}
+#| echo: false
+
+```
+
+2. How has Netflix’s catalog changed in size over the periods for which we have questions? You should consider both the number of titles and the total runtime of content.
+```{r}
+#| echo: false
+
+```
+
+
+3. Which titles have had the most consistently high viewership across all periods? These shows are likely to be ‘staples’ that viewers fall back on as ‘comfort food’, e.g., re-runs of Friends.
+
+```{r}
+#| echo: false
+
+```
+
+
+4. Within each period, what fraction of time was spent on ‘shows’ vs movies?
+
+```{r}
+#| echo: false
+
+```
+
+
+5. How does the performance of live events compare to pre-taped content? Does the average live event draw more viewership than an average piece of pre-taped content? How about a ‘top tier’ live event vs ‘top tier’ pre-taped content?
+
+```{r}
+#| echo: false
+
+```
+
+
+```{r}
+NETFLIX_DATA |> group_by(title) |> summarise() |> nrow()
 ```
