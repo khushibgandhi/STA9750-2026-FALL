@@ -1,6 +1,9 @@
 ---
 title: "Mini-Project 01: What We Watched: Exploring Netflix Viewing Data"
 ---
+**Author**: Khushi Gandhi\
+**Completion Date**: October 16th, 2026
+
 ```{r}
 #| echo: false
 #| message: false
@@ -302,3 +305,4 @@ NETFLIX_DATA |> group_by(live_event) |> summarise(avg_view= mean(views, na.rm = 
                avg_top10.y = md("**Average Top Tier Hours Viewed**")) |> tab_header(title="Live Events vs. Pre-taped Content") |> fmt_number(decimals = 0)
 
 ```
+## Corporate Memo
