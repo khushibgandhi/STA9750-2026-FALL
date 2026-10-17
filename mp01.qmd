@@ -1,8 +1,22 @@
 ---
 title: "Mini-Project 01: What We Watched: Exploring Netflix Viewing Data"
+format:
+  html:
+    code-fold: TRUE
 ---
 **Author**: Khushi Gandhi\
 **Completion Date**: October 16th, 2026
+
+## Introduction
+Netflix is a prominent leader in the streaming industry and has contributed significantly to consumer entertainment preferences. In the early 2000s, Netflix was a competitor in the physical media distribution industry with competition like Redbox and Blockbusters. At the time, most businesses in this market focused on the short-term market and being profitable there. However, the transition to the digital age was a looming concern and Netflix responded proactively, introducing streaming services.
+
+Almost two decades later, Netflix is a global phenomenon that has revolutionized entertainment access on-the-go. Streaming companies such as Disney+, Hulu, Amazon Prime Video and Paramount+, have entered the market due to this change in consumer needs and the documented success Netflix has created with its own business structure.
+
+Starting in the first half of 2023, Netflix began to release “What We Watched” reports. They were urged to do so by advertisers that needed to know the likelihood of viewers coming across their content and Hollywood who with concerns on whether creators were  paid appropriately relative to viewership statistics for those projects. This project explores viewership and other features reported by Netflix from the first half of 2023 to the first half of 2026. 
+
+
+#### Data Acquisition, Preparation and Cleaning
+The data was acquired from Netflix's online publications for their “What We Watched” reports. The reports were standardized across formatting and compiled into one collective data set which this project refers to as `NETFLIX_DATA`.
 
 ```{r}
 #| echo: false
@@ -20,7 +34,7 @@ library(gt)
 ```
 
 ```{r}
-#| echo: false
+#| echo: true
 #' Acquire Netflix What We Watched Reports
 #' 
 #' This function will acquire and standardize all data for MP#01
@@ -112,18 +126,7 @@ NETFLIX_DATA <- load_netflix_data() |> rename(title = "Title", runtime = "Runtim
                                               views = "Views", hours_viewed = "Hours Viewed", release_date = "Release Date", available_globally = "Available Globally?") |> mutate(year = as.integer(year), available_globally = available_globally == "Yes")
 ```
 
-## Introduction
-Netflix is a prominent leader in the streaming industry and has contributed significantly to consumer entertainment preferences. In the early 2000s, Netflix was a competitor in the physical media distribution industry with competition like Redbox and Blockbusters. At the time, most businesses in this market focused on the short-term market and being profitable there. However, the transition to the digital age was a looming concern and Netflix responded proactively, introducing streaming services.
 
-Almost two decades later, Netflix is a global phenomenon that has revolutionized entertainment access on-the-go. Streaming companies such as Disney+, Hulu, Amazon Prime Video and Paramount+, have entered the market due to this change in consumer needs and the documented success Netflix has created with its own business structure.
-
-Starting in the first half of 2023, Netflix began to release “What We Watched” reports. They were urged to do so by advertisers that needed to know the likelihood of viewers coming across their content and Hollywood who with concerns on whether creators were  paid appropriately relative to viewership statistics for those projects. This project explores viewership and other features reported by Netflix from the first half of 2023 to the first half of 2026. 
-
-
-#### Data Acquisition
-The data was acquired from Netflix's online publications for their “What We Watched” reports. The reports were standardized across formatting and compiled into one collective data set which this project refers to as `NETFLIX_DATA`.
-
-#### Data Preparation and Cleaning
 To prepare the data for this project, two main actions were taken. First was converting column names into “tidy” ones. Some changes were not as significant and involved adding an underscore or making something lowercase. Other changes involved features that could potentially cause errors while coding. The second change made was a conversion of data types for `year` and `available_globally`. They were converted to integers and logical values respectively.
 
 The updated variables and what they measure are listed here:
@@ -183,9 +186,7 @@ The total hours spent watching shows from the Bridgerton universe was **`r comma
 
 **What percentage of total watch time was spent on the Top 10 titles of 2026H1?**\
 ```{r}
-#| echo: false
-
-##### QUESTION 5#####
+#| echo: true
 
 total = NETFLIX_DATA |> filter(period ==  "2026H1") |> summarise(total_views = sum(hours_viewed, na.rm = TRUE)) |> pull(total_views)
 
@@ -200,17 +201,22 @@ percent_top_ten = (total_top_ten/total)
 
 **What fraction of Netflix’s catalog is globally available?**\
 ```{r}
-#| echo: false
-
-##### QUESTION 6 #####
+#| echo: true
 
 ## by title
-titles_global = NETFLIX_DATA |> filter(available_globally == TRUE) |> group_by(title) |> summarise() |> nrow()
+titles_global = NETFLIX_DATA |> 
+  filter(available_globally == TRUE) |> 
+  group_by(title) |> 
+  summarise() |> 
+  nrow()
 total_titles = NETFLIX_DATA |> group_by(title) |> summarise() |> nrow()
 catalog_global_title = titles_global/total_titles
 
 ## by weighted hours viewed
-hours_global = NETFLIX_DATA |> filter(available_globally == TRUE) |> summarise(total_views = sum(hours_viewed, na.rm = TRUE)) |> pull(total_views)
+hours_global = NETFLIX_DATA |> 
+  filter(available_globally == TRUE) |> 
+  summarise(total_views = sum(hours_viewed, na.rm = TRUE)) |> 
+  pull(total_views)
 
 total_hours = NETFLIX_DATA |> summarise(total_views = sum(hours_viewed, na.rm = TRUE)) |> pull(total_views)
 catalog_global_hours = hours_global/total_hours
@@ -223,9 +229,13 @@ By `hours_viewed`, **`r percent(catalog_global_hours, accuracy = 0.01)`** of Net
 
 **What was the top title (by total hours viewed) in each period and what fraction of total viewership did it capture?**\
 ```{r}
-#| echo: false
+#| echo: true
 
-NETFLIX_DATA |> group_by(period) |> mutate(frac_viewership = percent(hours_viewed/sum(hours_viewed, na.rm = TRUE), accuracy = 0.01)) |> slice_max(hours_viewed) |> select(c("period", "title", "hours_viewed", "frac_viewership")) |> ungroup() |> mutate(hours_viewed = comma(hours_viewed)) |> gt() |>
+NETFLIX_DATA |> group_by(period) |> 
+  mutate(frac_viewership = percent(hours_viewed/sum(hours_viewed, na.rm = TRUE), accuracy = 0.01)) |> 
+  slice_max(hours_viewed) |> 
+  select(c("period", "title", "hours_viewed", "frac_viewership")) |> 
+  ungroup() |> mutate(hours_viewed = comma(hours_viewed)) |> gt() |>
     cols_label(period=md("**Period**"), 
                title = md("**Top Title**"), 
                hours_viewed = md("**Hours Viewed**"),
@@ -237,9 +247,13 @@ To determine the top title in hours viewed for each period, the data was first g
 
 **How has Netflix’s catalog changed in size over the periods for which we have questions?**
 ```{r}
-#| echo: false
+#| echo: true
 
-NETFLIX_DATA |> group_by(period) |> summarise(title_count = n(), sum_runtime = sum(runtime, na.rm = TRUE)) |> mutate(title_count = comma(title_count), sum_runtime = comma(round(sum_runtime/60, 0))) |> select(c("period", "title_count", "sum_runtime")) |> ungroup() |> gt() |>
+NETFLIX_DATA |> group_by(period) |> 
+  summarise(title_count = n(), sum_runtime = sum(runtime, na.rm = TRUE)) |> 
+  mutate(title_count = comma(title_count), sum_runtime = comma(round(sum_runtime/60, 0))) |> 
+  select(c("period", "title_count", "sum_runtime")) |> 
+  ungroup() |> gt() |>
     cols_label(period=md("**Period**"), 
                title_count = md("**Title Count**"), 
                sum_runtime = md("**Total Runtime (hours)**")) |> tab_header(title="An Analysis of Netflix's Catalog Each Period", 
@@ -253,12 +267,13 @@ Notably, there is a significant drop in total titles from the first half of 2023
 **Which titles have had the most consistently high viewership across all periods? These shows are likely to be ‘staples’ that viewers fall back on as ‘comfort food’, e.g., re-runs of Friends.**\
 
 ```{r}
-#| echo: false
+#| echo: true
 
 
 NETFLIX_DATA |> group_by(title) |> 
   summarise(num_period = n(), avg_hrs_viewed = mean(hours_viewed, na.rm = TRUE), sd_hrsview = sd(hours_viewed, na.rm = TRUE), min_hrsview = min(hours_viewed, na.rm = TRUE)) |> 
-  filter(num_period == 7) |> slice_max(min_hrsview, n=10) |> ungroup() |> 
+  filter(num_period == 7) |> 
+  slice_max(min_hrsview, n=10) |> ungroup() |> 
   select(c("title", "num_period", "avg_hrs_viewed", "sd_hrsview", "min_hrsview")) |> 
   mutate(avg_hrs_viewed = comma(avg_hrs_viewed)) |> gt() |>
     cols_label(title=md("**Title**"), 
@@ -278,7 +293,7 @@ The table also shows values for standard deviation for average hours viewed. Whi
 **Within each period, what fraction of time was spent on ‘shows’ vs movies?**\
 
 ```{r}
-#| echo: false
+#| echo: true
 
 NETFLIX_DATA |> mutate(type= ifelse(str_detect(title, "Season|Series|Limited|Episode|Part|Volume") | (!is.na(runtime) & runtime > (60*4)), "Show", "Movie")) |> 
   group_by(period, type) |> 
@@ -303,7 +318,7 @@ In addition to the issue with conditional logic and incomplete data, it may be w
 **How does the performance of live events compare to pre-taped content? Does the average live event draw more viewership than an average piece of pre-taped content? How about a ‘top tier’ live event vs ‘top tier’ pre-taped content?**
 
 ```{r}
-#| echo: false
+#| echo: true
 
 top10views = NETFLIX_DATA |> group_by(live_event, title)|> summarise(avg_views= mean(views, na.rm = TRUE), .groups = "drop_last") |> slice_max(avg_views, n = 10) |> summarise(avg_top10 = mean(avg_views))
 
@@ -330,7 +345,7 @@ In terms of consumer preferences, there has been a significant shift in what con
 To obtain a general overview of this shift in preferences, we can take a look at the snapshot below of the top 10 titles in terms of viewership grouped across global availability and titles. Essentially, we are subsetting the titles with the most average hours viewed and comparing their global availability status.
 
 ```{r}
-#| echo: false
+#| echo: true
 
 NETFLIX_DATA|> group_by(available_globally, title) |> 
   summarise(avg_hr_view = mean(hours_viewed), .groups = "drop") |> 
@@ -346,7 +361,7 @@ All except one show, were titles that were globally available and still amassed 
 The graph below displays the trend lines for views for global and regional titles across the seven periods.
 
 ```{r}
-#| echo: false
+#| echo: true
 
 global_stats = NETFLIX_DATA |> group_by(available_globally, period) |> summarise(sum_hr_view = sum(hours_viewed, na.rm = TRUE), .groups = "drop") |> drop_na()
 
@@ -368,7 +383,7 @@ A second question Netflix should consider for its 2027 strategy is whether short
 The idea is important to think about because in an era driven by social media, consumers’ attention span has considerably decreased. Reels are extremely popular and even fifteen seconds is sometimes not enough time to capture someone’s attention. It is possible we are experiencing a shift in preference towards short form content in the entertainment industry as well. However, the results of the below table show otherwise.
 
 ```{r}
-#| echo: false
+#| echo: true
 
 NETFLIX_DATA |> mutate(len = ifelse(runtime <= 240, "short_form", "long_form")) |> group_by(len, period) |> drop_na() |> summarise(avg_hrs_viewed = mean(hours_viewed), .groups = "drop_last") |> pivot_wider(names_from = len, values_from = avg_hrs_viewed) |> mutate(rate = long_form/short_form)|> gt()|>
   cols_label(period = md("**Period**"),
