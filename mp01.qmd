@@ -158,7 +158,7 @@ Running the `glimpse` function shows that `NETFLIX_DATA` contains 61,892 records
 ```{r, echo = TRUE}
 skim(NETFLIX_DATA)
 ```
-The `skim` function provides summary statistics for each variable by their type. This is a better alternative to the `summary` function because it provides more detail about the different values in the data. For example, in the table above, in additional to summary statistics, the count of missing and unique values for some variables are given. Notably, there are 13,085 and 18,198 missings for `runtime` and `views` respectively. While `glimpse()` alluded to this issue earlier, the exact count helps visualize the extent to which `NA` values as present. This issue is something to consider when choosing how to analyze viewership. For logical values, there is also a count of `TRUE`s and `FALSE`s for each category. While `skim()` provides an extensive amount of information about the data, it is better to be more informed than not. Furthermore, the built-in formatting makes the information simple to interpret. 
+The `skim` function provides summary statistics for each variable by their type. This is a better alternative to the `summary` function because it provides more detail about the different values in the data. For example, in the table above, in additional to summary statistics, the count of missing and unique values for some variables are given. Notably, there are 13,085 and 18,198 missings for `runtime` and `views` respectively. While `glimpse()` alluded to this issue earlier, the exact count helps visualize the extent to which `NA` values as present. This issue is something to consider when choosing how to analyze viewership. For logical values, there is also a count of `TRUE` and `FALSE` for each category. While `skim()` provides an extensive amount of information about the data, it is better to be more informed than not. Furthermore, the built-in formatting makes the information simple to interpret. 
 
 #### Exploratory Questions
 **What date range is covered by this data set?**\
@@ -253,7 +253,11 @@ Notably, there is a significant drop in total titles from the first half of 2023
 #| echo: false
 
 
-NETFLIX_DATA |> group_by(title) |> summarise(num_period = n(), avg_hrs_viewed = mean(hours_viewed, na.rm = TRUE), sd_hrsview = sd(hours_viewed, na.rm = TRUE), min_hrsview = min(hours_viewed, na.rm = TRUE)) |> filter(num_period == 7) |> slice_max(min_hrsview, n=10) |> ungroup() |> select(c("title", "num_period", "avg_hrs_viewed", "sd_hrsview", "min_hrsview")) |> mutate(avg_hrs_viewed = comma(avg_hrs_viewed)) |> gt() |>
+NETFLIX_DATA |> group_by(title) |> 
+  summarise(num_period = n(), avg_hrs_viewed = mean(hours_viewed, na.rm = TRUE), sd_hrsview = sd(hours_viewed, na.rm = TRUE), min_hrsview = min(hours_viewed, na.rm = TRUE)) |> 
+  filter(num_period == 7) |> slice_max(min_hrsview, n=10) |> ungroup() |> 
+  select(c("title", "num_period", "avg_hrs_viewed", "sd_hrsview", "min_hrsview")) |> 
+  mutate(avg_hrs_viewed = comma(avg_hrs_viewed)) |> gt() |>
     cols_label(title=md("**Title**"), 
                num_period= md("**Number of Periods Present**"), 
                avg_hrs_viewed = md("**Average Hours Viewed**"),
@@ -273,7 +277,12 @@ The table also shows values for standard deviation for average hours viewed. Whi
 ```{r}
 #| echo: false
 
-NETFLIX_DATA |> mutate(type= ifelse(str_detect(title, "Season|Series|Limited|Episode|Part|Volume") | (!is.na(runtime) & runtime > (60*4)), "Show", "Movie")) |> group_by(period, type) |> summarise(total_hours = sum(hours_viewed, na.rm = TRUE), .groups = "drop_last") |> mutate(frac_viewership = percent(total_hours/sum(total_hours))) |> pivot_wider(names_from = type, values_from = c(total_hours, frac_viewership)) |> select(-c(total_hours_Movie, total_hours_Show)) |> ungroup() |> gt() |>
+NETFLIX_DATA |> mutate(type= ifelse(str_detect(title, "Season|Series|Limited|Episode|Part|Volume") | (!is.na(runtime) & runtime > (60*4)), "Show", "Movie")) |> 
+  group_by(period, type) |> 
+  summarise(total_hours = sum(hours_viewed, na.rm = TRUE), .groups = "drop_last") |> 
+  mutate(frac_viewership = percent(total_hours/sum(total_hours))) |> 
+  pivot_wider(names_from = type, values_from = c(total_hours, frac_viewership)) |> select(-c(total_hours_Movie, total_hours_Show)) |> 
+  ungroup() |> gt() |>
     cols_label(period=md("**Period**"), 
                frac_viewership_Movie = md("**Movie Viewership**"), 
                frac_viewership_Show = md("**Show Viewership**")) |> tab_header(title="Movie vs. Show Viewership", 
@@ -306,3 +315,73 @@ NETFLIX_DATA |> group_by(live_event) |> summarise(avg_view= mean(views, na.rm = 
 
 ```
 ## Corporate Memo
+
+Netflix continues to see success in viewership rates and performance across the last seven periods reported for the “What We Watched”. After analyzing specific areas for improvement, two main strategies for Netflix’s 2027 original content are recommended which are outlined below.
+
+#### Global Availability vs. Regional Content
+**Recommendation**: Netflix should release currently available regional titles globally or put effort toward global releases in general.
+
+In terms of consumer preferences, there has been a significant shift in what consumers are watching. One of the most memorable examples of this was in 2021, when Netflix’s Korean drama series “Squid Game” became a global hit. However, this change was not overnight. Titles such as “Alice in Borderland” (Japan), “Money Heist” (Spain), and “Lupin” (France) have all been recognized internationally. Despite language barriers and cultural differences, the appreciation for these series lies in the stories. Therefore, I believe there should be a push to make regional content available globally or Netflix should produce more global content in general.
+
+To obtain a general overview of this shift in preferences we can take a look at the snapshot below of the top 10 titles in terms of viewership grouped across global availability and titles. Essentially what we are doing here is subsetting the titles with the most average hours viewed and comparing their global availability status.
+
+```{r}
+#| echo: false
+
+NETFLIX_DATA|> group_by(available_globally, title) |> 
+  summarise(avg_hr_view = mean(hours_viewed), .groups = "drop") |> 
+  slice_max(avg_hr_view, n=11) |> drop_na() |> 
+  mutate(available_globally = ifelse(available_globally == TRUE, "Yes", "No"))|> 
+  select(c(title,avg_hr_view, available_globally)) |> gt() |> 
+  cols_label(title = "Title",avg_hr_view = "Average Hours Viewed", available_globally = "Available Globally?") |> 
+  fmt_number(decimals = 0)
+
+```
+All except one show, were titles that were globally available and still amassed a significant amount of views. Notably, of the titles available globally, five of them are international series. This is something to keep in mind when considering changes to Netflix’s catalog.
+
+The graph below displays the trendlines for views for global and regional titles across the seven periods.
+
+```{r}
+#| echo: false
+
+global_stats = NETFLIX_DATA |> group_by(available_globally, period) |> summarise(sum_hr_view = sum(hours_viewed, na.rm = TRUE), .groups = "drop") |> drop_na()
+
+NETFLIX_DATA|> group_by(available_globally, period) |> 
+  summarise(sum_hr_view = sum(hours_viewed, na.rm = TRUE), .groups = "drop") |> 
+  drop_na()|> ggplot(aes(period, sum_hr_view, group = available_globally, color = available_globally)) + geom_point() + geom_line() + 
+  labs(x = "Period", y = "Total Hours Viewed", color = "Available Globally?", title = "Total Viewed Hours for Global vs. Regional Content") + theme_minimal()
+
+```
+Both trend lines have a significant drop in total views but this is expected due to the 63.76% reduction in available titles between the first and second half of 2023. In terms of global availability status, there is no clear trend line of a pattern. Views for global and regional content seem to fluctuate continuously. Between the last half of 2025 and the first half of 2026, there is a decrease in total view for global content of about `r percent(1-(global_stats$sum_hr_view[14]/global_stats$sum_hr_view[13]), accuracy = 0.01)`. Consequently, there is an increase in the total views for regional content of `r percent((global_stats$sum_hr_view[7]/global_stats$sum_hr_view[6]) -1, accuracy = 0.01)`.
+
+In an era where connectivity happens digitally, regional content limits how much of Netflix’s total viewership base can be reached. Of course, shifting focus strategically to global availability requires legal work as well but the effort is something to consider. The global viewership base obtained from more widely accessible titles will stay committed to Netflix instead of competitors. For example, a viewer who enjoys a foreign genre may continue to stream on Netflix instead of a competitor if there were more options available in his/her region.
+
+#### Short-Form vs. Long Form Content
+**Recommendation**: For 2027, Netflix should contnue making original long form content, that is with runtime of ove 240 minutes.
+
+A second question Netflix should consider for its 2027 strategy is whether short-form or long-form content is more valued. To analyze this issue, a filtering based on logical conditioning was run on the data. Netflix produces shows with an average of eight episodes that run for about 30 minutes. We can assume that the maximum runtime for short content has a runtime of 240 minutes or less. Anything else would be considered long form. This could include shows that have more episodes or longer episode times.
+
+The idea is important to think about because in an era driven by social media, consumers’ attention span has considerably decreased. Reels are extremely popular and even fifteen seconds is sometimes not enough time to capture someone’s attention. It is possible we are experiencing a shift in preference towards short form content in the entertainment industry as well. However, the results of the below table show otherwise.
+
+```{r}
+#| echo: false
+
+NETFLIX_DATA |> mutate(len = ifelse(runtime <= 240, "short_form", "long_form")) |> group_by(len, period) |> drop_na() |> summarise(avg_hrs_viewed = mean(hours_viewed), .groups = "drop_last") |> pivot_wider(names_from = len, values_from = avg_hrs_viewed) |> mutate(rate = long_form/short_form)|> gt()|>
+  cols_label(period = md("**Period**"),
+             long_form = md("**Long-Form Views**"),
+             short_form = md("**Short-Form Views**"),
+             rate = md("**LF/SF**")) |>
+  fmt_number(decimals = 0) |>
+  fmt_number(columns = rate, decimals = 1) |> tab_header(title = "Average Hours Viewed for Long vs. Short Form Content", subtitle ="By period")
+
+```
+In the table above, we see that long form content views are significantly higher than that of short form. The **LF/SF** column stands for how many more times greater long form views are than short form. In the first half of 2026, long form views were 5.3 times higher than that of short form. Also, if we look at the change in this ratio by year (for each two halves), in 2024 and 2025, there was an increase in this LF/SF ratio throughout the year.
+
+This signals something that contradicts what markets are currently showing. While we believe that short form content is more interactive with the consumer base, Netflix’s viewers value long form content more. This may be because most long form content is structured in multiple short episodes but because runtime is aggregated across a whole season, we consider it long form. Perhaps consumers are engaging more with long form content because they are watching in shorter intervals of time.
+
+
+::: {.callout-note title="AI Usage Statement" collapse="true"}
+
+Gemini was used to help edit the code in this project, but all non-code text was generated wthout the use of any Generative AI tools.
+
+:::

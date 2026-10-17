@@ -484,7 +484,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </table>
 </div>
 </div>
-<p>The <code>skim</code> function provides summary statistics for each variable by their type. This is a better alternative to the <code>summary</code> function because it provides more detail about the different values in the data. For example, in the table above, in additional to summary statistics, the count of missing and unique values for some variables are given. Notably, there are 13,085 and 18,198 missings for <code>runtime</code> and <code>views</code> respectively. While <code>glimpse()</code> alluded to this issue earlier, the exact count helps visualize the extent to which <code>NA</code> values as present. This issue is something to consider when choosing how to analyze viewership. For logical values, there is also a count of <code>TRUE</code>s and <code>FALSE</code>s for each category. While <code>skim()</code> provides an extensive amount of information about the data, it is better to be more informed than not. Furthermore, the built-in formatting makes the information simple to interpret.</p>
+<p>The <code>skim</code> function provides summary statistics for each variable by their type. This is a better alternative to the <code>summary</code> function because it provides more detail about the different values in the data. For example, in the table above, in additional to summary statistics, the count of missing and unique values for some variables are given. Notably, there are 13,085 and 18,198 missings for <code>runtime</code> and <code>views</code> respectively. While <code>glimpse()</code> alluded to this issue earlier, the exact count helps visualize the extent to which <code>NA</code> values as present. This issue is something to consider when choosing how to analyze viewership. For logical values, there is also a count of <code>TRUE</code> and <code>FALSE</code> for each category. While <code>skim()</code> provides an extensive amount of information about the data, it is better to be more informed than not. Furthermore, the built-in formatting makes the information simple to interpret.</p>
 </section>
 <section id="exploratory-questions" class="level4">
 <h4 class="anchored" data-anchor-id="exploratory-questions">Exploratory Questions</h4>
@@ -511,23 +511,23 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="dtjuqqllps" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dtjuqqllps table {
+<div id="uwuimtdsbg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uwuimtdsbg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dtjuqqllps thead, #dtjuqqllps tbody, #dtjuqqllps tfoot, #dtjuqqllps tr, #dtjuqqllps td, #dtjuqqllps th {
+#uwuimtdsbg thead, #uwuimtdsbg tbody, #uwuimtdsbg tfoot, #uwuimtdsbg tr, #uwuimtdsbg td, #uwuimtdsbg th {
   border-style: none;
 }
 
-#dtjuqqllps p {
+#uwuimtdsbg p {
   margin: 0;
   padding: 0;
 }
 
-#dtjuqqllps .gt_table {
+#uwuimtdsbg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -553,12 +553,12 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-left-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_caption {
+#uwuimtdsbg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dtjuqqllps .gt_title {
+#uwuimtdsbg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -570,7 +570,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-width: 0;
 }
 
-#dtjuqqllps .gt_subtitle {
+#uwuimtdsbg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -582,7 +582,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-width: 0;
 }
 
-#dtjuqqllps .gt_heading {
+#uwuimtdsbg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -594,13 +594,13 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_bottom_border {
+#uwuimtdsbg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_col_headings {
+#uwuimtdsbg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -615,7 +615,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_col_heading {
+#uwuimtdsbg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -635,7 +635,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#dtjuqqllps .gt_column_spanner_outer {
+#uwuimtdsbg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -647,15 +647,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 4px;
 }
 
-#dtjuqqllps .gt_column_spanner_outer:first-child {
+#uwuimtdsbg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dtjuqqllps .gt_column_spanner_outer:last-child {
+#uwuimtdsbg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dtjuqqllps .gt_column_spanner {
+#uwuimtdsbg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -667,11 +667,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   width: 100%;
 }
 
-#dtjuqqllps .gt_spanner_row {
+#uwuimtdsbg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dtjuqqllps .gt_group_heading {
+#uwuimtdsbg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -697,7 +697,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   text-align: left;
 }
 
-#dtjuqqllps .gt_empty_group_heading {
+#uwuimtdsbg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -712,15 +712,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: middle;
 }
 
-#dtjuqqllps .gt_from_md > :first-child {
+#uwuimtdsbg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dtjuqqllps .gt_from_md > :last-child {
+#uwuimtdsbg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dtjuqqllps .gt_row {
+#uwuimtdsbg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -739,7 +739,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#dtjuqqllps .gt_stub {
+#uwuimtdsbg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -752,7 +752,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#dtjuqqllps .gt_stub_row_group {
+#uwuimtdsbg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -766,15 +766,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: top;
 }
 
-#dtjuqqllps .gt_row_group_first td {
+#uwuimtdsbg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dtjuqqllps .gt_row_group_first th {
+#uwuimtdsbg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dtjuqqllps .gt_summary_row {
+#uwuimtdsbg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -784,16 +784,16 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#dtjuqqllps .gt_first_summary_row {
+#uwuimtdsbg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_first_summary_row.thick {
+#uwuimtdsbg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dtjuqqllps .gt_last_summary_row {
+#uwuimtdsbg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -803,7 +803,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_grand_summary_row {
+#uwuimtdsbg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -813,7 +813,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#dtjuqqllps .gt_first_grand_summary_row {
+#uwuimtdsbg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -823,7 +823,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_last_grand_summary_row_top {
+#uwuimtdsbg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -833,11 +833,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_striped {
+#uwuimtdsbg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dtjuqqllps .gt_table_body {
+#uwuimtdsbg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -846,7 +846,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_footnotes {
+#uwuimtdsbg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -860,7 +860,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_footnote {
+#uwuimtdsbg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -869,7 +869,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#dtjuqqllps .gt_sourcenotes {
+#uwuimtdsbg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -883,7 +883,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#dtjuqqllps .gt_sourcenote {
+#uwuimtdsbg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -891,72 +891,72 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#dtjuqqllps .gt_left {
+#uwuimtdsbg .gt_left {
   text-align: left;
 }
 
-#dtjuqqllps .gt_center {
+#uwuimtdsbg .gt_center {
   text-align: center;
 }
 
-#dtjuqqllps .gt_right {
+#uwuimtdsbg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dtjuqqllps .gt_font_normal {
+#uwuimtdsbg .gt_font_normal {
   font-weight: normal;
 }
 
-#dtjuqqllps .gt_font_bold {
+#uwuimtdsbg .gt_font_bold {
   font-weight: bold;
 }
 
-#dtjuqqllps .gt_font_italic {
+#uwuimtdsbg .gt_font_italic {
   font-style: italic;
 }
 
-#dtjuqqllps .gt_super {
+#uwuimtdsbg .gt_super {
   font-size: 65%;
 }
 
-#dtjuqqllps .gt_footnote_marks {
+#uwuimtdsbg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dtjuqqllps .gt_asterisk {
+#uwuimtdsbg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dtjuqqllps .gt_indent_1 {
+#uwuimtdsbg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dtjuqqllps .gt_indent_2 {
+#uwuimtdsbg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dtjuqqllps .gt_indent_3 {
+#uwuimtdsbg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dtjuqqllps .gt_indent_4 {
+#uwuimtdsbg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dtjuqqllps .gt_indent_5 {
+#uwuimtdsbg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dtjuqqllps .katex-display {
+#uwuimtdsbg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dtjuqqllps div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uwuimtdsbg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1029,23 +1029,23 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 <p><strong>How has Netflix’s catalog changed in size over the periods for which we have questions?</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="kxtwcqvmcz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kxtwcqvmcz table {
+<div id="pcmfvbvian" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pcmfvbvian table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kxtwcqvmcz thead, #kxtwcqvmcz tbody, #kxtwcqvmcz tfoot, #kxtwcqvmcz tr, #kxtwcqvmcz td, #kxtwcqvmcz th {
+#pcmfvbvian thead, #pcmfvbvian tbody, #pcmfvbvian tfoot, #pcmfvbvian tr, #pcmfvbvian td, #pcmfvbvian th {
   border-style: none;
 }
 
-#kxtwcqvmcz p {
+#pcmfvbvian p {
   margin: 0;
   padding: 0;
 }
 
-#kxtwcqvmcz .gt_table {
+#pcmfvbvian .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1071,12 +1071,12 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-left-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_caption {
+#pcmfvbvian .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kxtwcqvmcz .gt_title {
+#pcmfvbvian .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1088,7 +1088,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-width: 0;
 }
 
-#kxtwcqvmcz .gt_subtitle {
+#pcmfvbvian .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1100,7 +1100,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-width: 0;
 }
 
-#kxtwcqvmcz .gt_heading {
+#pcmfvbvian .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1112,13 +1112,13 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_bottom_border {
+#pcmfvbvian .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_col_headings {
+#pcmfvbvian .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1133,7 +1133,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_col_heading {
+#pcmfvbvian .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1153,7 +1153,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#kxtwcqvmcz .gt_column_spanner_outer {
+#pcmfvbvian .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1165,15 +1165,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 4px;
 }
 
-#kxtwcqvmcz .gt_column_spanner_outer:first-child {
+#pcmfvbvian .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kxtwcqvmcz .gt_column_spanner_outer:last-child {
+#pcmfvbvian .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kxtwcqvmcz .gt_column_spanner {
+#pcmfvbvian .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1185,11 +1185,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   width: 100%;
 }
 
-#kxtwcqvmcz .gt_spanner_row {
+#pcmfvbvian .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kxtwcqvmcz .gt_group_heading {
+#pcmfvbvian .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1215,7 +1215,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   text-align: left;
 }
 
-#kxtwcqvmcz .gt_empty_group_heading {
+#pcmfvbvian .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1230,15 +1230,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: middle;
 }
 
-#kxtwcqvmcz .gt_from_md > :first-child {
+#pcmfvbvian .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kxtwcqvmcz .gt_from_md > :last-child {
+#pcmfvbvian .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kxtwcqvmcz .gt_row {
+#pcmfvbvian .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1257,7 +1257,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#kxtwcqvmcz .gt_stub {
+#pcmfvbvian .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1270,7 +1270,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#kxtwcqvmcz .gt_stub_row_group {
+#pcmfvbvian .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1284,15 +1284,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: top;
 }
 
-#kxtwcqvmcz .gt_row_group_first td {
+#pcmfvbvian .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kxtwcqvmcz .gt_row_group_first th {
+#pcmfvbvian .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kxtwcqvmcz .gt_summary_row {
+#pcmfvbvian .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1302,16 +1302,16 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#kxtwcqvmcz .gt_first_summary_row {
+#pcmfvbvian .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_first_summary_row.thick {
+#pcmfvbvian .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kxtwcqvmcz .gt_last_summary_row {
+#pcmfvbvian .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1321,7 +1321,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_grand_summary_row {
+#pcmfvbvian .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1331,7 +1331,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#kxtwcqvmcz .gt_first_grand_summary_row {
+#pcmfvbvian .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1341,7 +1341,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_last_grand_summary_row_top {
+#pcmfvbvian .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1351,11 +1351,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_striped {
+#pcmfvbvian .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kxtwcqvmcz .gt_table_body {
+#pcmfvbvian .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1364,7 +1364,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_footnotes {
+#pcmfvbvian .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1378,7 +1378,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_footnote {
+#pcmfvbvian .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1387,7 +1387,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#kxtwcqvmcz .gt_sourcenotes {
+#pcmfvbvian .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1401,7 +1401,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#kxtwcqvmcz .gt_sourcenote {
+#pcmfvbvian .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1409,72 +1409,72 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#kxtwcqvmcz .gt_left {
+#pcmfvbvian .gt_left {
   text-align: left;
 }
 
-#kxtwcqvmcz .gt_center {
+#pcmfvbvian .gt_center {
   text-align: center;
 }
 
-#kxtwcqvmcz .gt_right {
+#pcmfvbvian .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kxtwcqvmcz .gt_font_normal {
+#pcmfvbvian .gt_font_normal {
   font-weight: normal;
 }
 
-#kxtwcqvmcz .gt_font_bold {
+#pcmfvbvian .gt_font_bold {
   font-weight: bold;
 }
 
-#kxtwcqvmcz .gt_font_italic {
+#pcmfvbvian .gt_font_italic {
   font-style: italic;
 }
 
-#kxtwcqvmcz .gt_super {
+#pcmfvbvian .gt_super {
   font-size: 65%;
 }
 
-#kxtwcqvmcz .gt_footnote_marks {
+#pcmfvbvian .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kxtwcqvmcz .gt_asterisk {
+#pcmfvbvian .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kxtwcqvmcz .gt_indent_1 {
+#pcmfvbvian .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kxtwcqvmcz .gt_indent_2 {
+#pcmfvbvian .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kxtwcqvmcz .gt_indent_3 {
+#pcmfvbvian .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kxtwcqvmcz .gt_indent_4 {
+#pcmfvbvian .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kxtwcqvmcz .gt_indent_5 {
+#pcmfvbvian .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kxtwcqvmcz .katex-display {
+#pcmfvbvian .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kxtwcqvmcz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pcmfvbvian div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1542,23 +1542,23 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ighhasuacd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ighhasuacd table {
+<div id="sywwkpstrj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sywwkpstrj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ighhasuacd thead, #ighhasuacd tbody, #ighhasuacd tfoot, #ighhasuacd tr, #ighhasuacd td, #ighhasuacd th {
+#sywwkpstrj thead, #sywwkpstrj tbody, #sywwkpstrj tfoot, #sywwkpstrj tr, #sywwkpstrj td, #sywwkpstrj th {
   border-style: none;
 }
 
-#ighhasuacd p {
+#sywwkpstrj p {
   margin: 0;
   padding: 0;
 }
 
-#ighhasuacd .gt_table {
+#sywwkpstrj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1584,12 +1584,12 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-left-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_caption {
+#sywwkpstrj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ighhasuacd .gt_title {
+#sywwkpstrj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1601,7 +1601,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-width: 0;
 }
 
-#ighhasuacd .gt_subtitle {
+#sywwkpstrj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1613,7 +1613,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-width: 0;
 }
 
-#ighhasuacd .gt_heading {
+#sywwkpstrj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1625,13 +1625,13 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_bottom_border {
+#sywwkpstrj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_col_headings {
+#sywwkpstrj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1646,7 +1646,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_col_heading {
+#sywwkpstrj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1666,7 +1666,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#ighhasuacd .gt_column_spanner_outer {
+#sywwkpstrj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1678,15 +1678,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 4px;
 }
 
-#ighhasuacd .gt_column_spanner_outer:first-child {
+#sywwkpstrj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ighhasuacd .gt_column_spanner_outer:last-child {
+#sywwkpstrj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ighhasuacd .gt_column_spanner {
+#sywwkpstrj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1698,11 +1698,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   width: 100%;
 }
 
-#ighhasuacd .gt_spanner_row {
+#sywwkpstrj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ighhasuacd .gt_group_heading {
+#sywwkpstrj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1728,7 +1728,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   text-align: left;
 }
 
-#ighhasuacd .gt_empty_group_heading {
+#sywwkpstrj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1743,15 +1743,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: middle;
 }
 
-#ighhasuacd .gt_from_md > :first-child {
+#sywwkpstrj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ighhasuacd .gt_from_md > :last-child {
+#sywwkpstrj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ighhasuacd .gt_row {
+#sywwkpstrj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1770,7 +1770,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#ighhasuacd .gt_stub {
+#sywwkpstrj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1783,7 +1783,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#ighhasuacd .gt_stub_row_group {
+#sywwkpstrj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1797,15 +1797,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: top;
 }
 
-#ighhasuacd .gt_row_group_first td {
+#sywwkpstrj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ighhasuacd .gt_row_group_first th {
+#sywwkpstrj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ighhasuacd .gt_summary_row {
+#sywwkpstrj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1815,16 +1815,16 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#ighhasuacd .gt_first_summary_row {
+#sywwkpstrj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_first_summary_row.thick {
+#sywwkpstrj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ighhasuacd .gt_last_summary_row {
+#sywwkpstrj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1834,7 +1834,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_grand_summary_row {
+#sywwkpstrj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1844,7 +1844,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#ighhasuacd .gt_first_grand_summary_row {
+#sywwkpstrj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1854,7 +1854,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_last_grand_summary_row_top {
+#sywwkpstrj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1864,11 +1864,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_striped {
+#sywwkpstrj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ighhasuacd .gt_table_body {
+#sywwkpstrj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1877,7 +1877,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_footnotes {
+#sywwkpstrj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1891,7 +1891,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_footnote {
+#sywwkpstrj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1900,7 +1900,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#ighhasuacd .gt_sourcenotes {
+#sywwkpstrj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1914,7 +1914,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#ighhasuacd .gt_sourcenote {
+#sywwkpstrj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1922,72 +1922,72 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#ighhasuacd .gt_left {
+#sywwkpstrj .gt_left {
   text-align: left;
 }
 
-#ighhasuacd .gt_center {
+#sywwkpstrj .gt_center {
   text-align: center;
 }
 
-#ighhasuacd .gt_right {
+#sywwkpstrj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ighhasuacd .gt_font_normal {
+#sywwkpstrj .gt_font_normal {
   font-weight: normal;
 }
 
-#ighhasuacd .gt_font_bold {
+#sywwkpstrj .gt_font_bold {
   font-weight: bold;
 }
 
-#ighhasuacd .gt_font_italic {
+#sywwkpstrj .gt_font_italic {
   font-style: italic;
 }
 
-#ighhasuacd .gt_super {
+#sywwkpstrj .gt_super {
   font-size: 65%;
 }
 
-#ighhasuacd .gt_footnote_marks {
+#sywwkpstrj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ighhasuacd .gt_asterisk {
+#sywwkpstrj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ighhasuacd .gt_indent_1 {
+#sywwkpstrj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ighhasuacd .gt_indent_2 {
+#sywwkpstrj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ighhasuacd .gt_indent_3 {
+#sywwkpstrj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ighhasuacd .gt_indent_4 {
+#sywwkpstrj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ighhasuacd .gt_indent_5 {
+#sywwkpstrj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ighhasuacd .katex-display {
+#sywwkpstrj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ighhasuacd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sywwkpstrj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2092,23 +2092,23 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cokpxajqxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cokpxajqxq table {
+<div id="jzcqqmivnq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jzcqqmivnq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cokpxajqxq thead, #cokpxajqxq tbody, #cokpxajqxq tfoot, #cokpxajqxq tr, #cokpxajqxq td, #cokpxajqxq th {
+#jzcqqmivnq thead, #jzcqqmivnq tbody, #jzcqqmivnq tfoot, #jzcqqmivnq tr, #jzcqqmivnq td, #jzcqqmivnq th {
   border-style: none;
 }
 
-#cokpxajqxq p {
+#jzcqqmivnq p {
   margin: 0;
   padding: 0;
 }
 
-#cokpxajqxq .gt_table {
+#jzcqqmivnq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2134,12 +2134,12 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-left-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_caption {
+#jzcqqmivnq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cokpxajqxq .gt_title {
+#jzcqqmivnq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2151,7 +2151,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-width: 0;
 }
 
-#cokpxajqxq .gt_subtitle {
+#jzcqqmivnq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2163,7 +2163,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-width: 0;
 }
 
-#cokpxajqxq .gt_heading {
+#jzcqqmivnq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2175,13 +2175,13 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_bottom_border {
+#jzcqqmivnq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_col_headings {
+#jzcqqmivnq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2196,7 +2196,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_col_heading {
+#jzcqqmivnq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2216,7 +2216,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#cokpxajqxq .gt_column_spanner_outer {
+#jzcqqmivnq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2228,15 +2228,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 4px;
 }
 
-#cokpxajqxq .gt_column_spanner_outer:first-child {
+#jzcqqmivnq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cokpxajqxq .gt_column_spanner_outer:last-child {
+#jzcqqmivnq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cokpxajqxq .gt_column_spanner {
+#jzcqqmivnq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2248,11 +2248,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   width: 100%;
 }
 
-#cokpxajqxq .gt_spanner_row {
+#jzcqqmivnq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cokpxajqxq .gt_group_heading {
+#jzcqqmivnq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2278,7 +2278,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   text-align: left;
 }
 
-#cokpxajqxq .gt_empty_group_heading {
+#jzcqqmivnq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2293,15 +2293,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: middle;
 }
 
-#cokpxajqxq .gt_from_md > :first-child {
+#jzcqqmivnq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cokpxajqxq .gt_from_md > :last-child {
+#jzcqqmivnq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cokpxajqxq .gt_row {
+#jzcqqmivnq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2320,7 +2320,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#cokpxajqxq .gt_stub {
+#jzcqqmivnq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2333,7 +2333,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#cokpxajqxq .gt_stub_row_group {
+#jzcqqmivnq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2347,15 +2347,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: top;
 }
 
-#cokpxajqxq .gt_row_group_first td {
+#jzcqqmivnq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cokpxajqxq .gt_row_group_first th {
+#jzcqqmivnq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cokpxajqxq .gt_summary_row {
+#jzcqqmivnq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2365,16 +2365,16 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#cokpxajqxq .gt_first_summary_row {
+#jzcqqmivnq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_first_summary_row.thick {
+#jzcqqmivnq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cokpxajqxq .gt_last_summary_row {
+#jzcqqmivnq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2384,7 +2384,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_grand_summary_row {
+#jzcqqmivnq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2394,7 +2394,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#cokpxajqxq .gt_first_grand_summary_row {
+#jzcqqmivnq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2404,7 +2404,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_last_grand_summary_row_top {
+#jzcqqmivnq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2414,11 +2414,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_striped {
+#jzcqqmivnq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cokpxajqxq .gt_table_body {
+#jzcqqmivnq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2427,7 +2427,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_footnotes {
+#jzcqqmivnq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2441,7 +2441,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_footnote {
+#jzcqqmivnq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2450,7 +2450,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#cokpxajqxq .gt_sourcenotes {
+#jzcqqmivnq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2464,7 +2464,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#cokpxajqxq .gt_sourcenote {
+#jzcqqmivnq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2472,72 +2472,72 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#cokpxajqxq .gt_left {
+#jzcqqmivnq .gt_left {
   text-align: left;
 }
 
-#cokpxajqxq .gt_center {
+#jzcqqmivnq .gt_center {
   text-align: center;
 }
 
-#cokpxajqxq .gt_right {
+#jzcqqmivnq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cokpxajqxq .gt_font_normal {
+#jzcqqmivnq .gt_font_normal {
   font-weight: normal;
 }
 
-#cokpxajqxq .gt_font_bold {
+#jzcqqmivnq .gt_font_bold {
   font-weight: bold;
 }
 
-#cokpxajqxq .gt_font_italic {
+#jzcqqmivnq .gt_font_italic {
   font-style: italic;
 }
 
-#cokpxajqxq .gt_super {
+#jzcqqmivnq .gt_super {
   font-size: 65%;
 }
 
-#cokpxajqxq .gt_footnote_marks {
+#jzcqqmivnq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cokpxajqxq .gt_asterisk {
+#jzcqqmivnq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cokpxajqxq .gt_indent_1 {
+#jzcqqmivnq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cokpxajqxq .gt_indent_2 {
+#jzcqqmivnq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cokpxajqxq .gt_indent_3 {
+#jzcqqmivnq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cokpxajqxq .gt_indent_4 {
+#jzcqqmivnq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cokpxajqxq .gt_indent_5 {
+#jzcqqmivnq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cokpxajqxq .katex-display {
+#jzcqqmivnq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cokpxajqxq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jzcqqmivnq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2605,23 +2605,23 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 <p><strong>How does the performance of live events compare to pre-taped content? Does the average live event draw more viewership than an average piece of pre-taped content? How about a ‘top tier’ live event vs ‘top tier’ pre-taped content?</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="eixgqsxfeo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#eixgqsxfeo table {
+<div id="fywiumvmbz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fywiumvmbz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#eixgqsxfeo thead, #eixgqsxfeo tbody, #eixgqsxfeo tfoot, #eixgqsxfeo tr, #eixgqsxfeo td, #eixgqsxfeo th {
+#fywiumvmbz thead, #fywiumvmbz tbody, #fywiumvmbz tfoot, #fywiumvmbz tr, #fywiumvmbz td, #fywiumvmbz th {
   border-style: none;
 }
 
-#eixgqsxfeo p {
+#fywiumvmbz p {
   margin: 0;
   padding: 0;
 }
 
-#eixgqsxfeo .gt_table {
+#fywiumvmbz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2647,12 +2647,12 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-left-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_caption {
+#fywiumvmbz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#eixgqsxfeo .gt_title {
+#fywiumvmbz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2664,7 +2664,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-width: 0;
 }
 
-#eixgqsxfeo .gt_subtitle {
+#fywiumvmbz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2676,7 +2676,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-width: 0;
 }
 
-#eixgqsxfeo .gt_heading {
+#fywiumvmbz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2688,13 +2688,13 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_bottom_border {
+#fywiumvmbz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_col_headings {
+#fywiumvmbz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2709,7 +2709,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_col_heading {
+#fywiumvmbz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2729,7 +2729,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#eixgqsxfeo .gt_column_spanner_outer {
+#fywiumvmbz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2741,15 +2741,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 4px;
 }
 
-#eixgqsxfeo .gt_column_spanner_outer:first-child {
+#fywiumvmbz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#eixgqsxfeo .gt_column_spanner_outer:last-child {
+#fywiumvmbz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#eixgqsxfeo .gt_column_spanner {
+#fywiumvmbz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2761,11 +2761,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   width: 100%;
 }
 
-#eixgqsxfeo .gt_spanner_row {
+#fywiumvmbz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#eixgqsxfeo .gt_group_heading {
+#fywiumvmbz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2791,7 +2791,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   text-align: left;
 }
 
-#eixgqsxfeo .gt_empty_group_heading {
+#fywiumvmbz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2806,15 +2806,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: middle;
 }
 
-#eixgqsxfeo .gt_from_md > :first-child {
+#fywiumvmbz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#eixgqsxfeo .gt_from_md > :last-child {
+#fywiumvmbz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#eixgqsxfeo .gt_row {
+#fywiumvmbz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2833,7 +2833,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   overflow-x: hidden;
 }
 
-#eixgqsxfeo .gt_stub {
+#fywiumvmbz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2846,7 +2846,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#eixgqsxfeo .gt_stub_row_group {
+#fywiumvmbz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2860,15 +2860,15 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   vertical-align: top;
 }
 
-#eixgqsxfeo .gt_row_group_first td {
+#fywiumvmbz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#eixgqsxfeo .gt_row_group_first th {
+#fywiumvmbz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#eixgqsxfeo .gt_summary_row {
+#fywiumvmbz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2878,16 +2878,16 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#eixgqsxfeo .gt_first_summary_row {
+#fywiumvmbz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_first_summary_row.thick {
+#fywiumvmbz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#eixgqsxfeo .gt_last_summary_row {
+#fywiumvmbz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2897,7 +2897,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_grand_summary_row {
+#fywiumvmbz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2907,7 +2907,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#eixgqsxfeo .gt_first_grand_summary_row {
+#fywiumvmbz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2917,7 +2917,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-top-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_last_grand_summary_row_top {
+#fywiumvmbz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2927,11 +2927,11 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_striped {
+#fywiumvmbz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#eixgqsxfeo .gt_table_body {
+#fywiumvmbz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2940,7 +2940,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-bottom-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_footnotes {
+#fywiumvmbz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2954,7 +2954,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_footnote {
+#fywiumvmbz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2963,7 +2963,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#eixgqsxfeo .gt_sourcenotes {
+#fywiumvmbz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2977,7 +2977,7 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   border-right-color: #D3D3D3;
 }
 
-#eixgqsxfeo .gt_sourcenote {
+#fywiumvmbz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2985,72 +2985,72 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   padding-right: 5px;
 }
 
-#eixgqsxfeo .gt_left {
+#fywiumvmbz .gt_left {
   text-align: left;
 }
 
-#eixgqsxfeo .gt_center {
+#fywiumvmbz .gt_center {
   text-align: center;
 }
 
-#eixgqsxfeo .gt_right {
+#fywiumvmbz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#eixgqsxfeo .gt_font_normal {
+#fywiumvmbz .gt_font_normal {
   font-weight: normal;
 }
 
-#eixgqsxfeo .gt_font_bold {
+#fywiumvmbz .gt_font_bold {
   font-weight: bold;
 }
 
-#eixgqsxfeo .gt_font_italic {
+#fywiumvmbz .gt_font_italic {
   font-style: italic;
 }
 
-#eixgqsxfeo .gt_super {
+#fywiumvmbz .gt_super {
   font-size: 65%;
 }
 
-#eixgqsxfeo .gt_footnote_marks {
+#fywiumvmbz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#eixgqsxfeo .gt_asterisk {
+#fywiumvmbz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#eixgqsxfeo .gt_indent_1 {
+#fywiumvmbz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#eixgqsxfeo .gt_indent_2 {
+#fywiumvmbz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#eixgqsxfeo .gt_indent_3 {
+#fywiumvmbz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#eixgqsxfeo .gt_indent_4 {
+#fywiumvmbz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#eixgqsxfeo .gt_indent_5 {
+#fywiumvmbz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#eixgqsxfeo .katex-display {
+#fywiumvmbz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#eixgqsxfeo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fywiumvmbz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3093,8 +3093,1079 @@ $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </section>
 <section id="corporate-memo" class="level2">
 <h2 class="anchored" data-anchor-id="corporate-memo">Corporate Memo</h2>
+<p>Netflix continues to see success in viewership rates and performance across the last seven periods reported for the “What We Watched”. After analyzing specific areas for improvement, two main strategies for Netflix’s 2027 original content are recommended which are outlined below.</p>
+<section id="global-availability-vs.-regional-content" class="level4">
+<h4 class="anchored" data-anchor-id="global-availability-vs.-regional-content">Global Availability vs.&nbsp;Regional Content</h4>
+<p><strong>Recommendation</strong>: Netflix should release currently available regional titles globally or put effort toward global releases in general.</p>
+<p>In terms of consumer preferences, there has been a significant shift in what consumers are watching. One of the most memorable examples of this was in 2021, when Netflix’s Korean drama series “Squid Game” became a global hit. However, this change was not overnight. Titles such as “Alice in Borderland” (Japan), “Money Heist” (Spain), and “Lupin” (France) have all been recognized internationally. Despite language barriers and cultural differences, the appreciation for these series lies in the stories. Therefore, I believe there should be a push to make regional content available globally or Netflix should produce more global content in general.</p>
+<p>To obtain a general overview of this shift in preferences we can take a look at the snapshot below of the top 10 titles in terms of viewership grouped across global availability and titles. Essentially what we are doing here is subsetting the titles with the most average hours viewed and comparing their global availability status.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="qteelnycvw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qteelnycvw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qteelnycvw thead, #qteelnycvw tbody, #qteelnycvw tfoot, #qteelnycvw tr, #qteelnycvw td, #qteelnycvw th {
+  border-style: none;
+}
+
+#qteelnycvw p {
+  margin: 0;
+  padding: 0;
+}
+
+#qteelnycvw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qteelnycvw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qteelnycvw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qteelnycvw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qteelnycvw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qteelnycvw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qteelnycvw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qteelnycvw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qteelnycvw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qteelnycvw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qteelnycvw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qteelnycvw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qteelnycvw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qteelnycvw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qteelnycvw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qteelnycvw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qteelnycvw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qteelnycvw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qteelnycvw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qteelnycvw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qteelnycvw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qteelnycvw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qteelnycvw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qteelnycvw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qteelnycvw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qteelnycvw .gt_left {
+  text-align: left;
+}
+
+#qteelnycvw .gt_center {
+  text-align: center;
+}
+
+#qteelnycvw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qteelnycvw .gt_font_normal {
+  font-weight: normal;
+}
+
+#qteelnycvw .gt_font_bold {
+  font-weight: bold;
+}
+
+#qteelnycvw .gt_font_italic {
+  font-style: italic;
+}
+
+#qteelnycvw .gt_super {
+  font-size: 65%;
+}
+
+#qteelnycvw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qteelnycvw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qteelnycvw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qteelnycvw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qteelnycvw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qteelnycvw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qteelnycvw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qteelnycvw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qteelnycvw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="title" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Title</th>
+<th id="avg_hr_view" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Average Hours Viewed</th>
+<th id="available_globally" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Available Globally?</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="title">Bridgerton: Season 4</td>
+<td class="gt_row gt_right" headers="avg_hr_view">889,800,000</td>
+<td class="gt_row gt_left" headers="available_globally">Yes</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="title">Stranger Things 5</td>
+<td class="gt_row gt_right" headers="avg_hr_view">729,050,000</td>
+<td class="gt_row gt_left" headers="available_globally">Yes</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="title">Wednesday: Season 2</td>
+<td class="gt_row gt_right" headers="avg_hr_view">517,700,000</td>
+<td class="gt_row gt_left" headers="available_globally">Yes</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="title">Teach You a Lesson: Limited Series</td>
+<td class="gt_row gt_right" headers="avg_hr_view">514,700,000</td>
+<td class="gt_row gt_left" headers="available_globally">Yes</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="title">His &amp; Hers: Limited Series</td>
+<td class="gt_row gt_right" headers="avg_hr_view">454,300,000</td>
+<td class="gt_row gt_left" headers="available_globally">Yes</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="title">La Reina del Sur: Season 3</td>
+<td class="gt_row gt_right" headers="avg_hr_view">429,600,000</td>
+<td class="gt_row gt_left" headers="available_globally">No</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="title">Squid Game: Season 2</td>
+<td class="gt_row gt_right" headers="avg_hr_view">403,650,000</td>
+<td class="gt_row gt_left" headers="available_globally">Yes</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="title">ONE PIECE: Season 2</td>
+<td class="gt_row gt_right" headers="avg_hr_view">383,500,000</td>
+<td class="gt_row gt_left" headers="available_globally">Yes</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="title">Can This Love Be Translated?: Limited Series</td>
+<td class="gt_row gt_right" headers="avg_hr_view">377,700,000</td>
+<td class="gt_row gt_left" headers="available_globally">Yes</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="title">Pursuit of Jade: Season 1</td>
+<td class="gt_row gt_right" headers="avg_hr_view">356,700,000</td>
+<td class="gt_row gt_left" headers="available_globally">Yes</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>All except one show, were titles that were globally available and still amassed a significant amount of views. Notably, of the titles available globally, five of them are international series. This is something to keep in mind when considering changes to Netflix’s catalog.</p>
+<p>The graph below displays the trendlines for views for global and regional titles across the seven periods.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mp01_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Both trend lines have a significant drop in total views but this is expected due to the 63.76% reduction in available titles between the first and second half of 2023. In terms of global availability status, there is no clear trend line of a pattern. Views for global and regional content seem to fluctuate continuously. Between the last half of 2025 and the first half of 2026, there is a decrease in total view for global content of about 4.56%. Consequently, there is an increase in the total views for regional content of 13.91%.</p>
+<p>In an era where connectivity happens digitally, regional content limits how much of Netflix’s total viewership base can be reached. Of course, shifting focus strategically to global availability requires legal work as well but the effort is something to consider. The global viewership base obtained from more widely accessible titles will stay committed to Netflix instead of competitors. For example, a viewer who enjoys a foreign genre may continue to stream on Netflix instead of a competitor if there were more options available in his/her region.</p>
+</section>
+<section id="short-form-vs.-long-form-content" class="level4">
+<h4 class="anchored" data-anchor-id="short-form-vs.-long-form-content">Short-Form vs.&nbsp;Long Form Content</h4>
+<p><strong>Recommendation</strong>: For 2027, Netflix should contnue making original long form content, that is with runtime of ove 240 minutes.</p>
+<p>A second question Netflix should consider for its 2027 strategy is whether short-form or long-form content is more valued. To analyze this issue, a filtering based on logical conditioning was run on the data. Netflix produces shows with an average of eight episodes that run for about 30 minutes. We can assume that the maximum runtime for short content has a runtime of 240 minutes or less. Anything else would be considered long form. This could include shows that have more episodes or longer episode times.</p>
+<p>The idea is important to think about because in an era driven by social media, consumers’ attention span has considerably decreased. Reels are extremely popular and even fifteen seconds is sometimes not enough time to capture someone’s attention. It is possible we are experiencing a shift in preference towards short form content in the entertainment industry as well. However, the results of the below table show otherwise.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="lucuttluww" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lucuttluww table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#lucuttluww thead, #lucuttluww tbody, #lucuttluww tfoot, #lucuttluww tr, #lucuttluww td, #lucuttluww th {
+  border-style: none;
+}
+
+#lucuttluww p {
+  margin: 0;
+  padding: 0;
+}
+
+#lucuttluww .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lucuttluww .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#lucuttluww .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lucuttluww .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lucuttluww .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lucuttluww .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lucuttluww .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lucuttluww .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lucuttluww .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lucuttluww .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lucuttluww .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lucuttluww .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lucuttluww .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#lucuttluww .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#lucuttluww .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lucuttluww .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lucuttluww .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lucuttluww .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lucuttluww .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lucuttluww .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lucuttluww .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lucuttluww .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#lucuttluww .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lucuttluww .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lucuttluww .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lucuttluww .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lucuttluww .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lucuttluww .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lucuttluww .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lucuttluww .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lucuttluww .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lucuttluww .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lucuttluww .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lucuttluww .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lucuttluww .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lucuttluww .gt_left {
+  text-align: left;
+}
+
+#lucuttluww .gt_center {
+  text-align: center;
+}
+
+#lucuttluww .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lucuttluww .gt_font_normal {
+  font-weight: normal;
+}
+
+#lucuttluww .gt_font_bold {
+  font-weight: bold;
+}
+
+#lucuttluww .gt_font_italic {
+  font-style: italic;
+}
+
+#lucuttluww .gt_super {
+  font-size: 65%;
+}
+
+#lucuttluww .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#lucuttluww .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lucuttluww .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#lucuttluww .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#lucuttluww .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lucuttluww .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lucuttluww .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#lucuttluww .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#lucuttluww div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="4" class="gt_heading gt_title gt_font_normal">Average Hours Viewed for Long vs. Short Form Content</td>
+</tr>
+<tr class="gt_heading even">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">By period</td>
+</tr>
+<tr class="gt_col_headings header">
+<th id="period" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Period</strong></th>
+<th id="long_form" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"><strong>Long-Form Views</strong></th>
+<th id="short_form" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"><strong>Short-Form Views</strong></th>
+<th id="rate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"><strong>LF/SF</strong></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2023H2</td>
+<td class="gt_row gt_right" headers="long_form">16,101,202</td>
+<td class="gt_row gt_right" headers="short_form">3,952,392</td>
+<td class="gt_row gt_right" headers="rate">4.1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="period">2024H1</td>
+<td class="gt_row gt_right" headers="long_form">15,719,112</td>
+<td class="gt_row gt_right" headers="short_form">3,553,780</td>
+<td class="gt_row gt_right" headers="rate">4.4</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2024H2</td>
+<td class="gt_row gt_right" headers="long_form">15,512,143</td>
+<td class="gt_row gt_right" headers="short_form">3,379,379</td>
+<td class="gt_row gt_right" headers="rate">4.6</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="period">2025H1</td>
+<td class="gt_row gt_right" headers="long_form">15,690,917</td>
+<td class="gt_row gt_right" headers="short_form">3,854,906</td>
+<td class="gt_row gt_right" headers="rate">4.1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2025H2</td>
+<td class="gt_row gt_right" headers="long_form">15,226,298</td>
+<td class="gt_row gt_right" headers="short_form">3,016,440</td>
+<td class="gt_row gt_right" headers="rate">5.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="period">2026H1</td>
+<td class="gt_row gt_right" headers="long_form">14,130,071</td>
+<td class="gt_row gt_right" headers="short_form">2,667,574</td>
+<td class="gt_row gt_right" headers="rate">5.3</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>In the table above, we see that long form content views are significantly higher than that of short form. The <strong>LF/SF</strong> column stands for how many more times greater long form views are than short form. In the first half of 2026, long form views were 5.3 times higher than that of short form. Also, if we look at the change in this ratio by year (for each two halves), in 2024 and 2025, there was an increase in this LF/SF ratio throughout the year.</p>
+<p>This signals something that contradicts what markets are currently showing. While we believe that short form content is more interactive with the consumer base, Netflix’s viewers value long form content more. This may be because most long form content is structured in multiple short episodes but because runtime is aggregated across a whole season, we consider it long form. Perhaps consumers are engaging more with long form content because they are watching in shorter intervals of time.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="AI Usage Statement">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>AI Usage Statement
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Gemini was used to help edit the code in this project, but all non-code text was generated wthout the use of any Generative AI tools.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
