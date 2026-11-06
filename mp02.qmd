@@ -397,12 +397,14 @@ On average, **`r round(us_CO2_emission)` pounds** of CO~2~ are emitted per megaw
 #| message: false
 #| warning: false
 
-# Group by primary source to
-EIA_SEP_REPORT |> group_by(primary_source) |> 
+# Group by primary source
+EIA_SEP_REPORT |> group_by(primary_source) |>
+  # Summarize number of states in each group and compute the average electricity price across those states
   summarise(
     state_count = n_distinct(state), 
     states_use = toString(state),
     avg_price = mean(electricity_price_MWh)) |>
+  # Pull the three sources where the least number of states are using them
   slice_min(state_count, n=3) |>
   mutate(avg_price = round(avg_price, 2)) |>
   gt() |>
@@ -412,20 +414,7 @@ EIA_SEP_REPORT |> group_by(primary_source) |>
                avg_price = md("**Average Electricity Price ($/MWh)**")) |> 
   tab_header(title="Rarest Primary Energy Sources in the US")
 ```
-
-
-#### New York vs. Texas
-**How many times cleaner is NY’s energy mix than that of Texas?**
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-tex =  filter(EIA_SEP_REPORT, state == "Texas")
-ny =  filter(EIA_SEP_REPORT, state == "New York")
-```
-
-New York's energy mix is **`r round(tex$CO2_MWh/ny$CO2_MWh,2)` times** cleaner that that of Texas.
+The rarest primary energy source in the US is petroleum and it is used by only one state that has an average electricity price of $380 per megawatt hour. Both the second and third rarest primary sources are used by four states and they are hydroelectric and wind energy. Idaho, Oregon, Vermont, and Washington use hydroelectric energy with an average electricity price of $122.90 per megawatt hour. Wind energy is used by Iowa, Kansas, New Mexico and South Dakota with an average price of $101.50 per megawatt hour. Notably the rarest primary source, petroleum, is used by Hawaii which is also the state with the highest average electricity price across the country.
 
 
 ### NTD Energy Usage
@@ -486,7 +475,21 @@ NTD_ENERGY |> pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type"
 
 #### Least Common Fuel Source for U.S. Public Transit
 **What is the least commonly used fuel source for US public transit?**
-The least commonly used fuel source for US public transit is `r NTD_ENERGY |> pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type", values_to = "gallons", names_prefix = "Gallons of ") |>   group_by(fuel_type) |>   summarise(total_gallons = sum(gallons, na.rm = TRUE)) |>   filter(total_gallons > 0) |>   slice_min(total_gallons) |> pull("fuel_type")`.
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+least_common = NTD_ENERGY |> 
+  pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type", values_to = "gallons", names_prefix = "Gallons of ") |>   
+  group_by(fuel_type) |>   
+  summarise(total_gallons = sum(gallons, na.rm = TRUE)) |>   
+  filter(total_gallons > 0) |>   
+  slice_min(total_gallons) |> 
+  pull("fuel_type")
+
+```
+The least commonly used fuel source for US public transit is `r least_common`.
 
 
 ### NTD Service
@@ -497,14 +500,21 @@ The least commonly used fuel source for US public transit is `r NTD_ENERGY |> pi
 #| message: false
 #| warning: false
 
-top_5_upt_data = NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
+top_5_upt_data = NTD_SERVICE |>
+  # Remove all possible inaccurate entries
+  filter(!flagged_likely_inaccurate) |>
+  # Format agency name to only include name and omit unnecessary details
   mutate(AGENCY = str_remove(AGENCY, ", dba:.*")) |>
+  # Group by agency and mode to figures out with agencies in what services have the most UPT
   group_by(AGENCY, mode) |>
+  # Sum total upt across these groups
   summarise(upt = sum(total_upt, na.rm = TRUE), .groups = "drop") |>
+  # Add a column including the agency name and transit service for a UPT value
   mutate(service = paste0(AGENCY, " (", mode ,")")) |>
+  # Extract top five UPTs
   slice_max(upt, n=5)
 
-
+# Reorder service and UPT to show values in descending order
 ggplot(top_5_upt_data, aes(x = upt, y = reorder(service, upt))) +
   geom_col(fill = "steelblue") +
   geom_text(
@@ -530,10 +540,17 @@ ggplot(top_5_upt_data, aes(x = upt, y = reorder(service, upt))) +
     plot.title = element_text(face = "bold", size = 14, hjust = 0.5
                               ),
     panel.grid.major.y = element_blank(),
-    panel.grid.minor = element_blank(),
-    axis.text.y = element_text(color = "#111111", size = 10, lineheight = 0.9)
+    panel.grid.minor = element_blank()
   )
 ```
+MTA New York City Transit holds the top two spots for transit services with the most annual UPT. Heavy rails sits at the top with 2.3 billion UPTs annually with motorbus in second place at 661.5 million. 
+
+Following MTA at number three is Los Angeles County’s Metropolitan motorbus transit service at 240 million UPTs. Next is Chicago Transit Authority’s motorbus service at about 200 million and at fifth is Washington D.C.’s  heavy rail system at about 180 million UPTs.
+
+It is understandable that most of the five services with the highest UPTs are in population dense areas. It also makes sense that three of these spots are for motorbus services. While cities are expanding their heavy rail systems, they are still not as extensive as bus routes are. Logically, bus routes are more manageable and there is more flexibility in how they are designed/the places they reach.
+
+One important data nuance to consider is how the NTD tracks UPTs across different transit services. For example, switching from a bus to a train is still considered a transfer in New York City. Does it count as two UPTs since they are different transit systems or because it is considered a transfer it is only one passenger trip? 
+
 
 #### Average Trip Length for MTA New York City Transit 
 **What is the average trip length of a trip on MTA NYC?**
@@ -542,8 +559,12 @@ ggplot(top_5_upt_data, aes(x = upt, y = reorder(service, upt))) +
 #| message: false
 #| warning: false
 
+# Set up variable to call on in inline code
 avg_trip_length = NTD_SERVICE |> 
+  # Remove all possible inaccurate entries
+  # Only keep entries that have "MTA New York City Transit" in the agency name
   filter(!flagged_likely_inaccurate, str_detect(AGENCY, "MTA New York City Transit")) |>
+  # Divide sum of passenger miles across the MTA by the total number of trips taken
   summarise(avg_trip = sum(sum_passenger_miles)/sum(total_upt)) |> 
   pull(avg_trip)
 
@@ -551,27 +572,6 @@ avg_trip_length = NTD_SERVICE |>
 The average trip length for MTA New York City Transit is `r round(avg_trip_length,2)` miles.
 
 
-#### Longest Average Trip Length in NYC
-**Which transit service in NYC has the longest average trip length?**
-``` {r}
-#| echo: true
-#| message: false
-#| warning: false
-
-NTD_SERVICE |> filter(!flagged_likely_inaccurate) |> 
-  filter(state == "NY") |>
-  filter(city %in% c("New York", "Brooklyn")) |>
-  group_by(AGENCY, mode) |>
-  summarise(avg_trip = sum(sum_passenger_miles)/sum(total_upt), .groups = 'drop') |>
-  slice_max(avg_trip)
-
-NTD_SERVICE |> filter(!flagged_likely_inaccurate) |> 
-  filter(state == "NY") |>
-  filter(city %in% c("New York", "Brooklyn")) |>
-  group_by(AGENCY, mode) |>
-  summarise(avg_trip = sum(sum_passenger_miles)/sum(total_upt), .groups = 'drop') |>
-  pull(AGENCY)
-```
 #### Least Miles Traveled by Public Transit
 **Which five states has the fewest total miles traveled by public transit?**
 ```{r}
@@ -579,39 +579,36 @@ NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
 #| message: false
 #| warning: false
 
+# Remove all possible inaccurate entries
 NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
+  # Only include states by using built in 'state.abb' (no territories and other regions)
   filter(state %in% state.abb) |>
   group_by(state) |>
+  # Across each state, sum total passenger miles
+  # Divide by 1 million to make graphical reporting easier
   summarise(tot_miles = sum(sum_passenger_miles, na.rm = TRUE)/1000000) |>
+  filter(tot_miles > 0) |>
+  # Extract the five states with the fewest total miles traveled
   slice_min(tot_miles, n = 5) |>
+  # Add a column with the full state name since original data only contained abbreviations
   mutate(full_state = set_names(state.name, state.abb)[state]) |>
+  # Reorder states to show in acsending order
   ggplot(aes(tot_miles, reorder(full_state, -tot_miles))) +
   geom_col(fill = "steelblue") +
   geom_text(aes(label = comma(tot_miles)), hjust = -0.3, size = 3) +
   scale_x_continuous(labels = label_comma(), expand = expansion(mult = c(0,0.5))) +
   theme_minimal() +
   labs(title= "States with Fewest Total Miles Travelled by Public Transit",
-       x= "Total Miles Travelled by Public Transit (in millions)",
+       x= "Total Miles Traveled by Public Transit (in millions)",
        y = NULL) +
   theme(
     plot.title.position = "plot",
     plot.title = element_text(face = "bold", size = 13, hjust = 0.5),
     axis.title.x = element_text(margin = margin(t=12)))
 ```
+South Dakota has the fewest total miles traveled by public transit at 2.31 million miles. Following South Dakota, is New Hampshire, North Dakota, Mississippi, and Idaho in that order.
 
-#### Complete Representation?
-**Are all states represented in this data? If no, which ones are missing?**
-``` {r}
-#| echo: true
-#| message: false
-#| warning: false
-
-missing_states = tibble(name = state.name, state = state.abb) |>
-  anti_join(filter(NTD_SERVICE, !flagged_likely_inaccurate), by ="state")
-```
-
-`r ifelse(nrow(missing_states) == 0, "Yes, all 50 states are represented in this data.", "No, there are some states missing.")`
-
+Something worth noting is that originally, the state with the fewest total miles by public transit was Wyoming at zero. This was a confusing metric because looking at Wyoming‘s records they did have entries for everything else except total passenger miles. Upon further investigation, it was discovered that the FTA has different reporting regulations for agencies according to their size. The two levels are ‘full reporter’ and ‘reduced reporter’. While it is not known why Wyoming did not report these metrics, we can assume that it may be a personal choice to not include passenger miles.
 
 ### Data Integration
 #### How many UPTs were recorded in states where the primary energy source was nuclear power?
