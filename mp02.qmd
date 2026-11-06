@@ -11,7 +11,7 @@ format:
     code-fold: TRUE
 ---
 
-### Overview
+## Overview
 In the modern-day, resources consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly, alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.\
 \
 This impact is measured by CO~2~ emissions. As defined by the [U.S. Energy Information Administration](https://www.eia.gov/tools/glossary/index.php?id=carbon%20intensity), carbon intensity refers to the “amount of carbon by weight emitted per unit of energy consumed”. In an emissions context, a higher carbon intensity means more CO~2~ emissions, which is not ideal for industries with significant energy consumption (like public transit).\
@@ -21,7 +21,7 @@ At Green Transit Alliance (GTA), we value green practices in the transportation 
 Congratulations in advance to the winners!
 
 
-### Data Acquisition
+## Data Acquisition
 ```{r}
 #| echo: false
 #| message: false
@@ -37,7 +37,7 @@ library(gt)
 ```
 The data was acquired from two federal sources - the [National Transit Database](https://www.transit.dot.gov/ntd) and the [U.S. Energy Information Administration](https://www.eia.gov/).
 
-
+### U.S. Energy Information Administration
 #### State Electricity Profiles
 ```{r}
 #| echo: true
@@ -118,16 +118,14 @@ get_eia_sep <- function(state, abbr){
 EIA_SEP_REPORT <- map2(state.name, state.abb, get_eia_sep) |> list_rbind()
 ```
 
-The code above pulls summaries of the state electricity profiles from the EIA. The result is a 50 by 6 data frame titled `EIA_SEP_REPORT`. The following metrics are reported in this dataset.
+The US Energy Information Administration is a repository for energy data across the United States. For the purpose of this project, Green Transit Alliance is interested in the summaries for state electricity profiles. The code above does this, storing the result in a data frame titled `EIA_SEP_REPORT`.
 
-- `CO2_MWh`: pounds of CO~2~ emitted per megawatt-hour of electricity
-- `primary_source`: primary source of electricity generation
-- `electricity_price_MWh`: average retail price of 1000 kilowatt-hours
-- `generation_MWh`: total generation capacity
-- `state`
-- `abbreviation` state abbreviation
+Each entry represents one state with information regarding pounds of carbon dioxide emissions per megawatt hour, primary sources of electricity generation, average retail prices of electricity and total generation capacity. Eventually this data will be coupled with information on public transit agencies to understand different energy sources they use as a fraction of total electricity consumption at the state level.
 
+It is likely some type of joining function will be used. The most probable option is `inner_join` which will match columns present across multiple data sets. While the NTD data will be discussed later on, state data will be available. Given such, `EIA_SEP_REPORT` will likely be joined on the `state` or `abbreviation` column to gain a state-level picture on usage of fuel/electricity and carbon emissions by public transit agencies. Filters used depend on the analysis being conducted but it is possible they will be used to compare carbon emissions and electricity across various states.
 
+### National Transit Database
+The National Transit Database (NTD) is a repository for publicly available data on the finances, operations and assets in American public transit systems. It is managed by the Federal Transportation Administration (FTA). For Green Transit Alliance, information regarding how public transit agencies consume fuel and the amount of electricity they use as well. The services provided by transit systems are of interest as well.
 
 #### Energy Consumption
 ```{r}
@@ -193,27 +191,9 @@ load_ntd_energy <- function(){
 NTD_ENERGY <- load_ntd_energy()
 ```
 
-The code above downloads the [2025 Annual Database Energy Consumption](https://www.transit.dot.gov/ntd/data-product/2025-annual-database-energy-consumption) report from the NTD. The result is a 1,134 by 16 data frame where the following metrics are reported.
+The code above forms the database `NTD_ENERGY` which contains information on different transit agencies, their locations, the types of fuel they consume and in what amounts, and the amount of electricity they use as well. Some of the fuel types reported include gasoline, kerosene, biodiesel, and hydrogen to name a few. The electricity usage is reported in two metrics  - electricity propulsion and battery usage. These two categories just draw on the distinction between how electricity is acquired. Another important part of this data is the `Mode` column which specifies how services in transit agencies are provided. While these are currently listed as two letter abbreviations, they will be recorded in a future step according to the NTD Reporting Policy Manual.
 
-- `NTD ID`: identification for public transit agency
-- `Mode`: type of service (recoded in a later step)
-- `Agency Name`
-- `Gallons of Bio-Diesel`
-- `Bio-Diesel Description`
-- `Gallons of Bunker Fuel`
-- `Gallons of Compressed Natural Gas`
-- `Gallons of Diesel Fuel`
-- `Kilowatt hours of Electric Battery`
-- `Kilowatt hours of Electric Propulsion`
-- `Gallons of Ethanol`
-- `Gallons of Gasoline`
-- `Kilograms of Hydrogen`
-- `Gallons of Kerosene`
-- `Gallons of Liquified Nat Gas`
-- `Gallons of Liquified Petroleum Gas`
-
-
-
+As previously mentioned with the EIA data, an `inner_join` is the most appropriate for this data. While the `NTD_ENERGY` energy contains many more entries on different public transit agencies (local, citywide, etc.), understanding their resources consumption as a part of overall state electricity consumption is important to understand which transit agencies are the greenest.
 
 #### Transit Service Provided
 ```{r}
@@ -272,15 +252,19 @@ load_ntd_service <- function(){
 NTD_SERVICE <- load_ntd_service()
 ```
 
+The `NTD_SERVICE` data contains information on passenger trips across different transit services. Each entry corresponds to a different service by a specific agency. The transit services reported are the same `mode` column from the `NTD_ENERGY` data. Given such they will also have to be recoded.
 
+However the focus here is on how different services are serving different areas across the United States. There are columns titled `uza_sqmiles`/`uza_population` and `service_area_sq_miles`/`service_area_population`.These metrics specify how different transit systems are serving the public and in which amounts. There are also columns that have flags for inaccurate data. It is highly likely we will omit these records in our analysis to ensure fair, accurate reporting. 
 
-### Data Cleaning and Preparation
+Lastly, two significant metrics reported in this data are `total_upt` and `sum_passenger_miles`. `total_upt` represents unlinked passenger trips which means that one trip regardless of how many transfers will count as one UPT. For example if you take two trains to reach a destination it still counts as one UPT because it is one trip in two segments. On the other hand, `sum_passenger_miles` reports the cumulative miles traveled by all passengers in that transit system by a specific mode of transit.
+
+## Data Cleaning and Preparation
 ```{r}
 #| echo: true
 #| message: false
 #| warning: false
 
-# identify which distinct abbreviations are present in the data
+# Identify which distinct abbreviations are present in the data.
 # NTD_ENERGY |> distinct(Mode) |> pull(Mode)
 # NTD_SERVICE |> distinct(mode) |> pull(mode)
 
@@ -329,6 +313,9 @@ NTD_SERVICE <- NTD_SERVICE |>
         default="Unknown"))
 ```
 
+An initial understanding of the data was conducted using the `glimpse()` and `skim()` functions whose outputs are not included in the report. However this understanding is essential to conceptualize how different data reports connect and contribute to the broader picture of green public transit.
+
+The main concern here was translating the `mode` column in the NTD_ENERGY and NTD_SERVICE data sets into something more readable. As stated previously, the `mode` columns are originally reported as two letter abbreviations whose full forms represent various transit services. To understand which transit services are reported, the list of distinct values for each dataset was pulled and each of those abbreviations was translated into its full form. The abbreviations are shown in the code above and can also be accessed through the [NTD Reporting Policy Manual](https://www.transit.dot.gov/ntd/2025-ntd-reporting-policy-manual). 
 
 ## Data Integration and Initial Exploration
 
@@ -342,8 +329,9 @@ NTD_SERVICE <- NTD_SERVICE |>
 #| fig-align: center
 #| out-width: 80%
 
-
+# Filter out the five states with the highest electricity prices per megawatt-hour.
 EIA_SEP_REPORT |> slice_max(electricity_price_MWh, n=5) |>
+  # Use reorder to have the bar in descending order.
   ggplot(aes(reorder(state, -electricity_price_MWh),electricity_price_MWh)) +
   geom_col(fill = "steelblue") +
   geom_text(aes(label = dollar(electricity_price_MWh)), vjust = -0.5) +
@@ -380,7 +368,7 @@ EIA_SEP_REPORT |> slice_max(CO2_MWh, n=5) |>
   tab_header(title="States with the 'Dirtiest' Electricity Mix")
 
 ```
-The ‘dirtiest’ electricity mix is defined as having higj
+The ‘dirtiest’ electricity mix is defined as having high carbon emissions. Therefore, in other words, this question asks which states have the highest CO~2~ emissions in pounds per megawatt-hour. West Virginia has the 'dirtiest' electricity mix at 1,912 pounds of CO~2~ per megawatt-hour. West Virginia is followed by Kentucky, Wyoming, Missouri and Hawaii in descending order. Notably, four of the top five states with the 'dirtiest' electricity mix use coal as their primary source.
 
 
 #### Average Co~2~ per Megawatt-Hour
@@ -390,8 +378,11 @@ The ‘dirtiest’ electricity mix is defined as having higj
 #| message: false
 #| warning: false
 
+# Set up variable to call on in inline code
 us_CO2_emission = EIA_SEP_REPORT |>
-  summarise(CO2_avg = weighted.mean(CO2_MWh, generation_MWh)) |>
+  # Compute a weighted mean for total CO2 emissions as a fraction of total generation (both in mwH)
+  # Use weighted mean over simple mean to ensure states with smaller/bigger consumption are accurately represented in average CO2 emissions
+  summarise(CO2_avg = weighted.mean(CO2_MWh, generation_MWh, na.rm = TRUE)) |>
   pull(CO2_avg)
 
 ```
@@ -406,6 +397,7 @@ On average, **`r round(us_CO2_emission)` pounds** of CO~2~ are emitted per megaw
 #| message: false
 #| warning: false
 
+# Group by primary source to
 EIA_SEP_REPORT |> group_by(primary_source) |> 
   summarise(
     state_count = n_distinct(state), 
@@ -420,6 +412,7 @@ EIA_SEP_REPORT |> group_by(primary_source) |>
                avg_price = md("**Average Electricity Price ($/MWh)**")) |> 
   tab_header(title="Rarest Primary Energy Sources in the US")
 ```
+
 
 #### New York vs. Texas
 **How many times cleaner is NY’s energy mix than that of Texas?**
@@ -657,15 +650,100 @@ There were `r comma(upt_nuclear)` unlinked passenger trips recorded where the pr
 ```
 `r most_bio` was the metro area where the most gallons of bio-diesel used by public transit agencies.
 
-### Data Analysis
-#### Calculate Total Emissions
+## Data Analysis
+### Calculate Total Emissions
 Compute the total emissions associated with each Agency + Mode pair.
+``` {r}
+state_grid_intensity <- EIA_SEP_REPORT |> 
+  group_by(abbreviation) |> 
+  summarise(
+    grid_co2_per_mwh = mean(CO2_MWh, na.rm = TRUE),
+    .groups = "drop"
+  )
 
-#### Relate Total Emissions and Passenger Service
+energy_by_mode <- NTD_ENERGY |> 
+  mutate(join_id = as.integer(`NTD ID`)) |> 
+  group_by(join_id, Mode) |> 
+  summarise(
+    diesel_gal    = sum(`Gallons of Diesel Fuel`, na.rm = TRUE),
+    biodiesel_gal = sum(`Gallons of Bio-Diesel`, na.rm = TRUE),
+    gasoline_gal  = sum(`Gallons of Gasoline`, na.rm = TRUE),
+    cng_gal       = sum(`Gallons of Compressed Natural Gas`, na.rm = TRUE),
+    lng_gal       = sum(`Gallons of Liquified Nat Gas`, na.rm = TRUE),
+    lpg_gal       = sum(`Gallons of Liquified Petroleum Gas`, na.rm = TRUE),
+    bunker_gal    = sum(`Gallons of Bunker Fuel`, na.rm = TRUE),
+    kerosene_gal  = sum(`Gallons of Kerosene`, na.rm = TRUE),
+    ethanol_gal   = sum(`Gallons of Ethanol`, na.rm = TRUE),
+    electric_kwh  = sum(`Kilowatt hours of Electric Propulsion`, na.rm = TRUE) + 
+                    sum(`Kilowatt hours of Electric Battery`, na.rm = TRUE),
+    .groups = "drop"
+  )
 
-#### Identify ‘Greenest’ Transit Agencies
+agency_mode_emissions <- NTD_SERVICE |> 
+  filter(!flagged_likely_inaccurate) |> 
+  mutate(join_id = as.integer(NTD_ID)) |> 
+  group_by(join_id, AGENCY, state, mode) |> 
+  summarise(
+    total_upt = sum(total_upt, na.rm = TRUE),
+    total_pmt = sum(sum_passenger_miles, na.rm = TRUE),
+    .groups = "drop"
+  ) |> 
+  inner_join(energy_by_mode, by = join_by(join_id == join_id, mode == Mode)) |> 
+  left_join(state_grid_intensity, by = join_by(state == abbreviation)) |> 
+  mutate(
+    emiss_diesel   = diesel_gal * 22.51,
+    emiss_bio      = biodiesel_gal * 22.51,
+    emiss_gasoline = gasoline_gal * 19.56,
+    emiss_cng      = cng_gal * 12.08,
+    emiss_lng      = lng_gal * 13.88,
+    emiss_lpg      = lpg_gal * 12.68,
+    emiss_bunker   = bunker_gal * 26.04,
+    emiss_kerosene = kerosene_gal * 21.54,
+    emiss_ethanol  = ethanol_gal * 12.72,
+    emiss_electric = (electric_kwh / 1000) * coalesce(grid_co2_per_mwh, 852.4),
+    
+    total_emissions_lbs = emiss_diesel + emiss_bio + emiss_gasoline + emiss_cng + 
+                          emiss_lng + emiss_lpg + emiss_bunker + emiss_kerosene + 
+                          emiss_ethanol + emiss_electric
+  )
 
-### Deliverable: Transit Award "Press Release"
+agency_mode_emissions |> 
+  select(AGENCY, mode, state, grid_co2_per_mwh, total_emissions_lbs) |> 
+  head(5)
+```
+
+### Relate Total Emissions and Passenger Service
+``` {r}
+agency_efficiency <- agency_mode_emissions |> 
+  group_by(join_id, AGENCY, state) |> 
+  summarise(
+    total_upt = sum(total_upt, na.rm = TRUE),
+    total_pmt = sum(total_pmt, na.rm = TRUE),
+    total_emissions_lbs = sum(total_emissions_lbs, na.rm = TRUE),
+    .groups = "drop"
+  ) |> 
+  # Filter out trivial/pilot services with insufficient volume
+  filter(total_upt >= 10000, total_pmt >= 10000) |> 
+  mutate(
+    # Core efficiency metrics
+    lbs_per_upt = total_emissions_lbs / total_upt,
+    lbs_per_pmt = total_emissions_lbs / total_pmt,
+    
+    # Standard transit agency size tiers based on annual ridership (UPT)
+    agency_size = case_when(
+      total_upt >= 50000000 ~ "Large",    # > 50M annual trips (MTA, CTA, MBTA, WMATA, etc.)
+      total_upt >= 5000000  ~ "Medium",   # 5M - 50M trips (mid-sized cities, commuter authorities)
+      TRUE                  ~ "Small"     # 10k - 5M trips (smaller municipal systems, regional shuttles)
+    ),
+    agency_size = factor(agency_size, levels = c("Large", "Medium", "Small"))
+  )
+
+agency_efficiency
+```
+
+### Identify ‘Greenest’ Transit Agencies
+
+## Deliverable: Transit Award "Press Release"
 
 
 
