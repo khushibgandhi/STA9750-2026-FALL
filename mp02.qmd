@@ -329,9 +329,9 @@ The main concern here was translating the `mode` column in the NTD_ENERGY and NT
 #| fig-align: center
 #| out-width: 80%
 
-# Filter out the five states with the highest electricity prices per megawatt-hour.
+# Filter out the five states with the highest electricity prices per megawatt-hour
 EIA_SEP_REPORT |> slice_max(electricity_price_MWh, n=5) |>
-  # Use reorder to have the bar in descending order.
+  # Use reorder to have the bar in descending order
   ggplot(aes(reorder(state, -electricity_price_MWh),electricity_price_MWh)) +
   geom_col(fill = "steelblue") +
   geom_text(aes(label = dollar(electricity_price_MWh)), vjust = -0.5) +
@@ -346,7 +346,7 @@ EIA_SEP_REPORT |> slice_max(electricity_price_MWh, n=5) |>
     axis.title.y = element_text(margin = margin(r=12))
   )
 ```
-Hawaii has the most expensive retail electricity at $380 per megawatt-hour. Following Hawaii, in order of descending price, are California, Connecticut, Rhode Island and Massachusetts.
+**Hawaii has the most expensive retail electricity** at $380 per megawatt-hour. Following Hawaii, in order of descending price, are California, Connecticut, Rhode Island and Massachusetts.
 
 
 #### 'Dirtiest' Electricity Mix
@@ -356,8 +356,9 @@ Hawaii has the most expensive retail electricity at $380 per megawatt-hour. Foll
 #| message: false
 #| warning: false
 
-
+# Filter out the five states with the highest CO2 per megawatt-hour
 EIA_SEP_REPORT |> slice_max(CO2_MWh, n=5) |> 
+  # Select only the relevant, needed columns
   select(c("state", "CO2_MWh", "primary_source")) |> 
   gt() |>
   cols_align(align = "left", columns = "CO2_MWh") |>
@@ -368,7 +369,7 @@ EIA_SEP_REPORT |> slice_max(CO2_MWh, n=5) |>
   tab_header(title="States with the 'Dirtiest' Electricity Mix")
 
 ```
-The ‘dirtiest’ electricity mix is defined as having high carbon emissions. Therefore, in other words, this question asks which states have the highest CO~2~ emissions in pounds per megawatt-hour. West Virginia has the 'dirtiest' electricity mix at 1,912 pounds of CO~2~ per megawatt-hour. West Virginia is followed by Kentucky, Wyoming, Missouri and Hawaii in descending order. Notably, four of the top five states with the 'dirtiest' electricity mix use coal as their primary source.
+The ‘dirtiest’ electricity mix is defined as having high carbon emissions. Therefore, in other words, this question asks which states have the highest CO~2~ emissions in pounds per megawatt-hour. **West Virginia has the 'dirtiest' electricity mix** at 1,912 pounds of CO~2~ per megawatt-hour. West Virginia is followed by Kentucky, Wyoming, Missouri and Hawaii in descending order. Notably, four of the top five states with the 'dirtiest' electricity mix use coal as their primary source.
 
 
 #### Average Co~2~ per Megawatt-Hour
@@ -414,39 +415,14 @@ EIA_SEP_REPORT |> group_by(primary_source) |>
                avg_price = md("**Average Electricity Price ($/MWh)**")) |> 
   tab_header(title="Rarest Primary Energy Sources in the US")
 ```
-The rarest primary energy source in the US is petroleum and it is used by only one state that has an average electricity price of $380 per megawatt hour. Both the second and third rarest primary sources are used by four states and they are hydroelectric and wind energy. Idaho, Oregon, Vermont, and Washington use hydroelectric energy with an average electricity price of $122.90 per megawatt hour. Wind energy is used by Iowa, Kansas, New Mexico and South Dakota with an average price of $101.50 per megawatt hour. Notably the rarest primary source, petroleum, is used by Hawaii which is also the state with the highest average electricity price across the country.
+The rarest primary energy source in the US is **petroleum** and it is used by only one state that has an average electricity price of \$380 per megawatt hour. 
+
+Both the second and third rarest primary sources are used by four states and they are hydroelectric and wind energy. Idaho, Oregon, Vermont, and Washington use hydroelectric energy with an average electricity price of \$122.90 per megawatt hour. 
+
+Wind energy is used by Iowa, Kansas, New Mexico and South Dakota with an average price of \$101.50 per megawatt hour. Notably the rarest primary source, petroleum, is used by Hawaii which is also the state with the highest average electricity price across the country.
 
 
 ### NTD Energy Usage
-#### Breakdown of Fuel Usage by Type
-**Which five transit agencies used the most gallons of fuel (all sources) and how did it breakdown by type?**
-```{r}
-#| echo: true
-#| message: false
-#| warning: false
-
-most_used_fuel  = NTD_ENERGY |> pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type", values_to = "gallons") |>
-  group_by(`Agency Name`) |> 
-  summarise(total_gallons = sum(gallons, na.rm = TRUE)) |>
-  slice_max(total_gallons, n=5) |> 
-  pull(`Agency Name`)
-
-NTD_ENERGY |> filter(`Agency Name` %in% most_used_fuel) |> 
-  pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type", values_to = "gallons", names_prefix = "Gallons of ") |>
-  group_by(`Agency Name`, fuel_type) |>
-  summarise(total_gallons = sum(gallons, na.rm = TRUE), .groups = "drop") |>
-  pivot_wider(names_from = fuel_type, values_from = total_gallons) |> 
-  select(`Agency Name`, where(~ is.numeric(.x) && sum(.x) > 0)) |> gt()|>
-  cols_label(`Agency Name`=md("**Agency Name**"),
-             "Compressed Natural Gas" = md("**Compressed Natural Gas**"),
-             "Diesel Fuel" =md("**Diesel Fuel**"),
-             "Gasoline" = md("**Gasoline**")) |>
-  fmt_number(decimals = 0) |>
-  tab_header(title = "Breakdown of Fuel Usage in Transit Agencies with the Highest Consumption",
-             subtitle = "in gallons") |>
-  tab_source_note(source_note = md("**Note**: Fuel types with no comsumption across all top 5 agencies are not reported above."))
-```
-
 #### Visualizing Fuel Usage
 **Across all US public transit, visualize the amounts of each type of fuel used.**
 ```{r}
@@ -454,9 +430,13 @@ NTD_ENERGY |> filter(`Agency Name` %in% most_used_fuel) |>
 #| message: false
 #| warning: false
 
-NTD_ENERGY |> pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type", values_to = "gallons", names_prefix = "Gallons of ") |>
+NTD_ENERGY |> 
+  # Change data format so eventually data can be grouped by fuel type
+  pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type", values_to = "gallons", names_prefix = "Gallons of ") |>
   group_by(fuel_type) |> 
-  summarise(total_gallons = sum(gallons, na.rm = TRUE)/1000000) |> 
+  # Aggregate the amount of gallons used across individual fuel type groups
+  summarise(total_gallons = sum(gallons, na.rm = TRUE)/1000000) |>
+  # Omit any fuel types that were unused
   filter(total_gallons > 0) |>
   ggplot(aes(total_gallons, reorder(fuel_type, total_gallons))) +
   geom_col(fill = "steelblue") +
@@ -472,6 +452,10 @@ NTD_ENERGY |> pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type"
     axis.title.y = element_text(margin = margin(r=12)))
   
 ```
+The most consumed fuel type across US public transit is **diesel fuel at 437.93 million gallons**. Second to it is compressed natural gas but in terms of gallons consumed it is only 45.4% of diesel fuel at 198.83 million gallons. This is a massive difference and it is plausible that diesel fuel is the standard for fuel type used by transportation systems.
+
+In third place is gasoline, but that value is half that of compressed natural gas usage. Following it are biodiesel, liquid petroleum gas, ethanol and lastly liquid natural gas, which is only about 220,000 gallons. 
+
 
 #### Least Common Fuel Source for U.S. Public Transit
 **What is the least commonly used fuel source for US public transit?**
@@ -480,16 +464,22 @@ NTD_ENERGY |> pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type"
 #| message: false
 #| warning: false
 
-least_common = NTD_ENERGY |> 
+# Set up variable to call on in inline code
+least_common = NTD_ENERGY |>
+  # Change data format so eventually data can be grouped by fuel type
   pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type", values_to = "gallons", names_prefix = "Gallons of ") |>   
-  group_by(fuel_type) |>   
+  group_by(fuel_type) |>
+  # Aggregate the amount of gallons used across individual fuel type groups
   summarise(total_gallons = sum(gallons, na.rm = TRUE)) |>   
-  filter(total_gallons > 0) |>   
+  # Omit any fuel types that were unused
+  filter(total_gallons > 0) |> 
+  # Find the fuel type with the lowest consumption
   slice_min(total_gallons) |> 
+  # Extract the name of that fuel type
   pull("fuel_type")
 
 ```
-The least commonly used fuel source for US public transit is `r least_common`.
+The least commonly used fuel source for US public transit is **`r least_common`**. This conclusion is also available in the previous tasks where all fuel types were graphically compared.
 
 
 ### NTD Service
@@ -543,7 +533,7 @@ ggplot(top_5_upt_data, aes(x = upt, y = reorder(service, upt))) +
     panel.grid.minor = element_blank()
   )
 ```
-MTA New York City Transit holds the top two spots for transit services with the most annual UPT. Heavy rails sits at the top with 2.3 billion UPTs annually with motorbus in second place at 661.5 million. 
+**MTA New York City Transit holds the top two spots for transit services with the most annual UPT.** Heavy rails sits at the top with 2.3 billion UPTs annually with motorbus in second place at 661.5 million. 
 
 Following MTA at number three is Los Angeles County’s Metropolitan motorbus transit service at 240 million UPTs. Next is Chicago Transit Authority’s motorbus service at about 200 million and at fifth is Washington D.C.’s  heavy rail system at about 180 million UPTs.
 
@@ -569,7 +559,7 @@ avg_trip_length = NTD_SERVICE |>
   pull(avg_trip)
 
 ```
-The average trip length for MTA New York City Transit is `r round(avg_trip_length,2)` miles.
+The average trip length for MTA New York City Transit is **`r round(avg_trip_length,2)` miles**.
 
 
 #### Least Miles Traveled by Public Transit
@@ -606,7 +596,7 @@ NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
     plot.title = element_text(face = "bold", size = 13, hjust = 0.5),
     axis.title.x = element_text(margin = margin(t=12)))
 ```
-South Dakota has the fewest total miles traveled by public transit at 2.31 million miles. Following South Dakota, is New Hampshire, North Dakota, Mississippi, and Idaho in that order.
+**South Dakota** has the fewest total miles traveled by public transit at 2.31 million miles. Following South Dakota, is New Hampshire, North Dakota, Mississippi, and Idaho in that order.
 
 Something worth noting is that originally, the state with the fewest total miles by public transit was Wyoming at zero. This was a confusing metric because looking at Wyoming‘s records they did have entries for everything else except total passenger miles. Upon further investigation, it was discovered that the FTA has different reporting regulations for agencies according to their size. The two levels are ‘full reporter’ and ‘reduced reporter’. While it is not known why Wyoming did not report these metrics, we can assume that it may be a personal choice to not include passenger miles.
 
@@ -626,7 +616,7 @@ upt_nuclear = NTD_SERVICE |>
   inner_join(states_nuclear, by = join_by(state == abbreviation)) |>
   summarise(tot_upt = sum(total_upt, na.rm = TRUE)) |> pull(tot_upt)
 ```
-There were `r comma(upt_nuclear)` unlinked passenger trips recorded where the primary energy source was nuclear power.
+There were **`r comma(upt_nuclear)`** unlinked passenger trips recorded where the primary energy source was nuclear power.
 
 #### In what metro area were the most gallons of bio-diesel used by public transit agencies?
 ``` {r}
@@ -645,7 +635,7 @@ There were `r comma(upt_nuclear)` unlinked passenger trips recorded where the pr
   slice_max(bio) |> pull(uza_name)
 
 ```
-`r most_bio` was the metro area where the most gallons of bio-diesel used by public transit agencies.
+**`r most_bio`** was the metro area where the most gallons of bio-diesel used by public transit agencies.
 
 ## Data Analysis
 ### Calculate Total Emissions
