@@ -11,8 +11,14 @@ format:
     code-fold: TRUE
 ---
 
-### Introduction
-
+### Overview
+In the modern-day, resources consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly, alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.\
+\
+This impact is measured by CO~2~ emissions. As defined by the [U.S. Energy Information Administration](https://www.eia.gov/tools/glossary/index.php?id=carbon%20intensity), carbon intensity refers to the “amount of carbon by weight emitted per unit of energy consumed”. In an emissions context, a higher carbon intensity means more CO~2~ emissions, which is not ideal for industries with significant energy consumption (like public transit).\
+\
+At Green Transit Alliance (GTA), we value green practices in the transportation industry. That is why annually, we recognize public transit agencies with the “greenest” outcomes. Our decisions are based on a comprehensive analysis of three federal sources which will be discussed in an upcoming section.\
+\
+Congratulations in advance to the winners!
 
 
 ### Data Acquisition
@@ -29,6 +35,8 @@ library(skimr)
 library(scales)
 library(gt)
 ```
+The data was acquired from two federal sources - the [National Transit Database](https://www.transit.dot.gov/ntd) and the [U.S. Energy Information Administration](https://www.eia.gov/).
+
 
 #### State Electricity Profiles
 ```{r}
@@ -110,7 +118,16 @@ get_eia_sep <- function(state, abbr){
 EIA_SEP_REPORT <- map2(state.name, state.abb, get_eia_sep) |> list_rbind()
 ```
 
-Using the code above, acquire the relevant data. Copy the code into your Quarto document and make sure it runs successfully. After doing so, consider which types of joins and filters will be appropriate for this data.
+The code above pulls summaries of the state electricity profiles from the EIA. The result is a 50 by 6 data frame titled `EIA_SEP_REPORT`. The following metrics are reported in this dataset.
+
+- `CO2_MWh`: pounds of CO~2~ emitted per megawatt-hour of electricity
+- `primary_source`: primary source of electricity generation
+- `electricity_price_MWh`: average retail price of 1000 kilowatt-hours
+- `generation_MWh`: total generation capacity
+- `state`
+- `abbreviation` state abbreviation
+
+
 
 #### Energy Consumption
 ```{r}
@@ -175,7 +192,28 @@ load_ntd_energy <- function(){
 
 NTD_ENERGY <- load_ntd_energy()
 ```
-Using the code above, acquire the relevant data. Copy the code into your Quarto document and make sure it runs successfully. After doing so, consider which types of joins and filters will be appropriate for this data.
+
+The code above downloads the [2025 Annual Database Energy Consumption](https://www.transit.dot.gov/ntd/data-product/2025-annual-database-energy-consumption) report from the NTD. The result is a 1,134 by 16 data frame where the following metrics are reported.
+
+- `NTD ID`: identification for public transit agency
+- `Mode`: type of service (recoded in a later step)
+- `Agency Name`
+- `Gallons of Bio-Diesel`
+- `Bio-Diesel Description`
+- `Gallons of Bunker Fuel`
+- `Gallons of Compressed Natural Gas`
+- `Gallons of Diesel Fuel`
+- `Kilowatt hours of Electric Battery`
+- `Kilowatt hours of Electric Propulsion`
+- `Gallons of Ethanol`
+- `Gallons of Gasoline`
+- `Kilograms of Hydrogen`
+- `Gallons of Kerosene`
+- `Gallons of Liquified Nat Gas`
+- `Gallons of Liquified Petroleum Gas`
+
+
+
 
 #### Transit Service Provided
 ```{r}
@@ -238,18 +276,13 @@ NTD_SERVICE <- load_ntd_service()
 
 ### Data Cleaning and Preparation
 ```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-NTD_ENERGY |> distinct(Mode) |> pull(Mode)
-NTD_SERVICE |> distinct(mode) |> pull(mode)
-```
-
-```{r}
 #| echo: true
 #| message: false
 #| warning: false
+
+# identify which distinct abbreviations are present in the data
+# NTD_ENERGY |> distinct(Mode) |> pull(Mode)
+# NTD_SERVICE |> distinct(mode) |> pull(mode)
 
 
 NTD_ENERGY <- NTD_ENERGY |>
@@ -296,6 +329,9 @@ NTD_SERVICE <- NTD_SERVICE |>
         default="Unknown"))
 ```
 
+
+
+
 ### Data Integration and Initial Exploration
 #### EDA - EIA State Electricity Profiles
 **Which 5 states have the most expensive retail electricity?**
@@ -306,7 +342,8 @@ NTD_SERVICE <- NTD_SERVICE |>
 #| fig-align: center
 #| out-width: 80%
 
-EIA_SEP_REPORT |> slice_max(electricity_price_MWh, n=5) |> 
+
+EIA_SEP_REPORT |> slice_max(electricity_price_MWh, n=5) |>
   ggplot(aes(reorder(state, -electricity_price_MWh),electricity_price_MWh)) +
   geom_col(fill = "steelblue") +
   geom_text(aes(label = dollar(electricity_price_MWh)), vjust = -0.5) +
@@ -321,13 +358,15 @@ EIA_SEP_REPORT |> slice_max(electricity_price_MWh, n=5) |>
     axis.title.y = element_text(margin = margin(r=12))
   )
 ```
-
-
+Hawaii has the most expensive retail electricity at $380 per megawatt-hour. Following Hawaii, in order of descending price, are California, Conecticut, Rhode Island and Massachusetts.
+\
+\
 **Which 5 states have the ‘dirtiest’ electricity mix?**
 ```{r}
 #| echo: true
 #| message: false
 #| warning: false
+
 
 EIA_SEP_REPORT |> slice_max(CO2_MWh, n=5) |> 
   select(c("state", "CO2_MWh", "primary_source")) |> 
@@ -340,6 +379,8 @@ EIA_SEP_REPORT |> slice_max(CO2_MWh, n=5) |>
   tab_header(title="States with the 'Dirtiest' Electricity Mix")
 
 ```
+The ‘dirtiest’ electricity mix is defined as having higj
+
 
 **On average, how many pounds of CO2 are emitted per MWh of electricity produced in the US?**
 ```{r}
@@ -418,7 +459,9 @@ NTD_ENERGY |> filter(`Agency Name` %in% most_used_fuel) |>
              subtitle = "in gallons") |>
   tab_source_note(source_note = md("**Note**: Fuel types with no comsumption across all top 5 agencies are not reported above."))
 ```
-
+\
+\
+\
 **Across all US public transit, visualize the amounts of each type of fuel used.**
 ```{r}
 #| echo: true
@@ -475,7 +518,82 @@ NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
     axis.title.x = element_text(margin = margin(t=12)))
 ```
 
+**What is the average trip length of a trip on MTA NYC?**
+``` {r}
+#| echo: true
+#| message: false
+#| warning: false
 
+avg_trip_length = NTD_SERVICE |> 
+  # Filter: Remove inaccurate entries and subset data from only MTA NYCT
+  filter(!flagged_likely_inaccurate, str_detect(AGENCY, "MTA New York City Transit")) |>
+  # Method: 
+  summarise(avg_trip = sum(sum_passenger_miles)/sum(total_upt)) |> 
+  pull(avg_trip)
+
+```
+
+The average trip length for MTA New York City Transit is `r round(avg_trip_length,2)` miles.
+
+
+**Which transit service in NYC has the longest average trip length?**
+``` {r}
+#| echo: true
+#| message: false
+#| warning: false
+
+NTD_SERVICE |> filter(!flagged_likely_inaccurate) |> 
+  filter(state == "NY") |>
+  filter(city %in% c("New York", "Brooklyn")) |>
+  group_by(AGENCY, mode) |>
+  summarise(avg_trip = sum(sum_passenger_miles)/sum(total_upt), .groups = 'drop') |>
+  slice_max(avg_trip)
+
+NTD_SERVICE |> filter(!flagged_likely_inaccurate) |> 
+  filter(state == "NY") |>
+  filter(city %in% c("New York", "Brooklyn")) |>
+  group_by(AGENCY, mode) |>
+  summarise(avg_trip = sum(sum_passenger_miles)/sum(total_upt), .groups = 'drop') |>
+  pull(AGENCY)
+```
+**Which five states has the fewest total miles travelled by public transit?**
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
+  filter(state %in% state.abb) |>
+  group_by(state) |>
+  summarise(tot_miles = sum(sum_passenger_miles, na.rm = TRUE)/1000000) |>
+  slice_min(tot_miles, n = 5) |>
+  mutate(full_state = set_names(state.name, state.abb)[state]) |>
+  ggplot(aes(tot_miles, reorder(full_state, -tot_miles))) +
+  geom_col(fill = "steelblue") +
+  geom_text(aes(label = comma(tot_miles)), hjust = -0.3, size = 3) +
+  scale_x_continuous(labels = label_comma(), expand = expansion(mult = c(0,0.5))) +
+  theme_minimal() +
+  labs(title= "States with Fewest Total Miles Travelled by Public Transit",
+       x= "Total Miles Travelled by Public Transit (in millions)",
+       y = NULL) +
+  theme(
+    plot.title.position = "plot",
+    plot.title = element_text(face = "bold", size = 13, hjust = 0.5),
+    axis.title.x = element_text(margin = margin(t=12)))
+```
+
+**Are all states represented in this data? If no, which ones are missing?**
+
+``` {r}
+#| echo: true
+#| message: false
+#| warning: false
+
+missing_states = tibble(name = state.name, state = state.abb) |>
+  anti_join(filter(NTD_SERVICE, !flagged_likely_inaccurate), by ="state")
+```
+
+`r ifelse(nrow(missing_states) == 0, "All the states are represented in this data.", "No.")`
 #### Data Integration
 
 ### Data Analysis
