@@ -330,10 +330,10 @@ NTD_SERVICE <- NTD_SERVICE |>
 ```
 
 
+## Data Integration and Initial Exploration
 
-
-### Data Integration and Initial Exploration
-#### EDA - EIA State Electricity Profiles
+### EIA State Electricity Profiles
+#### Most Expensive Retail Electricity
 **Which 5 states have the most expensive retail electricity?**
 ```{r}
 #| echo: true
@@ -358,9 +358,10 @@ EIA_SEP_REPORT |> slice_max(electricity_price_MWh, n=5) |>
     axis.title.y = element_text(margin = margin(r=12))
   )
 ```
-Hawaii has the most expensive retail electricity at $380 per megawatt-hour. Following Hawaii, in order of descending price, are California, Conecticut, Rhode Island and Massachusetts.
-\
-\
+Hawaii has the most expensive retail electricity at $380 per megawatt-hour. Following Hawaii, in order of descending price, are California, Connecticut, Rhode Island and Massachusetts.
+
+
+#### 'Dirtiest' Electricity Mix
 **Which 5 states have the ‘dirtiest’ electricity mix?**
 ```{r}
 #| echo: true
@@ -382,6 +383,7 @@ EIA_SEP_REPORT |> slice_max(CO2_MWh, n=5) |>
 The ‘dirtiest’ electricity mix is defined as having higj
 
 
+#### Average Co~2~ per Megawatt-Hour
 **On average, how many pounds of CO2 are emitted per MWh of electricity produced in the US?**
 ```{r}
 #| echo: true
@@ -397,6 +399,7 @@ us_CO2_emission = EIA_SEP_REPORT |>
 On average, **`r round(us_CO2_emission)` pounds** of CO~2~ are emitted per megawatt hour of electricity produced in the United States.
 
 
+#### Rarest Primary Energy Sources in the US
 **What are the three rarest primary energy sources in the US? What is the associated cost of electricity associated with each source and in what states are they used?**
 ```{r}
 #| echo: true
@@ -418,7 +421,8 @@ EIA_SEP_REPORT |> group_by(primary_source) |>
   tab_header(title="Rarest Primary Energy Sources in the US")
 ```
 
-**How many times cleaner is NY’s energy mix than that of Texas? **
+#### New York vs. Texas
+**How many times cleaner is NY’s energy mix than that of Texas?**
 ```{r}
 #| echo: false
 #| message: false
@@ -431,7 +435,8 @@ ny =  filter(EIA_SEP_REPORT, state == "New York")
 New York's energy mix is **`r round(tex$CO2_MWh/ny$CO2_MWh,2)` times** cleaner that that of Texas.
 
 
-#### EDA - NTD Energy Usage
+### NTD Energy Usage
+#### Breakdown of Fuel Usage by Type
 **Which five transit agencies used the most gallons of fuel (all sources) and how did it breakdown by type?**
 ```{r}
 #| echo: true
@@ -459,9 +464,8 @@ NTD_ENERGY |> filter(`Agency Name` %in% most_used_fuel) |>
              subtitle = "in gallons") |>
   tab_source_note(source_note = md("**Note**: Fuel types with no comsumption across all top 5 agencies are not reported above."))
 ```
-\
-\
-\
+
+#### Visualizing Fuel Usage
 **Across all US public transit, visualize the amounts of each type of fuel used.**
 ```{r}
 #| echo: true
@@ -487,37 +491,58 @@ NTD_ENERGY |> pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type"
   
 ```
 
-**What is the least commonly used fuel source for US public transit?**\
+#### Least Common Fuel Source for U.S. Public Transit
+**What is the least commonly used fuel source for US public transit?**
 The least commonly used fuel source for US public transit is `r NTD_ENERGY |> pivot_longer(cols = starts_with("Gallons"), names_to = "fuel_type", values_to = "gallons", names_prefix = "Gallons of ") |>   group_by(fuel_type) |>   summarise(total_gallons = sum(gallons, na.rm = TRUE)) |>   filter(total_gallons > 0) |>   slice_min(total_gallons) |> pull("fuel_type")`.
 
-#### EDA - NTD Service
 
+### NTD Service
+#### Transit Services with the Most Annual UPT
 **Which five transit services have the most UPT annually?**
 ```{r}
 #| echo: true
 #| message: false
 #| warning: false
 
-NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
+top_5_upt_data = NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
   mutate(AGENCY = str_remove(AGENCY, ", dba:.*")) |>
   group_by(AGENCY, mode) |>
   summarise(upt = sum(total_upt, na.rm = TRUE), .groups = "drop") |>
   mutate(service = paste0(AGENCY, " (", mode ,")")) |>
-  slice_max(upt, n=5) |>
-  ggplot(aes(upt, reorder(service, upt))) +
+  slice_max(upt, n=5)
+
+
+ggplot(top_5_upt_data, aes(x = upt, y = reorder(service, upt))) +
   geom_col(fill = "steelblue") +
-  geom_text(aes(label = comma(upt)), hjust = -0.1, size = 3) +
-  scale_x_continuous(labels = label_comma(), expand = expansion(mult = c(0,0.5))) +
-  theme_minimal() +
-  labs(title= "Transit Services with the Most Annual UPT",
-       x= "Total Unlinked Passenger Trips",
-       y = NULL) +
+  geom_text(
+    aes(label = label_number(accuracy = 0.1, scale_cut = cut_short_scale())(upt)),
+    hjust = -0.15,
+    size = 3.8
+  ) +
+  scale_x_continuous(
+    labels = label_number(scale_cut = cut_short_scale()),
+    expand = expansion(mult = c(0, 0.18))
+  ) +
+  scale_y_discrete(
+    labels = function(x) str_wrap(x, width = 28)
+  ) +
+  labs(
+    title = "Transit Services with the Most Annual UPT",
+    x = "Total Unlinked Passenger Trips",
+    y = NULL
+  ) +
+  theme_minimal(base_size = 12) +
   theme(
-    plot.title.position = "plot",
-    plot.title = element_text(face = "bold", size = 13, hjust = .5),
-    axis.title.x = element_text(margin = margin(t=12)))
+    plot.title.position = 'plot',
+    plot.title = element_text(face = "bold", size = 14, hjust = 0.5
+                              ),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_text(color = "#111111", size = 10, lineheight = 0.9)
+  )
 ```
 
+#### Average Trip Length for MTA New York City Transit 
 **What is the average trip length of a trip on MTA NYC?**
 ``` {r}
 #| echo: true
@@ -525,17 +550,15 @@ NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
 #| warning: false
 
 avg_trip_length = NTD_SERVICE |> 
-  # Filter: Remove inaccurate entries and subset data from only MTA NYCT
   filter(!flagged_likely_inaccurate, str_detect(AGENCY, "MTA New York City Transit")) |>
-  # Method: 
   summarise(avg_trip = sum(sum_passenger_miles)/sum(total_upt)) |> 
   pull(avg_trip)
 
 ```
-
 The average trip length for MTA New York City Transit is `r round(avg_trip_length,2)` miles.
 
 
+#### Longest Average Trip Length in NYC
 **Which transit service in NYC has the longest average trip length?**
 ``` {r}
 #| echo: true
@@ -556,7 +579,8 @@ NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
   summarise(avg_trip = sum(sum_passenger_miles)/sum(total_upt), .groups = 'drop') |>
   pull(AGENCY)
 ```
-**Which five states has the fewest total miles travelled by public transit?**
+#### Least Miles Traveled by Public Transit
+**Which five states has the fewest total miles traveled by public transit?**
 ```{r}
 #| echo: true
 #| message: false
@@ -582,8 +606,8 @@ NTD_SERVICE |> filter(!flagged_likely_inaccurate) |>
     axis.title.x = element_text(margin = margin(t=12)))
 ```
 
+#### Complete Representation?
 **Are all states represented in this data? If no, which ones are missing?**
-
 ``` {r}
 #| echo: true
 #| message: false
@@ -593,8 +617,45 @@ missing_states = tibble(name = state.name, state = state.abb) |>
   anti_join(filter(NTD_SERVICE, !flagged_likely_inaccurate), by ="state")
 ```
 
-`r ifelse(nrow(missing_states) == 0, "All the states are represented in this data.", "No.")`
-#### Data Integration
+`r ifelse(nrow(missing_states) == 0, "Yes, all 50 states are represented in this data.", "No, there are some states missing.")`
+
+
+### Data Integration
+#### How many UPTs were recorded in states where the primary energy source was nuclear power?
+``` {r}
+#| echo: true
+#| message: false
+#| warning: false
+
+states_nuclear = EIA_SEP_REPORT |>
+  filter(primary_source == "Nuclear") |>
+  select(abbreviation)
+
+upt_nuclear = NTD_SERVICE |>
+  filter(!flagged_likely_inaccurate) |>
+  inner_join(states_nuclear, by = join_by(state == abbreviation)) |>
+  summarise(tot_upt = sum(total_upt, na.rm = TRUE)) |> pull(tot_upt)
+```
+There were `r comma(upt_nuclear)` unlinked passenger trips recorded where the primary energy source was nuclear power.
+
+#### In what metro area were the most gallons of bio-diesel used by public transit agencies?
+``` {r}
+#| echo: true
+#| message: false
+#| warning: false
+
+ most_bio = NTD_ENERGY |> filter(`Gallons of Bio-Diesel`> 0) |>
+  mutate(join_id = as.integer(`NTD ID`)) |>
+  inner_join(NTD_SERVICE|>
+               mutate(join_id = as.integer(NTD_ID)) |>
+               distinct(join_id, uza_name),
+             by = join_by(join_id ==  join_id)) |>
+  group_by(uza_name) |>
+  summarise(bio = sum(`Gallons of Bio-Diesel`)) |>
+  slice_max(bio) |> pull(uza_name)
+
+```
+`r most_bio` was the metro area where the most gallons of bio-diesel used by public transit agencies.
 
 ### Data Analysis
 #### Calculate Total Emissions
