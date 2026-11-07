@@ -12,7 +12,7 @@ format:
 ---
 
 ## Overview
-In the rn-day, resources consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly, alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.\
+In the modern-day, resources consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly, alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.\
 \
 This impact is measured by CO~2~ emissions. As defined by the [U.S. Energy Information Administration](https://www.eia.gov/tools/glossary/index.php?id=carbon%20intensity), carbon intensity refers to the “amount of carbon by weight emitted per unit of energy consumed”. In an emissions context, a higher carbon intensity means more CO~2~ emissions, which is not ideal for industries with significant energy consumption (like public transit).\
 \
@@ -831,7 +831,7 @@ agency_efficiency |>
 
 
 ## Deliverable: Transit Award "Press Release"
-### GREEN TRANSIT ALLIANCE ANNOUNCES 2026 WINNERS FOR THE GREENEST TRANSIT AGENCY AND DANGER ZONE AWARDS
+### GREEN TRANSIT ALLIANCE ANNOUNCES 2026 WINNERS FOR THE ANNUAL GTA VI AWARDS
 
 #### Award 1: Greenest Transit Agency
 
@@ -872,11 +872,12 @@ ggplot(trimet_vs_nat, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), color = ent
     subtitle = "Operational greenhouse gas emissions per passenger mile traveled (PMT)",
     x        = "lbs CO2 per Passenger Mile",
     y        = NULL,
-    caption  = "Sources: 2022 National Transit Database (NTD); EIA State Electricity Profiles."
+    caption  = "Sources: 2022 National Transit Database (NTD), EIA State Electricity Profiles"
   ) +
   theme_minimal() +
   theme(
     plot.title       = element_text(face = "bold"),
+    plot.caption.position = "plot",
     axis.text.y      = element_text(face = "bold", size = 11, color = "black"),
     panel.grid.minor = element_blank(),
     panel.grid.major.y = element_blank()
@@ -918,11 +919,12 @@ ggplot(comparison_df, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), fill = cate
     subtitle = "Dashed gold line shows 2026 CAFE car standard",
     x        = "lbs CO2 per Passenger Mile",
     y        = NULL,
-    caption  = "Sources: 2025 National Transit Database (NTD); EIA State Electricity Profiles; US DOT NHTSA 2026 CAFE Standards."
+    caption  = "Sources: 2025 National Transit Database (NTD), EIA State Electricity Profiles, US DOT NHTSA 2026 CAFE Standards"
   ) +
   theme_minimal() +
   theme(
     legend.position = "none",
+    plot.caption.position = "plot",
     plot.title = element_text(face = "bold")
   ) +
   expand_limits(x = 6.5)
@@ -963,18 +965,16 @@ ggplot(agency_efficiency, aes(x = total_pmt, y = per_pmt)) +
     subtitle = "Dashed line shows 2026 CAFE car standard",
     x = "Total Passenger Miles (Log Scale)",
     y = "lbs CO2 per Passenger Mile",
-    caption  = "Sources: 2025 National Transit Database (NTD); EIA State Electricity Profiles; US DOT NHTSA 2026 CAFE Standards."
+    caption  = "Sources: 2025 National Transit Database (NTD), EIA State Electricity Profiles, US DOT NHTSA 2026 CAFE Standards"
   ) +
   theme_minimal() +
   theme(
     legend.position = "right",
-    plot.title = element_text(face = "bold")
+    plot.title = element_text(face = "bold"),
+    plot.caption.position = "plot"
   ) +
   expand_limits(y = 6.5)
 ```
-
-
-
 
 
 
