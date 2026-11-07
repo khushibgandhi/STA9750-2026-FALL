@@ -943,7 +943,7 @@ ggplot(comparison_df, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), fill = cate
     "Danger Zone" = "#e76f51"
   )) +
   labs(
-    title    = "System Scale vs. Carbon Intensity",
+    title    = "Public Transit Systems vs. Carbon Intensity",
     x        = "lbs CO2 per Passenger Mile",
     y        = NULL,
     caption  = "Sources: 2025 National Transit Database (NTD), EIA State Electricity Profiles, US DOT NHTSA 2026 CAFE Standards"
