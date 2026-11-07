@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>In the modern-day, resources consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly, alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.<br>
+<p>In the modern-day, resource consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.<br>
 <br>
 This impact is measured by CO<sub>2</sub> emissions. As defined by the <a href="https://www.eia.gov/tools/glossary/index.php?id=carbon%20intensity">U.S. Energy Information Administration</a>, carbon intensity refers to the “amount of carbon by weight emitted per unit of energy consumed”. In an emissions context, a higher carbon intensity means more CO<sub>2</sub> emissions, which is not ideal for industries with significant energy consumption (like public transit).<br>
 <br>
@@ -393,7 +393,7 @@ Congratulations in advance to the winners!</p>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>NTD_ENERGY <span class="ot">&lt;-</span> <span class="fu">load_ntd_energy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>The code above forms the database <code>NTD_ENERGY</code> which contains information on different transit agencies, their locations, the types of fuel they consume and in what amounts, and the amount of electricity they use as well. Some of the fuel types reported include gasoline, kerosene, biodiesel, and hydrogen to name a few. The electricity usage is reported in two metrics - electricity propulsion and battery usage. These two categories just draw on the distinction between how electricity is acquired. Another important part of this data is the <code>Mode</code> column which specifies how services in transit agencies are provided. While these are currently listed as two letter abbreviations, they will be recorded in a future step according to the NTD Reporting Policy Manual.</p>
+<p>The code above forms the dataset <code>NTD_ENERGY</code> which contains information on different transit agencies, their locations, the types of fuel they consume, in what amounts, and the amount of electricity used as well. Some of the fuel types reported include gasoline, kerosene, biodiesel, and hydrogen to name a few. The electricity usage is reported in two metrics - electricity propulsion and battery usage. These two categories draw on the distinction between how electricity is acquired. Another important part of this data is the <code>Mode</code> column which specifies how services in transit agencies are provided. While these are currently listed as two letter abbreviations, they will be recorded in a future step according to the NTD Reporting Policy Manual.</p>
 <p>As previously mentioned with the EIA data, an <code>inner_join</code> is the most appropriate for this data. While the <code>NTD_ENERGY</code> energy contains many more entries on different public transit agencies (local, citywide, etc.), understanding their resources consumption as a part of overall state electricity consumption is important to understand which transit agencies are the greenest.</p>
 </section>
 <section id="transit-service-provided" class="level4">
@@ -453,7 +453,7 @@ Congratulations in advance to the winners!</p>
 </details>
 </div>
 <p>The <code>NTD_SERVICE</code> data contains information on passenger trips across different transit services. Each entry corresponds to a different service by a specific agency. The transit services reported are the same <code>mode</code> column from the <code>NTD_ENERGY</code> data. Given such they will also have to be recoded.</p>
-<p>However the focus here is on how different services are serving different areas across the United States. There are columns titled <code>uza_sqmiles</code>/<code>uza_population</code> and <code>service_area_sq_miles</code>/<code>service_area_population</code>.These metrics specify how different transit systems are serving the public and in which amounts. There are also columns that have flags for inaccurate data. It is highly likely we will omit these records in our analysis to ensure fair, accurate reporting.</p>
+<p>However, the focus here is on how different services are serving different areas across the United States. There are columns titled <code>uza_sqmiles</code>/<code>uza_population</code> and <code>service_area_sq_miles</code>/<code>service_area_population</code>.These metrics specify how different transit systems are serving the public and in which amounts. There are also columns that have flags for inaccurate data. It is highly likely we will omit these records in our analysis to ensure fair, accurate reporting.</p>
 <p>Lastly, two significant metrics reported in this data are <code>total_upt</code> and <code>sum_passenger_miles</code>. <code>total_upt</code> represents unlinked passenger trips which means that one trip regardless of how many transfers will count as one UPT. For example if you take two trains to reach a destination it still counts as one UPT because it is one trip in two segments. On the other hand, <code>sum_passenger_miles</code> reports the cumulative miles traveled by all passengers in that transit system by a specific mode of transit.</p>
 </section>
 </section>
@@ -512,8 +512,8 @@ Congratulations in advance to the winners!</p>
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">default=</span><span class="st">"Unknown"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>An initial understanding of the data was conducted using the <code>glimpse()</code> and <code>skim()</code> functions whose outputs are not included in the report. However this understanding is essential to conceptualize how different data reports connect and contribute to the broader picture of green public transit.</p>
-<p>The main concern here was translating the <code>mode</code> column in the NTD_ENERGY and NTD_SERVICE data sets into something more readable. As stated previously, the <code>mode</code> columns are originally reported as two letter abbreviations whose full forms represent various transit services. To understand which transit services are reported, the list of distinct values for each dataset was pulled and each of those abbreviations was translated into its full form. The abbreviations are shown in the code above and can also be accessed through the <a href="https://www.transit.dot.gov/ntd/2025-ntd-reporting-policy-manual">NTD Reporting Policy Manual</a>.</p>
+<p>An initial understanding of the data was conducted using the <code>glimpse()</code> and <code>skim()</code> functions whose outputs are not included in the report. However, this understanding is essential to conceptualize how different data reports connect and contribute to the broader picture of green public transit.</p>
+<p>The main concern here was translating the <code>mode</code> column in the <code>NTD_ENERGY</code> and <code>NTD_SERVICE</code> data sets into something more readable. As stated previously, the <code>mode</code> columns are originally reported as two letter abbreviations whose full forms represent various transit services. To understand which transit services are reported, the list of distinct values for each dataset was pulled and each of those abbreviations was translated into its full form. The abbreviations are shown in the code above and can also be accessed through the <a href="https://www.transit.dot.gov/ntd/2025-ntd-reporting-policy-manual">NTD Reporting Policy Manual</a>.</p>
 </section>
 <section id="data-integration-and-initial-exploration" class="level2">
 <h2 class="anchored" data-anchor-id="data-integration-and-initial-exploration">Data Integration and Initial Exploration</h2>
@@ -571,23 +571,23 @@ Congratulations in advance to the winners!</p>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title=</span><span class="st">"States with the 'Dirtiest' Electricity Mix"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="kpnottiycc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kpnottiycc table {
+<div id="unlxirbnci" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#unlxirbnci table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kpnottiycc thead, #kpnottiycc tbody, #kpnottiycc tfoot, #kpnottiycc tr, #kpnottiycc td, #kpnottiycc th {
+#unlxirbnci thead, #unlxirbnci tbody, #unlxirbnci tfoot, #unlxirbnci tr, #unlxirbnci td, #unlxirbnci th {
   border-style: none;
 }
 
-#kpnottiycc p {
+#unlxirbnci p {
   margin: 0;
   padding: 0;
 }
 
-#kpnottiycc .gt_table {
+#unlxirbnci .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -613,12 +613,12 @@ Congratulations in advance to the winners!</p>
   border-left-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_caption {
+#unlxirbnci .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kpnottiycc .gt_title {
+#unlxirbnci .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -630,7 +630,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-width: 0;
 }
 
-#kpnottiycc .gt_subtitle {
+#unlxirbnci .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -642,7 +642,7 @@ Congratulations in advance to the winners!</p>
   border-top-width: 0;
 }
 
-#kpnottiycc .gt_heading {
+#unlxirbnci .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -654,13 +654,13 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_bottom_border {
+#unlxirbnci .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_col_headings {
+#unlxirbnci .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -675,7 +675,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_col_heading {
+#unlxirbnci .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -695,7 +695,7 @@ Congratulations in advance to the winners!</p>
   overflow-x: hidden;
 }
 
-#kpnottiycc .gt_column_spanner_outer {
+#unlxirbnci .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -707,15 +707,15 @@ Congratulations in advance to the winners!</p>
   padding-right: 4px;
 }
 
-#kpnottiycc .gt_column_spanner_outer:first-child {
+#unlxirbnci .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kpnottiycc .gt_column_spanner_outer:last-child {
+#unlxirbnci .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kpnottiycc .gt_column_spanner {
+#unlxirbnci .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -727,11 +727,11 @@ Congratulations in advance to the winners!</p>
   width: 100%;
 }
 
-#kpnottiycc .gt_spanner_row {
+#unlxirbnci .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kpnottiycc .gt_group_heading {
+#unlxirbnci .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -757,7 +757,7 @@ Congratulations in advance to the winners!</p>
   text-align: left;
 }
 
-#kpnottiycc .gt_empty_group_heading {
+#unlxirbnci .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -772,15 +772,15 @@ Congratulations in advance to the winners!</p>
   vertical-align: middle;
 }
 
-#kpnottiycc .gt_from_md > :first-child {
+#unlxirbnci .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kpnottiycc .gt_from_md > :last-child {
+#unlxirbnci .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kpnottiycc .gt_row {
+#unlxirbnci .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -799,7 +799,7 @@ Congratulations in advance to the winners!</p>
   overflow-x: hidden;
 }
 
-#kpnottiycc .gt_stub {
+#unlxirbnci .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -812,7 +812,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#kpnottiycc .gt_stub_row_group {
+#unlxirbnci .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -826,15 +826,15 @@ Congratulations in advance to the winners!</p>
   vertical-align: top;
 }
 
-#kpnottiycc .gt_row_group_first td {
+#unlxirbnci .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kpnottiycc .gt_row_group_first th {
+#unlxirbnci .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kpnottiycc .gt_summary_row {
+#unlxirbnci .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -844,16 +844,16 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#kpnottiycc .gt_first_summary_row {
+#unlxirbnci .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_first_summary_row.thick {
+#unlxirbnci .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kpnottiycc .gt_last_summary_row {
+#unlxirbnci .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -863,7 +863,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_grand_summary_row {
+#unlxirbnci .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -873,7 +873,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#kpnottiycc .gt_first_grand_summary_row {
+#unlxirbnci .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -883,7 +883,7 @@ Congratulations in advance to the winners!</p>
   border-top-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_last_grand_summary_row_top {
+#unlxirbnci .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -893,11 +893,11 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_striped {
+#unlxirbnci .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kpnottiycc .gt_table_body {
+#unlxirbnci .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -906,7 +906,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_footnotes {
+#unlxirbnci .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -920,7 +920,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_footnote {
+#unlxirbnci .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -929,7 +929,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#kpnottiycc .gt_sourcenotes {
+#unlxirbnci .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -943,7 +943,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#kpnottiycc .gt_sourcenote {
+#unlxirbnci .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -951,72 +951,72 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#kpnottiycc .gt_left {
+#unlxirbnci .gt_left {
   text-align: left;
 }
 
-#kpnottiycc .gt_center {
+#unlxirbnci .gt_center {
   text-align: center;
 }
 
-#kpnottiycc .gt_right {
+#unlxirbnci .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kpnottiycc .gt_font_normal {
+#unlxirbnci .gt_font_normal {
   font-weight: normal;
 }
 
-#kpnottiycc .gt_font_bold {
+#unlxirbnci .gt_font_bold {
   font-weight: bold;
 }
 
-#kpnottiycc .gt_font_italic {
+#unlxirbnci .gt_font_italic {
   font-style: italic;
 }
 
-#kpnottiycc .gt_super {
+#unlxirbnci .gt_super {
   font-size: 65%;
 }
 
-#kpnottiycc .gt_footnote_marks {
+#unlxirbnci .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kpnottiycc .gt_asterisk {
+#unlxirbnci .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kpnottiycc .gt_indent_1 {
+#unlxirbnci .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kpnottiycc .gt_indent_2 {
+#unlxirbnci .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kpnottiycc .gt_indent_3 {
+#unlxirbnci .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kpnottiycc .gt_indent_4 {
+#unlxirbnci .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kpnottiycc .gt_indent_5 {
+#unlxirbnci .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kpnottiycc .katex-display {
+#unlxirbnci .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kpnottiycc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#unlxirbnci div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1106,23 +1106,23 @@ Congratulations in advance to the winners!</p>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title=</span><span class="st">"Rarest Primary Energy Sources in the US"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="xdxplmgzku" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xdxplmgzku table {
+<div id="zdxqfpbukg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zdxqfpbukg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xdxplmgzku thead, #xdxplmgzku tbody, #xdxplmgzku tfoot, #xdxplmgzku tr, #xdxplmgzku td, #xdxplmgzku th {
+#zdxqfpbukg thead, #zdxqfpbukg tbody, #zdxqfpbukg tfoot, #zdxqfpbukg tr, #zdxqfpbukg td, #zdxqfpbukg th {
   border-style: none;
 }
 
-#xdxplmgzku p {
+#zdxqfpbukg p {
   margin: 0;
   padding: 0;
 }
 
-#xdxplmgzku .gt_table {
+#zdxqfpbukg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1148,12 +1148,12 @@ Congratulations in advance to the winners!</p>
   border-left-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_caption {
+#zdxqfpbukg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xdxplmgzku .gt_title {
+#zdxqfpbukg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1165,7 +1165,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-width: 0;
 }
 
-#xdxplmgzku .gt_subtitle {
+#zdxqfpbukg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1177,7 +1177,7 @@ Congratulations in advance to the winners!</p>
   border-top-width: 0;
 }
 
-#xdxplmgzku .gt_heading {
+#zdxqfpbukg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1189,13 +1189,13 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_bottom_border {
+#zdxqfpbukg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_col_headings {
+#zdxqfpbukg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1210,7 +1210,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_col_heading {
+#zdxqfpbukg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1230,7 +1230,7 @@ Congratulations in advance to the winners!</p>
   overflow-x: hidden;
 }
 
-#xdxplmgzku .gt_column_spanner_outer {
+#zdxqfpbukg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1242,15 +1242,15 @@ Congratulations in advance to the winners!</p>
   padding-right: 4px;
 }
 
-#xdxplmgzku .gt_column_spanner_outer:first-child {
+#zdxqfpbukg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xdxplmgzku .gt_column_spanner_outer:last-child {
+#zdxqfpbukg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xdxplmgzku .gt_column_spanner {
+#zdxqfpbukg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1262,11 +1262,11 @@ Congratulations in advance to the winners!</p>
   width: 100%;
 }
 
-#xdxplmgzku .gt_spanner_row {
+#zdxqfpbukg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xdxplmgzku .gt_group_heading {
+#zdxqfpbukg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1292,7 +1292,7 @@ Congratulations in advance to the winners!</p>
   text-align: left;
 }
 
-#xdxplmgzku .gt_empty_group_heading {
+#zdxqfpbukg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1307,15 +1307,15 @@ Congratulations in advance to the winners!</p>
   vertical-align: middle;
 }
 
-#xdxplmgzku .gt_from_md > :first-child {
+#zdxqfpbukg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xdxplmgzku .gt_from_md > :last-child {
+#zdxqfpbukg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xdxplmgzku .gt_row {
+#zdxqfpbukg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1334,7 +1334,7 @@ Congratulations in advance to the winners!</p>
   overflow-x: hidden;
 }
 
-#xdxplmgzku .gt_stub {
+#zdxqfpbukg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1347,7 +1347,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#xdxplmgzku .gt_stub_row_group {
+#zdxqfpbukg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1361,15 +1361,15 @@ Congratulations in advance to the winners!</p>
   vertical-align: top;
 }
 
-#xdxplmgzku .gt_row_group_first td {
+#zdxqfpbukg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xdxplmgzku .gt_row_group_first th {
+#zdxqfpbukg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xdxplmgzku .gt_summary_row {
+#zdxqfpbukg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1379,16 +1379,16 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#xdxplmgzku .gt_first_summary_row {
+#zdxqfpbukg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_first_summary_row.thick {
+#zdxqfpbukg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xdxplmgzku .gt_last_summary_row {
+#zdxqfpbukg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1398,7 +1398,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_grand_summary_row {
+#zdxqfpbukg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1408,7 +1408,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#xdxplmgzku .gt_first_grand_summary_row {
+#zdxqfpbukg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1418,7 +1418,7 @@ Congratulations in advance to the winners!</p>
   border-top-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_last_grand_summary_row_top {
+#zdxqfpbukg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1428,11 +1428,11 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_striped {
+#zdxqfpbukg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xdxplmgzku .gt_table_body {
+#zdxqfpbukg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1441,7 +1441,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_footnotes {
+#zdxqfpbukg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1455,7 +1455,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_footnote {
+#zdxqfpbukg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1464,7 +1464,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#xdxplmgzku .gt_sourcenotes {
+#zdxqfpbukg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1478,7 +1478,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#xdxplmgzku .gt_sourcenote {
+#zdxqfpbukg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1486,72 +1486,72 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#xdxplmgzku .gt_left {
+#zdxqfpbukg .gt_left {
   text-align: left;
 }
 
-#xdxplmgzku .gt_center {
+#zdxqfpbukg .gt_center {
   text-align: center;
 }
 
-#xdxplmgzku .gt_right {
+#zdxqfpbukg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xdxplmgzku .gt_font_normal {
+#zdxqfpbukg .gt_font_normal {
   font-weight: normal;
 }
 
-#xdxplmgzku .gt_font_bold {
+#zdxqfpbukg .gt_font_bold {
   font-weight: bold;
 }
 
-#xdxplmgzku .gt_font_italic {
+#zdxqfpbukg .gt_font_italic {
   font-style: italic;
 }
 
-#xdxplmgzku .gt_super {
+#zdxqfpbukg .gt_super {
   font-size: 65%;
 }
 
-#xdxplmgzku .gt_footnote_marks {
+#zdxqfpbukg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xdxplmgzku .gt_asterisk {
+#zdxqfpbukg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xdxplmgzku .gt_indent_1 {
+#zdxqfpbukg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xdxplmgzku .gt_indent_2 {
+#zdxqfpbukg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xdxplmgzku .gt_indent_3 {
+#zdxqfpbukg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xdxplmgzku .gt_indent_4 {
+#zdxqfpbukg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xdxplmgzku .gt_indent_5 {
+#zdxqfpbukg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xdxplmgzku .katex-display {
+#zdxqfpbukg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xdxplmgzku div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zdxqfpbukg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1595,7 +1595,7 @@ Congratulations in advance to the winners!</p>
 </div>
 <p>The rarest primary energy source in the US is <strong>petroleum</strong> and it is used by only one state that has an average electricity price of $380 per megawatt hour.</p>
 <p>Both the second and third rarest primary sources are used by four states and they are hydroelectric and wind energy. Idaho, Oregon, Vermont, and Washington use hydroelectric energy with an average electricity price of $122.90 per megawatt hour.</p>
-<p>Wind energy is used by Iowa, Kansas, New Mexico and South Dakota with an average price of $101.50 per megawatt hour. Notably the rarest primary source, petroleum, is used by Hawaii which is also the state with the highest average electricity price across the country.</p>
+<p>Wind energy is used by Iowa, Kansas, New Mexico and South Dakota with an average price of $101.50 per megawatt hour. Notably, the rarest primary source, petroleum, is used by Hawaii which is also the state with the highest average electricity price across the country.</p>
 </section>
 </section>
 <section id="ntd-energy-usage" class="level3">
@@ -1902,7 +1902,7 @@ Congratulations in advance to the winners!</p>
 <span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.epa.gov/climateleadership/ghg-emission-factors-hub</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>State summary profiles as well as different fuel type consumption and their relevant carbon emissions are analyzed in the code above. The electricity from battery usage and from propulsion were combined to understand total electricity usage of these entries. The amount of fuel types including diesel, biodiesel, gasoline and others, were converted to their respective carbon emissions rates using EIA and EPA (Environment Protection Agency) conversion rates. Those emissions for individual agencies across various transit services were then aggregated and divided by total unlinked passenger trips and passenger miles.</p>
+<p>State summary profiles as well as different fuel type consumption and their relevant carbon emissions are analyzed in the code above. The electricity from battery usage and from propulsion were combined to understand total electricity usage of these entries. Different fuel types were also converted to their respective carbon emissions using EIA and EPA (Environment Protection Agency) conversion rates. Those emissions for individual agencies across various transit services were then aggregated and divided by total unlinked passenger trips and passenger miles.</p>
 </section>
 <section id="relate-total-emissions-and-passenger-service" class="level3">
 <h3 class="anchored" data-anchor-id="relate-total-emissions-and-passenger-service">Relate Total Emissions and Passenger Service</h3>
@@ -1953,23 +1953,23 @@ Congratulations in advance to the winners!</p>
 <span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"by unlinked passenger trips"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="izmmicrqyx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#izmmicrqyx table {
+<div id="adihqoenpb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#adihqoenpb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#izmmicrqyx thead, #izmmicrqyx tbody, #izmmicrqyx tfoot, #izmmicrqyx tr, #izmmicrqyx td, #izmmicrqyx th {
+#adihqoenpb thead, #adihqoenpb tbody, #adihqoenpb tfoot, #adihqoenpb tr, #adihqoenpb td, #adihqoenpb th {
   border-style: none;
 }
 
-#izmmicrqyx p {
+#adihqoenpb p {
   margin: 0;
   padding: 0;
 }
 
-#izmmicrqyx .gt_table {
+#adihqoenpb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1995,12 +1995,12 @@ Congratulations in advance to the winners!</p>
   border-left-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_caption {
+#adihqoenpb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#izmmicrqyx .gt_title {
+#adihqoenpb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2012,7 +2012,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-width: 0;
 }
 
-#izmmicrqyx .gt_subtitle {
+#adihqoenpb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2024,7 +2024,7 @@ Congratulations in advance to the winners!</p>
   border-top-width: 0;
 }
 
-#izmmicrqyx .gt_heading {
+#adihqoenpb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2036,13 +2036,13 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_bottom_border {
+#adihqoenpb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_col_headings {
+#adihqoenpb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2057,7 +2057,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_col_heading {
+#adihqoenpb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2077,7 +2077,7 @@ Congratulations in advance to the winners!</p>
   overflow-x: hidden;
 }
 
-#izmmicrqyx .gt_column_spanner_outer {
+#adihqoenpb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2089,15 +2089,15 @@ Congratulations in advance to the winners!</p>
   padding-right: 4px;
 }
 
-#izmmicrqyx .gt_column_spanner_outer:first-child {
+#adihqoenpb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#izmmicrqyx .gt_column_spanner_outer:last-child {
+#adihqoenpb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#izmmicrqyx .gt_column_spanner {
+#adihqoenpb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2109,11 +2109,11 @@ Congratulations in advance to the winners!</p>
   width: 100%;
 }
 
-#izmmicrqyx .gt_spanner_row {
+#adihqoenpb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#izmmicrqyx .gt_group_heading {
+#adihqoenpb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2139,7 +2139,7 @@ Congratulations in advance to the winners!</p>
   text-align: left;
 }
 
-#izmmicrqyx .gt_empty_group_heading {
+#adihqoenpb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2154,15 +2154,15 @@ Congratulations in advance to the winners!</p>
   vertical-align: middle;
 }
 
-#izmmicrqyx .gt_from_md > :first-child {
+#adihqoenpb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#izmmicrqyx .gt_from_md > :last-child {
+#adihqoenpb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#izmmicrqyx .gt_row {
+#adihqoenpb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2181,7 +2181,7 @@ Congratulations in advance to the winners!</p>
   overflow-x: hidden;
 }
 
-#izmmicrqyx .gt_stub {
+#adihqoenpb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2194,7 +2194,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#izmmicrqyx .gt_stub_row_group {
+#adihqoenpb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2208,15 +2208,15 @@ Congratulations in advance to the winners!</p>
   vertical-align: top;
 }
 
-#izmmicrqyx .gt_row_group_first td {
+#adihqoenpb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#izmmicrqyx .gt_row_group_first th {
+#adihqoenpb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#izmmicrqyx .gt_summary_row {
+#adihqoenpb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2226,16 +2226,16 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#izmmicrqyx .gt_first_summary_row {
+#adihqoenpb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_first_summary_row.thick {
+#adihqoenpb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#izmmicrqyx .gt_last_summary_row {
+#adihqoenpb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2245,7 +2245,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_grand_summary_row {
+#adihqoenpb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2255,7 +2255,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#izmmicrqyx .gt_first_grand_summary_row {
+#adihqoenpb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2265,7 +2265,7 @@ Congratulations in advance to the winners!</p>
   border-top-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_last_grand_summary_row_top {
+#adihqoenpb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2275,11 +2275,11 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_striped {
+#adihqoenpb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#izmmicrqyx .gt_table_body {
+#adihqoenpb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2288,7 +2288,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_footnotes {
+#adihqoenpb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2302,7 +2302,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_footnote {
+#adihqoenpb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2311,7 +2311,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#izmmicrqyx .gt_sourcenotes {
+#adihqoenpb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2325,7 +2325,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#izmmicrqyx .gt_sourcenote {
+#adihqoenpb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2333,72 +2333,72 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#izmmicrqyx .gt_left {
+#adihqoenpb .gt_left {
   text-align: left;
 }
 
-#izmmicrqyx .gt_center {
+#adihqoenpb .gt_center {
   text-align: center;
 }
 
-#izmmicrqyx .gt_right {
+#adihqoenpb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#izmmicrqyx .gt_font_normal {
+#adihqoenpb .gt_font_normal {
   font-weight: normal;
 }
 
-#izmmicrqyx .gt_font_bold {
+#adihqoenpb .gt_font_bold {
   font-weight: bold;
 }
 
-#izmmicrqyx .gt_font_italic {
+#adihqoenpb .gt_font_italic {
   font-style: italic;
 }
 
-#izmmicrqyx .gt_super {
+#adihqoenpb .gt_super {
   font-size: 65%;
 }
 
-#izmmicrqyx .gt_footnote_marks {
+#adihqoenpb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#izmmicrqyx .gt_asterisk {
+#adihqoenpb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#izmmicrqyx .gt_indent_1 {
+#adihqoenpb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#izmmicrqyx .gt_indent_2 {
+#adihqoenpb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#izmmicrqyx .gt_indent_3 {
+#adihqoenpb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#izmmicrqyx .gt_indent_4 {
+#adihqoenpb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#izmmicrqyx .gt_indent_5 {
+#adihqoenpb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#izmmicrqyx .katex-display {
+#adihqoenpb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#izmmicrqyx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#adihqoenpb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2470,23 +2470,23 @@ Congratulations in advance to the winners!</p>
 <span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"by passgenger miles traveled"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="ihdjrxgmht" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ihdjrxgmht table {
+<div id="tnnbaeinjs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tnnbaeinjs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ihdjrxgmht thead, #ihdjrxgmht tbody, #ihdjrxgmht tfoot, #ihdjrxgmht tr, #ihdjrxgmht td, #ihdjrxgmht th {
+#tnnbaeinjs thead, #tnnbaeinjs tbody, #tnnbaeinjs tfoot, #tnnbaeinjs tr, #tnnbaeinjs td, #tnnbaeinjs th {
   border-style: none;
 }
 
-#ihdjrxgmht p {
+#tnnbaeinjs p {
   margin: 0;
   padding: 0;
 }
 
-#ihdjrxgmht .gt_table {
+#tnnbaeinjs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2512,12 +2512,12 @@ Congratulations in advance to the winners!</p>
   border-left-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_caption {
+#tnnbaeinjs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ihdjrxgmht .gt_title {
+#tnnbaeinjs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2529,7 +2529,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-width: 0;
 }
 
-#ihdjrxgmht .gt_subtitle {
+#tnnbaeinjs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2541,7 +2541,7 @@ Congratulations in advance to the winners!</p>
   border-top-width: 0;
 }
 
-#ihdjrxgmht .gt_heading {
+#tnnbaeinjs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2553,13 +2553,13 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_bottom_border {
+#tnnbaeinjs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_col_headings {
+#tnnbaeinjs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2574,7 +2574,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_col_heading {
+#tnnbaeinjs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2594,7 +2594,7 @@ Congratulations in advance to the winners!</p>
   overflow-x: hidden;
 }
 
-#ihdjrxgmht .gt_column_spanner_outer {
+#tnnbaeinjs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2606,15 +2606,15 @@ Congratulations in advance to the winners!</p>
   padding-right: 4px;
 }
 
-#ihdjrxgmht .gt_column_spanner_outer:first-child {
+#tnnbaeinjs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ihdjrxgmht .gt_column_spanner_outer:last-child {
+#tnnbaeinjs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ihdjrxgmht .gt_column_spanner {
+#tnnbaeinjs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2626,11 +2626,11 @@ Congratulations in advance to the winners!</p>
   width: 100%;
 }
 
-#ihdjrxgmht .gt_spanner_row {
+#tnnbaeinjs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ihdjrxgmht .gt_group_heading {
+#tnnbaeinjs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2656,7 +2656,7 @@ Congratulations in advance to the winners!</p>
   text-align: left;
 }
 
-#ihdjrxgmht .gt_empty_group_heading {
+#tnnbaeinjs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2671,15 +2671,15 @@ Congratulations in advance to the winners!</p>
   vertical-align: middle;
 }
 
-#ihdjrxgmht .gt_from_md > :first-child {
+#tnnbaeinjs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ihdjrxgmht .gt_from_md > :last-child {
+#tnnbaeinjs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ihdjrxgmht .gt_row {
+#tnnbaeinjs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2698,7 +2698,7 @@ Congratulations in advance to the winners!</p>
   overflow-x: hidden;
 }
 
-#ihdjrxgmht .gt_stub {
+#tnnbaeinjs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2711,7 +2711,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#ihdjrxgmht .gt_stub_row_group {
+#tnnbaeinjs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2725,15 +2725,15 @@ Congratulations in advance to the winners!</p>
   vertical-align: top;
 }
 
-#ihdjrxgmht .gt_row_group_first td {
+#tnnbaeinjs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ihdjrxgmht .gt_row_group_first th {
+#tnnbaeinjs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ihdjrxgmht .gt_summary_row {
+#tnnbaeinjs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2743,16 +2743,16 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#ihdjrxgmht .gt_first_summary_row {
+#tnnbaeinjs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_first_summary_row.thick {
+#tnnbaeinjs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ihdjrxgmht .gt_last_summary_row {
+#tnnbaeinjs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2762,7 +2762,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_grand_summary_row {
+#tnnbaeinjs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2772,7 +2772,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#ihdjrxgmht .gt_first_grand_summary_row {
+#tnnbaeinjs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2782,7 +2782,7 @@ Congratulations in advance to the winners!</p>
   border-top-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_last_grand_summary_row_top {
+#tnnbaeinjs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2792,11 +2792,11 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_striped {
+#tnnbaeinjs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ihdjrxgmht .gt_table_body {
+#tnnbaeinjs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2805,7 +2805,7 @@ Congratulations in advance to the winners!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_footnotes {
+#tnnbaeinjs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2819,7 +2819,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_footnote {
+#tnnbaeinjs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2828,7 +2828,7 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#ihdjrxgmht .gt_sourcenotes {
+#tnnbaeinjs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2842,7 +2842,7 @@ Congratulations in advance to the winners!</p>
   border-right-color: #D3D3D3;
 }
 
-#ihdjrxgmht .gt_sourcenote {
+#tnnbaeinjs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2850,72 +2850,72 @@ Congratulations in advance to the winners!</p>
   padding-right: 5px;
 }
 
-#ihdjrxgmht .gt_left {
+#tnnbaeinjs .gt_left {
   text-align: left;
 }
 
-#ihdjrxgmht .gt_center {
+#tnnbaeinjs .gt_center {
   text-align: center;
 }
 
-#ihdjrxgmht .gt_right {
+#tnnbaeinjs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ihdjrxgmht .gt_font_normal {
+#tnnbaeinjs .gt_font_normal {
   font-weight: normal;
 }
 
-#ihdjrxgmht .gt_font_bold {
+#tnnbaeinjs .gt_font_bold {
   font-weight: bold;
 }
 
-#ihdjrxgmht .gt_font_italic {
+#tnnbaeinjs .gt_font_italic {
   font-style: italic;
 }
 
-#ihdjrxgmht .gt_super {
+#tnnbaeinjs .gt_super {
   font-size: 65%;
 }
 
-#ihdjrxgmht .gt_footnote_marks {
+#tnnbaeinjs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ihdjrxgmht .gt_asterisk {
+#tnnbaeinjs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ihdjrxgmht .gt_indent_1 {
+#tnnbaeinjs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ihdjrxgmht .gt_indent_2 {
+#tnnbaeinjs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ihdjrxgmht .gt_indent_3 {
+#tnnbaeinjs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ihdjrxgmht .gt_indent_4 {
+#tnnbaeinjs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ihdjrxgmht .gt_indent_5 {
+#tnnbaeinjs .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ihdjrxgmht .katex-display {
+#tnnbaeinjs .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ihdjrxgmht div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tnnbaeinjs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2998,40 +2998,41 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>agency_efficiency <span class="sc">|&gt;</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">%in%</span> state.abb, total_pmt <span class="sc">&gt;=</span> <span class="dv">500000</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(per_pmt, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(AGENCY, state, per_upt, per_pmt) <span class="sc">|&gt;</span> </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(per_upt, per_pmt), <span class="at">decimals =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">AGENCY  =</span> <span class="fu">md</span>(<span class="st">"**Agency**"</span>),</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">state   =</span> <span class="fu">md</span>(<span class="st">"**State**"</span>),</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">per_upt =</span> <span class="fu">md</span>(<span class="st">"**CO~2~ Emissions (lbs/UPT)**"</span>),</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">per_pmt =</span> <span class="fu">md</span>(<span class="st">"**CO~2~ Emissions (lbs/PMT)**"</span>)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"The Danger Zone Award"</span>,</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Highest Emissions per Passenger Mile"</span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PMT greater than 500,000 to subset system that are consistenly serving passengers throughout the year</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">%in%</span> state.abb, total_pmt <span class="sc">&gt;=</span> <span class="dv">500000</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(per_pmt, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(AGENCY, state, per_upt, per_pmt) <span class="sc">|&gt;</span> </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(per_upt, per_pmt), <span class="at">decimals =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">AGENCY  =</span> <span class="fu">md</span>(<span class="st">"**Agency**"</span>),</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">state   =</span> <span class="fu">md</span>(<span class="st">"**State**"</span>),</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">per_upt =</span> <span class="fu">md</span>(<span class="st">"**CO~2~ Emissions (lbs/UPT)**"</span>),</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">per_pmt =</span> <span class="fu">md</span>(<span class="st">"**CO~2~ Emissions (lbs/PMT)**"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"The Danger Zone Award"</span>,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Highest Emissions per Passenger Mile"</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="yidfkwqcko" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yidfkwqcko table {
+<div id="iljnktuady" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iljnktuady table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yidfkwqcko thead, #yidfkwqcko tbody, #yidfkwqcko tfoot, #yidfkwqcko tr, #yidfkwqcko td, #yidfkwqcko th {
+#iljnktuady thead, #iljnktuady tbody, #iljnktuady tfoot, #iljnktuady tr, #iljnktuady td, #iljnktuady th {
   border-style: none;
 }
 
-#yidfkwqcko p {
+#iljnktuady p {
   margin: 0;
   padding: 0;
 }
 
-#yidfkwqcko .gt_table {
+#iljnktuady .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3057,12 +3058,12 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-left-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_caption {
+#iljnktuady .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yidfkwqcko .gt_title {
+#iljnktuady .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3074,7 +3075,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-bottom-width: 0;
 }
 
-#yidfkwqcko .gt_subtitle {
+#iljnktuady .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3086,7 +3087,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-top-width: 0;
 }
 
-#yidfkwqcko .gt_heading {
+#iljnktuady .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3098,13 +3099,13 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-right-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_bottom_border {
+#iljnktuady .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_col_headings {
+#iljnktuady .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3119,7 +3120,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-right-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_col_heading {
+#iljnktuady .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3139,7 +3140,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   overflow-x: hidden;
 }
 
-#yidfkwqcko .gt_column_spanner_outer {
+#iljnktuady .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3151,15 +3152,15 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   padding-right: 4px;
 }
 
-#yidfkwqcko .gt_column_spanner_outer:first-child {
+#iljnktuady .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yidfkwqcko .gt_column_spanner_outer:last-child {
+#iljnktuady .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yidfkwqcko .gt_column_spanner {
+#iljnktuady .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3171,11 +3172,11 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   width: 100%;
 }
 
-#yidfkwqcko .gt_spanner_row {
+#iljnktuady .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yidfkwqcko .gt_group_heading {
+#iljnktuady .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3201,7 +3202,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   text-align: left;
 }
 
-#yidfkwqcko .gt_empty_group_heading {
+#iljnktuady .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3216,15 +3217,15 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   vertical-align: middle;
 }
 
-#yidfkwqcko .gt_from_md > :first-child {
+#iljnktuady .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yidfkwqcko .gt_from_md > :last-child {
+#iljnktuady .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yidfkwqcko .gt_row {
+#iljnktuady .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3243,7 +3244,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   overflow-x: hidden;
 }
 
-#yidfkwqcko .gt_stub {
+#iljnktuady .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3256,7 +3257,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   padding-right: 5px;
 }
 
-#yidfkwqcko .gt_stub_row_group {
+#iljnktuady .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3270,15 +3271,15 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   vertical-align: top;
 }
 
-#yidfkwqcko .gt_row_group_first td {
+#iljnktuady .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yidfkwqcko .gt_row_group_first th {
+#iljnktuady .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yidfkwqcko .gt_summary_row {
+#iljnktuady .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3288,16 +3289,16 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   padding-right: 5px;
 }
 
-#yidfkwqcko .gt_first_summary_row {
+#iljnktuady .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_first_summary_row.thick {
+#iljnktuady .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yidfkwqcko .gt_last_summary_row {
+#iljnktuady .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3307,7 +3308,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-bottom-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_grand_summary_row {
+#iljnktuady .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3317,7 +3318,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   padding-right: 5px;
 }
 
-#yidfkwqcko .gt_first_grand_summary_row {
+#iljnktuady .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3327,7 +3328,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-top-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_last_grand_summary_row_top {
+#iljnktuady .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3337,11 +3338,11 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-bottom-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_striped {
+#iljnktuady .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yidfkwqcko .gt_table_body {
+#iljnktuady .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3350,7 +3351,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-bottom-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_footnotes {
+#iljnktuady .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3364,7 +3365,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-right-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_footnote {
+#iljnktuady .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3373,7 +3374,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   padding-right: 5px;
 }
 
-#yidfkwqcko .gt_sourcenotes {
+#iljnktuady .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3387,7 +3388,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   border-right-color: #D3D3D3;
 }
 
-#yidfkwqcko .gt_sourcenote {
+#iljnktuady .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3395,72 +3396,72 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
   padding-right: 5px;
 }
 
-#yidfkwqcko .gt_left {
+#iljnktuady .gt_left {
   text-align: left;
 }
 
-#yidfkwqcko .gt_center {
+#iljnktuady .gt_center {
   text-align: center;
 }
 
-#yidfkwqcko .gt_right {
+#iljnktuady .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yidfkwqcko .gt_font_normal {
+#iljnktuady .gt_font_normal {
   font-weight: normal;
 }
 
-#yidfkwqcko .gt_font_bold {
+#iljnktuady .gt_font_bold {
   font-weight: bold;
 }
 
-#yidfkwqcko .gt_font_italic {
+#iljnktuady .gt_font_italic {
   font-style: italic;
 }
 
-#yidfkwqcko .gt_super {
+#iljnktuady .gt_super {
   font-size: 65%;
 }
 
-#yidfkwqcko .gt_footnote_marks {
+#iljnktuady .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yidfkwqcko .gt_asterisk {
+#iljnktuady .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yidfkwqcko .gt_indent_1 {
+#iljnktuady .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yidfkwqcko .gt_indent_2 {
+#iljnktuady .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yidfkwqcko .gt_indent_3 {
+#iljnktuady .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yidfkwqcko .gt_indent_4 {
+#iljnktuady .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yidfkwqcko .gt_indent_5 {
+#iljnktuady .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yidfkwqcko .katex-display {
+#iljnktuady .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yidfkwqcko div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iljnktuady div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3508,7 +3509,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
 <p>Without further ado, here are the winners!</p>
 <section id="award-1-greenest-transit-agency-1" class="level4">
 <h4 class="anchored" data-anchor-id="award-1-greenest-transit-agency-1">Award 1: Greenest Transit Agency</h4>
-<p>The award for the Greenest Transit Agency agency goes to the Tri-County Metropolitan District of Oregon or TriMet!</p>
+<p>The award for the Greenest Transit Agency agency goes to the <strong>Tri-County Metropolitan District of Oregon</strong> or TriMet!</p>
 <p>This transit system achieved an impressive 0.4 pounds of CO<sub>2</sub>/UPT and 0.097 pounds CO<sub>2</sub>/PMT. While there were other contenders with similar or lower rates, the TriMet serviced 269,801,597 passenger miles. At this scale, it is an impressive feat to have achieved these low carbon emission rates.</p>
 <p>These metrics were acquired by analyzing state summary profiles as well as different fuel type consumption and their relevant carbon emissions. The electricity from battery usage and from propulsion were combined to understand total electricity usage of these entries. The amount of fuel types including diesel, biodiesel, gasoline and others, were converted to their respective carbon emissions rates using EIA and EPA conversion rates. Those emissions for individual agencies across various transit services were then aggregated and divided by total unlinked passenger trips and passenger miles to understand on carbon emissions on a per UPT and per mile basis.</p>
 <div class="cell">
@@ -3520,39 +3521,43 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">weighted_avg_pmt =</span> <span class="fu">sum</span>(total_emissions_lbs, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sum</span>(total_pmt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>trimet_vs_nat <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">entity =</span> <span class="fu">c</span>(<span class="st">"TriMet (Winner)"</span>, <span class="st">"National Average"</span>),</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">lbs_pmt =</span> <span class="fu">c</span>(<span class="fl">0.097</span>, national_averages<span class="sc">$</span>weighted_avg_pmt)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># CAFE 2026 standard baseline</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 18.73 from EIA conversion table</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>cafe_car<span class="ot">=</span> <span class="fl">18.73</span><span class="sc">/</span><span class="dv">49</span></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(trimet_vs_nat, <span class="fu">aes</span>(<span class="at">x =</span> lbs_pmt, <span class="at">y =</span> <span class="fu">reorder</span>(entity, lbs_pmt), <span class="at">color =</span> entity)) <span class="sc">+</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> lbs_pmt, <span class="at">y =</span> entity, <span class="at">yend =</span> entity), </span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.3f lbs"</span>, lbs_pmt)), </span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"TriMet (Winner)"</span>  <span class="ot">=</span> <span class="st">"#2a9d8f"</span>,</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">"National Average"</span> <span class="ot">=</span> <span class="st">"#457b9d"</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"TriMet Carbon Efficiency vs. National Average"</span>,</span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Carbon emissions per passenger mile traveled"</span>,</span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"lbs CO2 per Passenger Mile"</span>,</span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Sources: 2022 National Transit Database (NTD), EIA State Electricity Profiles"</span></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">11</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">max</span>(trimet_vs_nat<span class="sc">$</span>lbs_pmt) <span class="sc">*</span> <span class="fl">1.35</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>trimet_vs_nat <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">entity =</span> <span class="fu">c</span>(<span class="st">"TriMet (Winner)"</span>, <span class="st">"National Average"</span>),</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">lbs_pmt =</span> <span class="fu">c</span>(<span class="fl">0.097</span>, national_averages<span class="sc">$</span>weighted_avg_pmt)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(trimet_vs_nat, <span class="fu">aes</span>(<span class="at">x =</span> lbs_pmt, <span class="at">y =</span> <span class="fu">reorder</span>(entity, lbs_pmt), <span class="at">color =</span> entity)) <span class="sc">+</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> lbs_pmt, <span class="at">y =</span> entity, <span class="at">yend =</span> entity), </span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.3f lbs"</span>, lbs_pmt)), </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>      <span class="st">"TriMet (Winner)"</span>  <span class="ot">=</span> <span class="st">"#2a9d8f"</span>,</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>      <span class="st">"National Average"</span> <span class="ot">=</span> <span class="st">"#457b9d"</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"TriMet Carbon Efficiency vs. National Average"</span>,</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Carbon emissions per passenger mile traveled"</span>,</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"lbs CO2 per Passenger Mile"</span>,</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Sources: 2022 National Transit Database (NTD), EIA State Electricity Profiles"</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">11</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">max</span>(trimet_vs_nat<span class="sc">$</span>lbs_pmt) <span class="sc">*</span> <span class="fl">1.35</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -3563,7 +3568,7 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
 </div>
 </div>
 <p>We can understand the scale of TriMet’s achievements by comparing it to the Corporate Average Fuel Economy standard baseline for the carbon emissions emitted by the average personal vehicle at about 0.38 pounds CO<sub>2</sub>/PMT. This means that TriMet achieved a 74.62% reduction in carbon emissions.</p>
-<p>Furthermore, the national carbon emission rate for public transit agencies sat at about 0.446 CO<sub>2</sub>/PMT which is significantly higher than TriMet’s rate as well.</p>
+<p>Furthermore, the national carbon emission rate for public transit agencies sat at about 0.446 pounds of CO<sub>2</sub>/PMT which is significantly higher than TriMet’s rate as well.</p>
 <p>An honorable mention also goes to the Anaheim Transportation Network who also achieved low carbon emission rates but at a medium size agency level.</p>
 </section>
 <section id="award-2-danger-zone-award-1" class="level4">
@@ -3599,19 +3604,18 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
 <span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
 <span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"System Scale vs. Carbon Intensity"</span>,</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Dashed gold line shows 2026 CAFE car standard"</span>,</span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"lbs CO2 per Passenger Mile"</span>,</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Sources: 2025 National Transit Database (NTD), EIA State Electricity Profiles, US DOT NHTSA 2026 CAFE Standards"</span></span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fl">6.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"lbs CO2 per Passenger Mile"</span>,</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Sources: 2025 National Transit Database (NTD), EIA State Electricity Profiles, US DOT NHTSA 2026 CAFE Standards"</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fl">6.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -3673,15 +3677,14 @@ For unlinked passenger trips, the Seattle Center Monorail was emitting about 0.0
 </div>
 </div>
 </div>
-<p>This plot highlights CO<sub>2</sub>/PMT for TriMet, VOTRON, and the MTA (mega system benchmark) and other major transit systems in the United States. TriMet sits well below the CAFE average, represented by the yellow dashed line, and most other US public transit agencies. The MTA achieves a much more significant total passenger mile count, but has higher emissions per passenger mile. However, it is notably below the CAFE average as well, despite serving billions of passengers annually.</p>
-<p>Lastly, we look at VOTRON, the red dot outlier. It does not serve a significant amount of passenger miles compared to other large transit agencies and still has a high carbon emissions rate per passenger mile.</p>
+<p>This plot highlights pounds of CO<sub>2</sub>/PMT for TriMet, VOTRON, and the MTA (mega system benchmark) and other major transit systems in the United States. TriMet sits well below the CAFE average, represented by the yellow dashed line, and most other US public transit agencies. The MTA achieves a much more significant total passenger mile count, but has higher emissions per passenger mile. However, it is notably below the CAFE average as well, despite serving billions of passengers annually.</p>
+<p>Lastly, we look at VOTRON, the red dotted outlier. It does not serve a significant amount of passenger miles compared to other large transit agencies and still has a high carbon emissions rate per passenger mile.</p>
 <p>VOTRON, you need to do better.</p>
 </section>
 <section id="until-next-year" class="level4">
 <h4 class="anchored" data-anchor-id="until-next-year">Until Next Year!</h4>
 <p>As a society we are facing resource depletion, mass pollution, and adverse environmental effects due to societal developments, and the increased need for resources.</p>
-<p>As part of the transportation industry, we must take responsibility for how our operations affect and contribute to these issues. Those that are actively aware of the resources they use and are doing their best to lower carbon emission rates, bravo to you. Let’s work together to keep our planet green.</p>
-<p>Until next year!</p>
+<p>As part of the transportation industry, we must take responsibility for how our operations affect and contribute to these issues. Those that are actively aware of the resources they use and are doing their best to lower carbon emission rates, bravo to you. Let’s work together to keep our planet green. Until next year!</p>
 <div class="callout callout-style-default callout-note callout-titled" title="AI Usage Statement">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">

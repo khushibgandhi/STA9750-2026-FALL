@@ -12,7 +12,7 @@ format:
 ---
 
 ## Overview
-In the modern-day, resources consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly, alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.\
+In the modern-day, resource consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.\
 \
 This impact is measured by CO~2~ emissions. As defined by the [U.S. Energy Information Administration](https://www.eia.gov/tools/glossary/index.php?id=carbon%20intensity), carbon intensity refers to the “amount of carbon by weight emitted per unit of energy consumed”. In an emissions context, a higher carbon intensity means more CO~2~ emissions, which is not ideal for industries with significant energy consumption (like public transit).\
 \
@@ -191,7 +191,7 @@ load_ntd_energy <- function(){
 NTD_ENERGY <- load_ntd_energy()
 ```
 
-The code above forms the database `NTD_ENERGY` which contains information on different transit agencies, their locations, the types of fuel they consume and in what amounts, and the amount of electricity they use as well. Some of the fuel types reported include gasoline, kerosene, biodiesel, and hydrogen to name a few. The electricity usage is reported in two metrics  - electricity propulsion and battery usage. These two categories just draw on the distinction between how electricity is acquired. Another important part of this data is the `Mode` column which specifies how services in transit agencies are provided. While these are currently listed as two letter abbreviations, they will be recorded in a future step according to the NTD Reporting Policy Manual.
+The code above forms the dataset `NTD_ENERGY` which contains information on different transit agencies, their locations, the types of fuel they consume, in what amounts, and the amount of electricity used as well. Some of the fuel types reported include gasoline, kerosene, biodiesel, and hydrogen to name a few. The electricity usage is reported in two metrics  - electricity propulsion and battery usage. These two categories draw on the distinction between how electricity is acquired. Another important part of this data is the `Mode` column which specifies how services in transit agencies are provided. While these are currently listed as two letter abbreviations, they will be recorded in a future step according to the NTD Reporting Policy Manual.
 
 As previously mentioned with the EIA data, an `inner_join` is the most appropriate for this data. While the `NTD_ENERGY` energy contains many more entries on different public transit agencies (local, citywide, etc.), understanding their resources consumption as a part of overall state electricity consumption is important to understand which transit agencies are the greenest.
 
@@ -254,7 +254,7 @@ NTD_SERVICE <- load_ntd_service()
 
 The `NTD_SERVICE` data contains information on passenger trips across different transit services. Each entry corresponds to a different service by a specific agency. The transit services reported are the same `mode` column from the `NTD_ENERGY` data. Given such they will also have to be recoded.
 
-However the focus here is on how different services are serving different areas across the United States. There are columns titled `uza_sqmiles`/`uza_population` and `service_area_sq_miles`/`service_area_population`.These metrics specify how different transit systems are serving the public and in which amounts. There are also columns that have flags for inaccurate data. It is highly likely we will omit these records in our analysis to ensure fair, accurate reporting. 
+However, the focus here is on how different services are serving different areas across the United States. There are columns titled `uza_sqmiles`/`uza_population` and `service_area_sq_miles`/`service_area_population`.These metrics specify how different transit systems are serving the public and in which amounts. There are also columns that have flags for inaccurate data. It is highly likely we will omit these records in our analysis to ensure fair, accurate reporting. 
 
 Lastly, two significant metrics reported in this data are `total_upt` and `sum_passenger_miles`. `total_upt` represents unlinked passenger trips which means that one trip regardless of how many transfers will count as one UPT. For example if you take two trains to reach a destination it still counts as one UPT because it is one trip in two segments. On the other hand, `sum_passenger_miles` reports the cumulative miles traveled by all passengers in that transit system by a specific mode of transit.
 
@@ -313,9 +313,9 @@ NTD_SERVICE <- NTD_SERVICE |>
         default="Unknown"))
 ```
 
-An initial understanding of the data was conducted using the `glimpse()` and `skim()` functions whose outputs are not included in the report. However this understanding is essential to conceptualize how different data reports connect and contribute to the broader picture of green public transit.
+An initial understanding of the data was conducted using the `glimpse()` and `skim()` functions whose outputs are not included in the report. However, this understanding is essential to conceptualize how different data reports connect and contribute to the broader picture of green public transit.
 
-The main concern here was translating the `mode` column in the NTD_ENERGY and NTD_SERVICE data sets into something more readable. As stated previously, the `mode` columns are originally reported as two letter abbreviations whose full forms represent various transit services. To understand which transit services are reported, the list of distinct values for each dataset was pulled and each of those abbreviations was translated into its full form. The abbreviations are shown in the code above and can also be accessed through the [NTD Reporting Policy Manual](https://www.transit.dot.gov/ntd/2025-ntd-reporting-policy-manual). 
+The main concern here was translating the `mode` column in the `NTD_ENERGY` and `NTD_SERVICE` data sets into something more readable. As stated previously, the `mode` columns are originally reported as two letter abbreviations whose full forms represent various transit services. To understand which transit services are reported, the list of distinct values for each dataset was pulled and each of those abbreviations was translated into its full form. The abbreviations are shown in the code above and can also be accessed through the [NTD Reporting Policy Manual](https://www.transit.dot.gov/ntd/2025-ntd-reporting-policy-manual). 
 
 ## Data Integration and Initial Exploration
 
@@ -346,7 +346,7 @@ EIA_SEP_REPORT |> slice_max(electricity_price_MWh, n=5) |>
     axis.title.y = element_text(margin = margin(r=12))
   )
 ```
-**Hawaii has the most expensive retail electricity** at $380 per megawatt-hour. Following Hawaii, in order of descending price, are California, Connecticut, Rhode Island and Massachusetts.
+**Hawaii has the most expensive retail electricity** at \$380 per megawatt-hour. Following Hawaii, in order of descending price, are California, Connecticut, Rhode Island and Massachusetts.
 
 
 #### 'Dirtiest' Electricity Mix
@@ -419,7 +419,7 @@ The rarest primary energy source in the US is **petroleum** and it is used by on
 
 Both the second and third rarest primary sources are used by four states and they are hydroelectric and wind energy. Idaho, Oregon, Vermont, and Washington use hydroelectric energy with an average electricity price of \$122.90 per megawatt hour. 
 
-Wind energy is used by Iowa, Kansas, New Mexico and South Dakota with an average price of \$101.50 per megawatt hour. Notably the rarest primary source, petroleum, is used by Hawaii which is also the state with the highest average electricity price across the country.
+Wind energy is used by Iowa, Kansas, New Mexico and South Dakota with an average price of \$101.50 per megawatt hour. Notably, the rarest primary source, petroleum, is used by Hawaii which is also the state with the highest average electricity price across the country.
 
 
 ### NTD Energy Usage
@@ -711,7 +711,7 @@ agencymode_emissions = NTD_SERVICE |>
 # https://www.epa.gov/climateleadership/ghg-emission-factors-hub
 ```
 
-State summary profiles as well as different fuel type consumption and their relevant carbon emissions are analyzed in the code above.  The electricity from battery usage and from propulsion were combined to understand total electricity usage of these entries. The amount of fuel types including diesel, biodiesel, gasoline and others, were converted to their respective carbon emissions rates using EIA and EPA (Environment Protection Agency) conversion rates. Those emissions for individual agencies across various transit services were then aggregated and divided by total unlinked passenger trips and passenger miles.
+State summary profiles as well as different fuel type consumption and their relevant carbon emissions are analyzed in the code above.  The electricity from battery usage and from propulsion were combined to understand total electricity usage of these entries. Different fuel types were also converted to their respective carbon emissions using EIA and EPA (Environment Protection Agency) conversion rates. Those emissions for individual agencies across various transit services were then aggregated and divided by total unlinked passenger trips and passenger miles.
 
 ### Relate Total Emissions and Passenger Service
 Normalizing total emissions for each Agency + Mode pair by the actual size of the transit agency.
@@ -814,6 +814,7 @@ For unlinked passenger trips, the Seattle Center Monorail  was emitting about 0.
 #| warning: false
 
 agency_efficiency |> 
+  # PMT greater than 500,000 to subset system that are consistenly serving passengers throughout the year
   filter(state %in% state.abb, total_pmt >= 500000) |> 
   slice_max(per_pmt, n = 1) |> 
   select(AGENCY, state, per_upt, per_pmt) |> 
@@ -844,7 +845,7 @@ Without further ado, here are the winners!
 
 
 #### Award 1: Greenest Transit Agency
-The award for the Greenest Transit Agency agency goes to the Tri-County Metropolitan District of Oregon or TriMet!
+The award for the Greenest Transit Agency agency goes to the **Tri-County Metropolitan District of Oregon** or TriMet!
 
 This transit system achieved an impressive 0.4 pounds of CO~2~/UPT and 0.097 pounds CO~2~/PMT. While there were other contenders with similar or lower rates, the TriMet serviced 269,801,597 passenger miles. At this scale, it is an impressive feat to have achieved these low carbon emission rates. 
 
@@ -860,6 +861,10 @@ national_averages = agency_efficiency |>
     weighted_avg_upt = sum(total_emissions_lbs, na.rm = TRUE) / sum(total_upt, na.rm = TRUE),
     weighted_avg_pmt = sum(total_emissions_lbs, na.rm = TRUE) / sum(total_pmt, na.rm = TRUE)
   )
+
+# CAFE 2026 standard baseline
+# 18.73 from EIA conversion table
+cafe_car= 18.73/49
 
 trimet_vs_nat = data.frame(entity = c("TriMet (Winner)", "National Average"),
   lbs_pmt = c(0.097, national_averages$weighted_avg_pmt)
@@ -897,7 +902,7 @@ ggplot(trimet_vs_nat, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), color = ent
 ```
 We can understand the scale of TriMet's achievements by comparing it to the Corporate Average Fuel Economy standard baseline for the carbon emissions emitted by the average personal vehicle at about 0.38 pounds CO~2~/PMT. This means that TriMet achieved a 74.62% reduction in carbon emissions. 
 
-Furthermore, the national carbon emission rate for public transit agencies sat at about 0.446 CO~2~/PMT which is significantly higher than TriMet’s rate as well.
+Furthermore, the national carbon emission rate for public transit agencies sat at about 0.446 pounds of CO~2~/PMT which is significantly higher than TriMet’s rate as well.
 
 An honorable mention also goes to the Anaheim Transportation Network who also achieved low carbon emission rates but at a medium size agency level. 
 
@@ -939,7 +944,6 @@ ggplot(comparison_df, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), fill = cate
   )) +
   labs(
     title    = "System Scale vs. Carbon Intensity",
-    subtitle = "Dashed gold line shows 2026 CAFE car standard",
     x        = "lbs CO2 per Passenger Mile",
     y        = NULL,
     caption  = "Sources: 2025 National Transit Database (NTD), EIA State Electricity Profiles, US DOT NHTSA 2026 CAFE Standards"
@@ -1002,18 +1006,16 @@ ggplot(agency_efficiency, aes(x = total_pmt, y = per_pmt)) +
   ) +
   expand_limits(y = 6.5)
 ```
-This plot highlights CO~2~/PMT for TriMet, VOTRON, and the MTA (mega system benchmark) and other major transit systems in the United States. TriMet sits well below the CAFE average, represented by the yellow dashed line, and most other US public transit agencies. The MTA achieves a much more significant total passenger mile count, but has higher emissions per passenger mile. However, it is notably below the CAFE average as well, despite serving billions of passengers annually. 
+This plot highlights pounds of CO~2~/PMT for TriMet, VOTRON, and the MTA (mega system benchmark) and other major transit systems in the United States. TriMet sits well below the CAFE average, represented by the yellow dashed line, and most other US public transit agencies. The MTA achieves a much more significant total passenger mile count, but has higher emissions per passenger mile. However, it is notably below the CAFE average as well, despite serving billions of passengers annually. 
 
-Lastly, we look at VOTRON, the red dot outlier. It does not serve a significant amount of passenger miles compared to other large transit agencies and still has a high carbon emissions rate per passenger mile.
+Lastly, we look at VOTRON, the red dotted outlier. It does not serve a significant amount of passenger miles compared to other large transit agencies and still has a high carbon emissions rate per passenger mile.
 
 VOTRON, you need to do better.
 
 #### Until Next Year!
 As a society we are facing resource depletion, mass pollution, and adverse environmental effects due to societal developments, and the increased need for resources. 
 
-As part of the transportation industry, we must take responsibility for how our operations affect and contribute to these issues. Those that are actively aware of the resources they use and are doing their best to lower carbon emission rates, bravo to you. Let’s work together to keep our planet green.
-
-Until next year!
+As part of the transportation industry, we must take responsibility for how our operations affect and contribute to these issues. Those that are actively aware of the resources they use and are doing their best to lower carbon emission rates, bravo to you. Let’s work together to keep our planet green. Until next year!
 
 ::: {.callout-note title="AI Usage Statement" collapse="true"}
 
