@@ -707,8 +707,11 @@ agencymode_emissions = NTD_SERVICE |>
                           em_ethanol + em_electric
   )
 
+# Some data conversions for emissions were also pulled from the EPA
 # https://www.epa.gov/climateleadership/ghg-emission-factors-hub
 ```
+
+State summary profiles as well as different fuel type consumption and their relevant carbon emissions are analyzed in the code above.  The electricity from battery usage and from propulsion were combined to understand total electricity usage of these entries. The amount of fuel types including diesel, biodiesel, gasoline and others, were converted to their respective carbon emissions rates using EIA and EPA (Environment Protection Agency) conversion rates. Those emissions for individual agencies across various transit services were then aggregated and divided by total unlinked passenger trips and passenger miles.
 
 ### Relate Total Emissions and Passenger Service
 Normalizing total emissions for each Agency + Mode pair by the actual size of the transit agency.
@@ -717,23 +720,24 @@ Normalizing total emissions for each Agency + Mode pair by the actual size of th
 #| message: false
 #| warning: false
 
-
+# Compute total UPT and PMT
+# Add a column that computes carbon emissions per UPT/PMT
 agency_efficiency = agencymode_emissions |> 
   group_by(join_id, AGENCY, state) |> 
   summarise(
     total_emissions_lbs = sum(total_emissions_lbs, na.rm = TRUE),
-    total_upt           = sum(tot_upt, na.rm = TRUE),
-    total_pmt           = sum(tot_pmt, na.rm = TRUE),
+    total_upt = sum(tot_upt, na.rm = TRUE),
+    total_pmt = sum(tot_pmt, na.rm = TRUE),
     .groups = "drop"
   ) |> 
   filter(total_upt > 0, total_pmt > 0) |> 
   mutate(
-    per_upt = total_emissions_lbs / total_upt,
-    per_pmt = total_emissions_lbs / total_pmt,
+    per_upt = total_emissions_lbs/total_upt,
+    per_pmt = total_emissions_lbs/total_pmt,
     agency_size = case_when(
       total_upt >= 50e6 ~ "Large",
       total_upt >= 5e6  ~ "Medium",
-      TRUE              ~ "Small"
+      TRUE ~ "Small"
     )
   )
 
@@ -857,19 +861,14 @@ national_averages = agency_efficiency |>
     weighted_avg_pmt = sum(total_emissions_lbs, na.rm = TRUE) / sum(total_pmt, na.rm = TRUE)
   )
 
-# Data for TriMet vs National Average
-trimet_vs_nat <- data.frame(
-  entity = c("TriMet (Winner)", "National Average"),
+trimet_vs_nat = data.frame(entity = c("TriMet (Winner)", "National Average"),
   lbs_pmt = c(0.097, national_averages$weighted_avg_pmt)
 )
 
 ggplot(trimet_vs_nat, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), color = entity)) +
-  # Connecting line from 0 to each point
   geom_segment(aes(x = 0, xend = lbs_pmt, y = entity, yend = entity), 
                linewidth = 1.2, show.legend = FALSE) +
-  # Terminal point
   geom_point(size = 4, show.legend = FALSE) +
-  # Text label
   geom_text(aes(label = sprintf("%.3f lbs", lbs_pmt)), 
             hjust = -0.3, fontface = "bold", size = 4, show.legend = FALSE) +
   scale_color_manual(
@@ -915,7 +914,7 @@ To understand what a concerning metric this is, let’s compare VOTRON to other 
 #| message: false
 #| warning: false
 
-mta_metrics <- agency_efficiency |> 
+mta_metrics = agency_efficiency |> 
   filter(str_detect(AGENCY, "MTA New York City|New York City Transit")) |> 
   select(AGENCY, state, per_pmt, per_upt, total_pmt, total_emissions_lbs)
 
