@@ -830,8 +830,7 @@ agency_efficiency |>
 - **Metric:** 57.67 lbs of CO~2~ per UPT and 5.6 lbs of CO~2~ per passenger mile
 
 
-## Deliverable: Transit Award "Press Release"
-### GREEN TRANSIT ALLIANCE ANNOUNCES 2026 WINNERS FOR THE ANNUAL GTA VI AWARDS
+## GREEN TRANSIT ALLIANCE ANNOUNCES 2026 WINNERS FOR THE ANNUAL GTA VI AWARDS
 
 #### Award 1: Greenest Transit Agency
 
