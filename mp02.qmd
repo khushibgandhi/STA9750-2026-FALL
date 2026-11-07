@@ -624,7 +624,7 @@ There were **`r comma(upt_nuclear)`** unlinked passenger trips recorded where th
 #| message: false
 #| warning: false
 
- most_bio = NTD_ENERGY |> filter(`Gallons of Bio-Diesel`> 0) |>
+most_bio = NTD_ENERGY |> filter(`Gallons of Bio-Diesel`> 0) |>
   mutate(join_id = as.integer(`NTD ID`)) |>
   inner_join(NTD_SERVICE|>
                mutate(join_id = as.integer(NTD_ID)) |>
@@ -707,6 +707,7 @@ agencymode_emissions = NTD_SERVICE |>
                           em_ethanol + em_electric
   )
 
+# https://www.epa.gov/climateleadership/ghg-emission-factors-hub
 ```
 
 ### Relate Total Emissions and Passenger Service
@@ -830,9 +831,20 @@ agency_efficiency |>
 - **Metric:** 57.67 lbs of CO~2~ per UPT and 5.6 lbs of CO~2~ per passenger mile
 
 
-## GREEN TRANSIT ALLIANCE ANNOUNCES 2026 WINNERS FOR THE ANNUAL GTA VI AWARDS
+## Green Transit Alliance Annouces 2026 Winners for the Annual GTA VI Awards
+Green Transit Alliance is honored to announce the annual winners for the 2026 GTA VI awards. 
+
+This year, we have two categories. The first is our usual “Greenest Transit Agency”. For the second, we decided to bring awareness to agencies that can do better. The metrics in this analysis were calculated using the Energy Information Administration’s and National Transit Database’s records, both of which are federal sources. 
+
+Without further ado, here are the winners!
+
 
 #### Award 1: Greenest Transit Agency
+The award for the Greenest Transit Agency agency goes to the Tri-County Metropolitan District of Oregon or TriMet!
+
+This transit system achieved an impressive 0.4 pounds of CO~2~/UPT and 0.097 pounds CO~2~/PMT. While there were other contenders with similar or lower rates, the TriMet serviced 269,801,597 passenger miles. At this scale, it is an impressive feat to have achieved these low carbon emission rates. 
+
+These metrics were acquired by analyzing state summary profiles as well as different fuel type consumption and their relevant carbon emissions.  The electricity from battery usage and from propulsion were combined to understand total electricity usage of these entries. The amount of fuel types including diesel, biodiesel, gasoline and others, were converted to their respective carbon emissions rates using EIA and EPA conversion rates. Those emissions for individual agencies across various transit services were then aggregated and divided by total unlinked passenger trips and passenger miles to understand on carbon emissions on a per UPT and per mile basis.
 
 ```{r}
 #| echo: true
@@ -884,8 +896,19 @@ ggplot(trimet_vs_nat, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), color = ent
   ) +
   expand_limits(x = max(trimet_vs_nat$lbs_pmt) * 1.35)
 ```
+We can understand the scale of TriMet's achievements by comparing it to the Corporate Average Fuel Economy standard baseline for the carbon emissions emitted by the average personal vehicle at about 0.38 pounds CO~2~/PMT. This means that TriMet achieved a 74.62% reduction in carbon emissions. 
+
+Furthermore, the national carbon emission rate for public transit agencies sat at about 0.446 CO~2~/PMT which is significantly higher than TriMet’s rate as well.
+
+An honorable mention also goes to the Anaheim Transportation Network who also achieved low carbon emission rates but at a medium size agency level. 
+
 
 #### Award 2: Danger-Zone Award
+Let’s give it up for the County of Volusia, also known as VOTRAN from Florida for a staggering 5.6 pounds of carbon emitted per passenger mile. VOTRON, you are in the danger zone!
+
+This metric was calculated using the same method described for the Greenest Transit Award. Each fuel type was converted to the respective carbon emission rate and summed across the entire agency. The per passenger mile rate used for the Danger Zone Award is a result of aggregated total carbon emission per passenger mile over total passenger miles traveled.
+
+To understand what a concerning metric this is, let’s compare VOTRON to other public transit agencies. 
 
 ```{r}
 #| echo: true
@@ -897,6 +920,7 @@ mta_metrics <- agency_efficiency |>
   select(AGENCY, state, per_pmt, per_upt, total_pmt, total_emissions_lbs)
 
 # CAFE 2026 standard baseline
+# 18.73 from EIA conversion table
 cafe_car= 18.73/49
 
 comparison_df = data.frame(
@@ -930,6 +954,8 @@ ggplot(comparison_df, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), fill = cate
   ) +
   expand_limits(x = 6.5)
 ```
+In the bar chart above, there is a stark difference between VOTRON’s CO~2~/PMT and other reported agencies. It sits well above the CAFE, the TriMet, and to understand how a large agency operates, the MTA average (at 0.18 pounds of CO~2~/PMT). We can also look at this metric on a much larger scale through the plot shown below.
+
 
 ```{r}
 #| echo: true
@@ -977,9 +1003,18 @@ ggplot(agency_efficiency, aes(x = total_pmt, y = per_pmt)) +
   ) +
   expand_limits(y = 6.5)
 ```
+This plot highlights CO~2~/PMT for TriMet, VOTRON, and the MTA (mega system benchmark) and other major transit systems in the United States. TriMet sits well below the CAFE average, represented by the yellow dashed line, and most other US public transit agencies. The MTA achieves a much more significant total passenger mile count, but has higher emissions per passenger mile. However, it is notably below the CAFE average as well, despite serving billions of passengers annually. 
 
+Lastly, we look at VOTRON, the red dot outlier. It does not serve a significant amount of passenger miles compared to other large transit agencies and still has a high carbon emissions rate per passenger mile.
 
+VOTRON, you need to do better.
 
+#### Until Next Year!
+As a society we are facing resource depletion, mass pollution, and adverse environmental effects due to societal developments, and the increased need for resources. 
+
+As part of the transportation industry, we must take responsibility for how our operations affect and contribute to these issues. Those that are actively aware of the resources they use and are doing their best to lower carbon emission rates, bravo to you. Let’s work together to keep our planet green.
+
+Until next year!
 
 ::: {.callout-note title="AI Usage Statement" collapse="true"}
 
