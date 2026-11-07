@@ -869,16 +869,17 @@ ggplot(trimet_vs_nat, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), color = ent
   ) +
   labs(
     title    = "TriMet Carbon Efficiency vs. National Average",
-    subtitle = "Operational greenhouse gas emissions per passenger mile traveled (PMT)",
+    subtitle = "Carbon emissions per passenger mile traveled",
     x        = "lbs CO2 per Passenger Mile",
     y        = NULL,
     caption  = "Sources: 2022 National Transit Database (NTD), EIA State Electricity Profiles"
   ) +
   theme_minimal() +
   theme(
-    plot.title       = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
     plot.caption.position = "plot",
-    axis.text.y      = element_text(face = "bold", size = 11, color = "black"),
+    plot.caption = element_text(hjust = 0),
+    axis.text.y = element_text(face = "bold", size = 11, color = "black"),
     panel.grid.minor = element_blank(),
     panel.grid.major.y = element_blank()
   ) +
@@ -925,6 +926,7 @@ ggplot(comparison_df, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), fill = cate
   theme(
     legend.position = "none",
     plot.caption.position = "plot",
+    plot.caption = element_text(hjust = 0),
     plot.title = element_text(face = "bold")
   ) +
   expand_limits(x = 6.5)
@@ -971,7 +973,8 @@ ggplot(agency_efficiency, aes(x = total_pmt, y = per_pmt)) +
   theme(
     legend.position = "right",
     plot.title = element_text(face = "bold"),
-    plot.caption.position = "plot"
+    plot.caption.position = "plot",
+    plot.caption = element_text(hjust = 0)
   ) +
   expand_limits(y = 6.5)
 ```
