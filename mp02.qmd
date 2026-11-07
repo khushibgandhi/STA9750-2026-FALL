@@ -12,7 +12,7 @@ format:
 ---
 
 ## Overview
-In the modern-day, resources consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly, alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.\
+In the rn-day, resources consumption is increasing exponentially leading to mass depletion, pollution and overall, adverse impacts on the environment. As society begins to value sustainable practices, industries are forced to reevaluate resource usage. For the transportation industry, public transit is a safer, environmental friendly, alternative to driving for example. However, while an individual train ride has less effect than a personal car, many public transit agencies do not have green practices.\
 \
 This impact is measured by CO~2~ emissions. As defined by the [U.S. Energy Information Administration](https://www.eia.gov/tools/glossary/index.php?id=carbon%20intensity), carbon intensity refers to the “amount of carbon by weight emitted per unit of energy consumed”. In an emissions context, a higher carbon intensity means more CO~2~ emissions, which is not ideal for industries with significant energy consumption (like public transit).\
 \
@@ -641,6 +641,9 @@ There were **`r comma(upt_nuclear)`** unlinked passenger trips recorded where th
 ### Calculate Total Emissions
 Compute the total emissions associated with each Agency + Mode pair.
 ``` {r}
+#| echo: true
+#| message: false
+#| warning: false
 
 # Subset EIA data to include only state abbreviation and CO2 per megawatt hour columns
 grid_intensity = EIA_SEP_REPORT |> 
@@ -704,16 +707,17 @@ agencymode_emissions = NTD_SERVICE |>
                           em_ethanol + em_electric
   )
 
-agencymode_emissions |> 
-  select(AGENCY, mode, state, grid_CO2, total_emissions_lbs)
-
-
 ```
 
 ### Relate Total Emissions and Passenger Service
 Normalizing total emissions for each Agency + Mode pair by the actual size of the transit agency.
 ``` {r}
-agencymode_emissions |> 
+#| echo: true
+#| message: false
+#| warning: false
+
+
+agency_efficiency = agencymode_emissions |> 
   group_by(join_id, AGENCY, state) |> 
   summarise(
     total_emissions_lbs = sum(total_emissions_lbs, na.rm = TRUE),
@@ -730,10 +734,101 @@ agencymode_emissions |>
       total_upt >= 5e6  ~ "Medium",
       TRUE              ~ "Small"
     )
-  )|> gt()
+  )
+
+# Best efficiency by agency size and per UPT
+agency_efficiency |> 
+  filter(state %in% state.abb) |>
+  group_by(agency_size) |> 
+  slice_min(per_upt, n = 1) |> 
+  ungroup() |> 
+  select(agency_size, AGENCY, state, per_upt, total_upt) |>
+  gt() |>
+  fmt_number(columns = per_upt, decimals = 3) |> 
+  fmt_number(columns = total_upt, decimals = 0) |> 
+  cols_label(
+    agency_size = md("**Agency Size**"),
+    AGENCY      = md("**Transit Agency**"),
+    state       = md("**State**"),
+    per_upt     = md("**CO~2~ Emissions (lbs/UPT)**"),
+    total_upt   = md("**Total Trips (UPT)**")
+  ) |> 
+  tab_header(
+    title    = "Greenest Transit Agencies",
+    subtitle = "by unlinked passenger trips")
+
+# Best efficiency by agency size and per passenger mile traveled
+agency_efficiency |> 
+  filter(state %in% state.abb) |>
+  group_by(agency_size) |> 
+  slice_min(per_pmt, n = 1) |> 
+  ungroup() |> 
+  select(agency_size, AGENCY, state, per_pmt, total_pmt) |>
+  gt() |>
+  fmt_number(columns = per_pmt, decimals = 3) |> 
+  fmt_number(columns = total_pmt, decimals = 0) |> 
+  cols_label(
+    agency_size = md("**Agency Size**"),
+    AGENCY      = md("**Transit Agency**"),
+    state       = md("**State**"),
+    per_pmt     = md("**CO~2~ Emissions (lbs/PMT)**"),
+    total_pmt   = md("**Total Passenger Miles**")
+  ) |> 
+  tab_header(
+    title    = "Greenest Transit Agencies",
+    subtitle = "by passgenger miles traveled")
 ```
 
+Across unlinked passenger trips and passenger miles traveled the results for the greenest transit agencies were the same.
+
+- **Large**: Tri-County Metropolitan Transportation District of Oregon\
+For unlinked passenger trips, the TriMet system was emitting about 0.4 pounds of carbon per UPT out of 65.6 million total trips . By passenger miles traveled, the TriMet system had 0.097 pounds of carbon emissions per unit out of almost 270 million total passenger miles.
+- **Medium**: Anaheim Transportation Network\
+For unlinked passenger trips, Anaheim Regional Transportation was emitting about 0.126 pounds of carbon per UPT out of 8.2 million total trips . By passenger miles traveled, Anaheim Regional Transportation had 0.09 pounds of carbon emissions per unit out of almost 11.5 million total passenger miles.
+- **Small**: City of Seattle\
+For unlinked passenger trips, the Seattle Center Monorail  was emitting about 0.058 pounds of carbon per UPT out of 2.29 million total trips . By passenger miles traveled, the Seattle Center Monorail  had 0.064 pounds of carbon emissions per unit out of almost 2.06 million total passenger miles.
+
+
 ### Identify ‘Greenest’ Transit Agencies
+#### Award 1: Greenest Transit Agency
+**Greenest Transit Agency by Passenger Miles**
+
+- **Agency:** Tri-County Metropolitan Transportation District of Oregon (TriMet)\
+- **Metric:** 0.4 lbs of CO~2~ per UPT and 0.097 lbs of CO~2~ per passenger mile
+
+**Honorable Mention**
+
+- **Agency:** Anaheim Transportation Network (Anaheim Regional Transportation)\
+- **Metric:** 0.126 lbs of CO~2~ per UPT and 0.09 lbs of CO~2~ per passenger mile
+
+#### Award 2: Danger-Zone Award
+**Highest Carbon Intensity per Passenger Mile**
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+agency_efficiency |> 
+  filter(state %in% state.abb, total_pmt >= 500000) |> 
+  slice_max(per_pmt, n = 1) |> 
+  select(AGENCY, state, per_upt, per_pmt) |> 
+  gt() |>
+  fmt_number(columns = c(per_upt, per_pmt), decimals = 3) |> 
+  cols_label(
+    AGENCY  = md("**Agency**"),
+    state   = md("**State**"),
+    per_upt = md("**CO~2~ Emissions (lbs/UPT)**"),
+    per_pmt = md("**CO~2~ Emissions (lbs/PMT)**")
+  ) |> 
+  tab_header(
+    title    = "The Danger Zone Award",
+    subtitle = "Highest Emissions per Passenger Mile"
+  )
+```
+
+- **Agency:** County of Volusia (VOTRAN)\
+- **Metric:** 57.67 lbs of CO~2~ per UPT and 5.6 lbs of CO~2~ per passenger mile
+
 
 ## Deliverable: Transit Award "Press Release"
 
@@ -742,13 +837,95 @@ agencymode_emissions |>
 
 
 
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+mta_metrics <- agency_efficiency |> 
+  filter(str_detect(AGENCY, "MTA New York City|New York City Transit")) |> 
+  select(AGENCY, state, per_pmt, per_upt, total_pmt, total_emissions_lbs)
+
+mta_metrics
+```
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+# CAFE 2026 standard baseline: 18.73 lbs CO2/gal divided by 49 mpg standard
+cafe_car= 18.73/49
+
+comparison_df = data.frame(
+  entity = c("TriMet (Greenest)", "MTA (NYC Transit)", "Personal Car (CAFE Avg)", "VOTRAN (Danger Zone)"),
+  lbs_pmt = c(0.097, 0.180, cafe_car, 5.600),
+  category = c("Green Winner", "Mega System Benchmark", "CAFE Car", "Danger Zone")
+)
+
+ggplot(comparison_df, aes(x = lbs_pmt, y = reorder(entity, lbs_pmt), fill = category)) +
+  geom_col(width = 0.6) +
+  geom_text(aes(label = sprintf("%.2f lbs", lbs_pmt)), hjust = -0.2, fontface = "bold") +
+  scale_fill_manual(values = c(
+    "Green Winner"= "#2a9d8f",
+    "Mega System Benchmark" = "#457b9d",
+    "CAFE Car"   = "#e9c46a",
+    "Danger Zone" = "#e76f51"
+  )) +
+  labs(
+    title = "Who Belongs in the 'Danger Zone'?",
+    subtitle = "Pounds of CO2 emitted per passenger mile traveled (PMT)",
+    x = "CO2 per Passenger Mile (in pounds)",
+    y = NULL
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "none") +
+  expand_limits(x = 6.5)
+```
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
 
 
+highlights = agency_efficiency |> 
+  filter(str_detect(AGENCY, "Tri-County Metropolitan|Volusia|MTA New York City")) |> 
+  mutate(
+    category = case_when(
+      str_detect(AGENCY, "Tri-County") ~ "Green Winner",
+      str_detect(AGENCY, "MTA")        ~ "Mega System Benchmark",
+      str_detect(AGENCY, "Volusia")    ~ "Danger Zone"
+    )
+  )
 
-
-
-
-
+ggplot(agency_efficiency, aes(x = total_pmt, y = per_pmt)) +
+  geom_point(alpha = 0.2, color = "gray70") +
+  geom_hline(yintercept = cafe_car, linetype = "dashed", color = "#e9c46a", linewidth = 0.9) +
+  geom_point(data = highlights, aes(color = category), size = 3.5) +
+  scale_color_manual(
+    name = "Benchmark Category",
+    values = c(
+      "Green Winner"= "#2a9d8f",
+      "Mega System Benchmark" = "#457b9d",
+      "Danger Zone"= "#e76f51"
+    )
+  ) +
+  scale_x_log10(labels = scales::comma) +
+  coord_cartesian(ylim = c(0, 7)) +
+  labs(
+    title = "System Scale vs. Carbon Intensity",
+    subtitle = "Dashed line shows 2026 CAFE car standard",
+    x = "Total Passenger Miles (Log Scale)",
+    y = "lbs CO2 per Passenger Mile"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(face = "bold")
+  ) +
+  expand_limits(y = 6.5)
+```
 
 
 
